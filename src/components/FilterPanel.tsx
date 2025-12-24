@@ -61,15 +61,15 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
   return (
     <ScrollArea className="h-full">
-      <div className="p-6 space-y-8">
+      <div className="p-5 space-y-6">
         <div className="flex items-center justify-between">
-          <h3 className="text-xl font-semibold text-text-dark">{t.filters.title}</h3>
+          <h3 className="text-base font-semibold text-text-dark">{t.filters.title}</h3>
           {hasActiveFilters && (
             <Button 
               variant="ghost" 
               size="sm" 
               onClick={onClearFilters} 
-              className="text-sm text-text-body hover:text-text-dark underline"
+              className="text-xs text-text-body hover:text-text-dark underline h-8 px-2"
             >
               {t.filters.clearAll}
             </Button>
@@ -78,19 +78,19 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <Separator className="bg-border-light" />
 
-        <div className="space-y-4">
-          <Label className="text-base font-semibold text-text-dark">{t.filters.categories}</Label>
-          <div className="space-y-3">
+        <div className="space-y-3">
+          <Label className="text-sm font-semibold text-text-dark">{t.filters.categories}</Label>
+          <div className="space-y-2.5">
             {categories.map((category) => (
               <div 
                 key={category.value} 
-                className="flex items-center space-x-3"
+                className="flex items-center space-x-2.5"
               >
                 <Checkbox
                   id={`category-${category.value}`}
                   checked={filters.categories.includes(category.value)}
                   onCheckedChange={() => toggleCategory(category.value)}
-                  className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                  className="data-[state=checked]:bg-primary data-[state=checked]:border-primary h-4 w-4"
                 />
                 <label
                   htmlFor={`category-${category.value}`}
@@ -105,9 +105,9 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <Separator className="bg-border-light" />
 
-        <div className="space-y-4">
-          <Label className="text-base font-semibold text-text-dark">{t.filters.priceRange}</Label>
-          <div className="space-y-4">
+        <div className="space-y-3">
+          <Label className="text-sm font-semibold text-text-dark">{t.filters.priceRange}</Label>
+          <div className="space-y-3">
             <Slider
               min={1}
               max={4}
@@ -125,15 +125,15 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <Separator className="bg-border-light" />
 
-        <div className="space-y-4">
-          <Label className="text-base font-semibold text-text-dark">{t.filters.minRating}</Label>
+        <div className="space-y-3">
+          <Label className="text-sm font-semibold text-text-dark">{t.filters.minRating}</Label>
           <div className="grid grid-cols-2 gap-2">
             {[0, 3, 4, 5].map((rating) => (
               <button
                 key={rating}
                 onClick={() => updateFilters({ minRating: rating })}
                 className={`
-                  flex items-center justify-center gap-1 px-3 py-2 rounded-lg border transition-all text-sm
+                  flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-lg border transition-all text-sm
                   ${filters.minRating === rating 
                     ? 'border-text-dark bg-bg-gray' 
                     : 'border-border-medium hover:border-text-dark'
@@ -144,7 +144,7 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
                   <span className="text-text-body">{t.filters.any}</span>
                 ) : (
                   <>
-                    <Star weight="fill" className="h-4 w-4" />
+                    <Star weight="fill" className="h-3.5 w-3.5" />
                     <span className="font-medium">{rating}+</span>
                   </>
                 )}
@@ -155,15 +155,15 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <Separator className="bg-border-light" />
 
-        <div className="space-y-4">
-          <Label className="text-base font-semibold text-text-dark">{t.filters.availability}</Label>
-          <div className="space-y-3">
-            <div className="flex items-center space-x-3">
+        <div className="space-y-3">
+          <Label className="text-sm font-semibold text-text-dark">{t.filters.availability}</Label>
+          <div className="space-y-2.5">
+            <div className="flex items-center space-x-2.5">
               <Checkbox
                 id="open-now"
                 checked={filters.openNow}
                 onCheckedChange={(checked) => updateFilters({ openNow: checked as boolean })}
-                className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                className="data-[state=checked]:bg-primary data-[state=checked]:border-primary h-4 w-4"
               />
               <label
                 htmlFor="open-now"
@@ -172,12 +172,12 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
                 {t.filters.openNow}
               </label>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2.5">
               <Checkbox
                 id="open-24"
                 checked={filters.open24Hours}
                 onCheckedChange={(checked) => updateFilters({ open24Hours: checked as boolean })}
-                className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                className="data-[state=checked]:bg-primary data-[state=checked]:border-primary h-4 w-4"
               />
               <label
                 htmlFor="open-24"
@@ -191,19 +191,19 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <Separator className="bg-border-light" />
 
-        <div className="space-y-4">
-          <Label className="text-base font-semibold text-text-dark">{t.filters.dietary}</Label>
-          <div className="space-y-3">
+        <div className="space-y-3">
+          <Label className="text-sm font-semibold text-text-dark">{t.filters.dietary}</Label>
+          <div className="space-y-2.5">
             {dietaryOptions.map((option) => (
               <div 
                 key={option.value} 
-                className="flex items-center space-x-3"
+                className="flex items-center space-x-2.5"
               >
                 <Checkbox
                   id={`dietary-${option.value}`}
                   checked={filters.dietary.includes(option.value)}
                   onCheckedChange={() => toggleDietary(option.value)}
-                  className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                  className="data-[state=checked]:bg-primary data-[state=checked]:border-primary h-4 w-4"
                 />
                 <label
                   htmlFor={`dietary-${option.value}`}

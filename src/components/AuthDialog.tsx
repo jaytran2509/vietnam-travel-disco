@@ -89,29 +89,29 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md bg-white border-0 rounded-xl shadow-2xl p-0">
-        <DialogHeader className="border-b border-border-light px-6 py-4">
-          <DialogTitle className="text-xl font-semibold text-text-dark">Welcome</DialogTitle>
+        <DialogHeader className="border-b border-border-light px-5 py-3.5">
+          <DialogTitle className="text-lg font-semibold text-text-dark">Welcome</DialogTitle>
         </DialogHeader>
 
         <Tabs defaultValue="login" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 h-auto p-0 bg-transparent px-6">
+          <TabsList className="grid w-full grid-cols-2 h-auto p-0 bg-transparent px-5">
             <TabsTrigger 
               value="login" 
-              className="text-sm font-semibold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-b-2 border-transparent data-[state=active]:border-text-dark rounded-none pb-3 text-text-body data-[state=active]:text-text-dark"
+              className="text-sm font-semibold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-b-2 border-transparent data-[state=active]:border-text-dark rounded-none pb-2.5 text-text-body data-[state=active]:text-text-dark"
             >
               Log in
             </TabsTrigger>
             <TabsTrigger 
               value="signup" 
-              className="text-sm font-semibold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-b-2 border-transparent data-[state=active]:border-text-dark rounded-none pb-3 text-text-body data-[state=active]:text-text-dark"
+              className="text-sm font-semibold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-b-2 border-transparent data-[state=active]:border-text-dark rounded-none pb-2.5 text-text-body data-[state=active]:text-text-dark"
             >
               Sign up
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="login" className="mt-0 px-6 pt-6 pb-4">
-            <form onSubmit={handleLogin} className="space-y-4">
-              <div className="space-y-2">
+          <TabsContent value="login" className="mt-0 px-5 pt-5 pb-3">
+            <form onSubmit={handleLogin} className="space-y-3.5">
+              <div className="space-y-1.5">
                 <Label htmlFor="login-email" className="text-sm font-medium text-text-dark">Email</Label>
                 <Input
                   id="login-email"
@@ -119,11 +119,11 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                   placeholder="your@email.com"
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
-                  className="h-11 text-sm border-border-medium rounded-lg focus-visible:border-text-dark"
+                  className="h-10 text-sm border-border-medium rounded-lg focus-visible:border-text-dark"
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="login-password" className="text-sm font-medium text-text-dark">Password</Label>
                 <Input
                   id="login-password"
@@ -131,7 +131,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                   placeholder="••••••••"
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
-                  className="h-11 text-sm border-border-medium rounded-lg focus-visible:border-text-dark"
+                  className="h-10 text-sm border-border-medium rounded-lg focus-visible:border-text-dark"
                 />
               </div>
 
@@ -140,7 +140,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                   id="remember-me"
                   checked={rememberMe}
                   onCheckedChange={(checked) => setRememberMe(checked as boolean)}
-                  className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+                  className="data-[state=checked]:bg-primary data-[state=checked]:border-primary h-4 w-4"
                 />
                 <Label
                   htmlFor="remember-me"
@@ -152,7 +152,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
 
               <Button 
                 type="submit" 
-                className="w-full h-12 text-base bg-primary text-white hover:bg-primary-hover font-semibold rounded-lg transition-colors"
+                className="w-full h-10 text-sm bg-primary text-white hover:bg-primary-hover font-semibold rounded-lg transition-colors"
               >
                 Log in
               </Button>
@@ -160,7 +160,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
               <Button
                 type="button"
                 variant="ghost"
-                className="w-full text-sm text-primary hover:text-primary-hover h-auto py-2"
+                className="w-full text-sm text-primary hover:text-primary-hover h-auto py-1.5"
                 onClick={() => toast.info('Password recovery coming soon!')}
               >
                 Forgot password?
@@ -168,9 +168,9 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
             </form>
           </TabsContent>
 
-          <TabsContent value="signup" className="mt-0 px-6 pt-6 pb-4">
-            <form onSubmit={handleSignup} className="space-y-4">
-              <div className="space-y-2">
+          <TabsContent value="signup" className="mt-0 px-5 pt-5 pb-3">
+            <form onSubmit={handleSignup} className="space-y-3.5">
+              <div className="space-y-1.5">
                 <Label htmlFor="signup-name" className="text-sm font-medium text-text-dark">Full Name</Label>
                 <Input
                   id="signup-name"
@@ -178,11 +178,11 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                   placeholder="John Doe"
                   value={signupName}
                   onChange={(e) => setSignupName(e.target.value)}
-                  className="h-11 text-sm border-border-medium rounded-lg focus-visible:border-text-dark"
+                  className="h-10 text-sm border-border-medium rounded-lg focus-visible:border-text-dark"
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="signup-email" className="text-sm font-medium text-text-dark">Email</Label>
                 <Input
                   id="signup-email"
@@ -190,11 +190,11 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                   placeholder="your@email.com"
                   value={signupEmail}
                   onChange={(e) => setSignupEmail(e.target.value)}
-                  className="h-11 text-sm border-border-medium rounded-lg focus-visible:border-text-dark"
+                  className="h-10 text-sm border-border-medium rounded-lg focus-visible:border-text-dark"
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="signup-password" className="text-sm font-medium text-text-dark">Password</Label>
                 <Input
                   id="signup-password"
@@ -202,11 +202,11 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                   placeholder="••••••••"
                   value={signupPassword}
                   onChange={(e) => setSignupPassword(e.target.value)}
-                  className="h-11 text-sm border-border-medium rounded-lg focus-visible:border-text-dark"
+                  className="h-10 text-sm border-border-medium rounded-lg focus-visible:border-text-dark"
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <Label htmlFor="signup-confirm-password" className="text-sm font-medium text-text-dark">Confirm Password</Label>
                 <Input
                   id="signup-confirm-password"
@@ -214,13 +214,13 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                   placeholder="••••••••"
                   value={signupConfirmPassword}
                   onChange={(e) => setSignupConfirmPassword(e.target.value)}
-                  className="h-11 text-sm border-border-medium rounded-lg focus-visible:border-text-dark"
+                  className="h-10 text-sm border-border-medium rounded-lg focus-visible:border-text-dark"
                 />
               </div>
 
               <Button 
                 type="submit" 
-                className="w-full h-12 text-base bg-primary text-white hover:bg-primary-hover font-semibold rounded-lg transition-colors"
+                className="w-full h-10 text-sm bg-primary text-white hover:bg-primary-hover font-semibold rounded-lg transition-colors"
               >
                 Sign up
               </Button>

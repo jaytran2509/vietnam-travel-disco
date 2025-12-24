@@ -21,18 +21,18 @@ export function LanguageSwitcher() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full hover:bg-bg-gray transition-colors">
-          <span className="text-xl">{currentLanguage?.flag}</span>
+        <Button variant="ghost" size="icon" className="h-9 w-9 rounded-full hover:bg-bg-gray transition-colors">
+          <span className="text-lg">{currentLanguage?.flag}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="bg-white border border-border-light rounded-lg shadow-lg">
+      <DropdownMenuContent align="end" className="bg-white border border-border-light rounded-lg shadow-lg min-w-[160px]">
         {languages.map((lang) => (
           <DropdownMenuItem
             key={lang.code}
             onClick={() => setLanguage(lang.code)}
             className="text-sm cursor-pointer text-text-dark hover:bg-bg-gray transition-colors"
           >
-            <span className="mr-2 text-lg">{lang.flag}</span>
+            <span className="mr-2 text-base">{lang.flag}</span>
             {lang.name}
             {language === lang.code && <span className="ml-auto text-primary font-semibold">✓</span>}
           </DropdownMenuItem>
