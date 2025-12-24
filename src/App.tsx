@@ -37,6 +37,7 @@ import { VenueCard } from '@/components/VenueCard'
 import { FilterPanel } from '@/components/FilterPanel'
 import { AuthDialog } from '@/components/AuthDialog'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { ThemeToggle } from '@/components/ThemeToggle'
 import { LanguageProvider, useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/hooks/use-auth'
 import { useFavorites } from '@/hooks/use-favorites'
@@ -146,23 +147,31 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-background">
       <motion.nav 
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b shadow-sm"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="sticky top-0 z-50 glass-strong border-b border-white/20 shadow-xl"
       >
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-14">
-            <div className="flex items-center gap-6">
-              <h1 className="font-heading text-base md:text-lg font-bold text-primary">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-8">
+              <motion.h1 
+                className="font-heading text-lg md:text-xl font-bold text-gradient-primary"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.2 }}
+              >
                 {t.nav.appTitle}
-              </h1>
-              <div className="hidden md:flex items-center gap-4">
+              </motion.h1>
+              <div className="hidden md:flex items-center gap-2">
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setShowFavoritesOnly(false)}
-                  className={`transition-all duration-300 ${!showFavoritesOnly ? 'text-primary' : 'text-foreground hover:text-primary'}`}
+                  className={`transition-all duration-300 font-semibold hover:scale-105 ${
+                    !showFavoritesOnly 
+                      ? 'text-primary bg-primary/10' 
+                      : 'text-foreground hover:text-primary hover:bg-primary/5'
+                  }`}
                 >
                   {t.nav.explore}
                 </Button>
@@ -171,12 +180,16 @@ function AppContent() {
                     variant="ghost"
                     size="sm"
                     onClick={() => setShowFavoritesOnly(true)}
-                    className={`transition-all duration-300 ${showFavoritesOnly ? 'text-primary' : 'text-foreground hover:text-primary'}`}
+                    className={`transition-all duration-300 font-semibold hover:scale-105 ${
+                      showFavoritesOnly 
+                        ? 'text-primary bg-primary/10' 
+                        : 'text-foreground hover:text-primary hover:bg-primary/5'
+                    }`}
                   >
-                    <Heart className="h-3.5 w-3.5 mr-1.5" weight={showFavoritesOnly ? 'fill' : 'regular'} />
+                    <Heart className="h-4 w-4 mr-2" weight={showFavoritesOnly ? 'fill' : 'regular'} />
                     {t.nav.favorites}
                     {(favoriteIds ?? []).length > 0 && (
-                      <Badge variant="secondary" className="ml-1.5 text-[10px] px-1.5 py-0 bg-secondary text-secondary-foreground font-medium">
+                      <Badge variant="secondary" className="ml-2 text-xs px-2 py-0.5 gradient-accent text-white border-0 font-bold">
                         {(favoriteIds ?? []).length}
                       </Badge>
                     )}
@@ -185,41 +198,49 @@ function AppContent() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
+              <ThemeToggle />
               <LanguageSwitcher />
               {isAuthenticated ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-secondary transition-colors duration-300">
-                      <User className="h-4 w-4" />
-                    </Button>
+                    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+                      <Button variant="ghost" size="icon" className="h-10 w-10 rounded-full glass hover:bg-white/80 transition-all duration-300">
+                        <User className="h-5 w-5" />
+                      </Button>
+                    </motion.div>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="animate-slideInRight">
-                    <div className="px-2 py-1.5">
-                      <p className="font-semibold text-sm text-foreground">{user?.name}</p>
+                  <DropdownMenuContent align="end" className="animate-slideInUp glass-strong border-white/20">
+                    <div className="px-3 py-2">
+                      <p className="font-bold text-sm text-foreground">{user?.name}</p>
                       <p className="text-xs text-muted-foreground">{user?.email}</p>
                     </div>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={logout} className="text-xs text-foreground hover:text-primary transition-colors">
-                      <SignOut className="h-3.5 w-3.5 mr-2" />
+                    <DropdownMenuItem onClick={logout} className="text-sm text-foreground hover:text-primary transition-colors cursor-pointer">
+                      <SignOut className="h-4 w-4 mr-2" />
                       {t.nav.logout}
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
-                <Button onClick={() => setAuthDialogOpen(true)} className="hidden md:flex h-8 text-xs">
-                  {t.nav.login}
-                </Button>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                  <Button 
+                    onClick={() => setAuthDialogOpen(true)} 
+                    className="hidden md:flex h-10 px-6 gradient-primary text-white border-0 font-semibold shadow-lg btn-ripple"
+                  >
+                    {t.nav.login}
+                  </Button>
+                </motion.div>
               )}
 
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="md:hidden h-8 w-8">
-                    <List className="h-4 w-4" />
+                  <Button variant="ghost" size="icon" className="md:hidden h-10 w-10 rounded-full">
+                    <List className="h-5 w-5" />
                   </Button>
                 </SheetTrigger>
-                <SheetContent side="right">
-                  <div className="flex flex-col gap-3 mt-6">
+                <SheetContent side="right" className="glass-strong border-l border-white/20">
+                  <div className="flex flex-col gap-3 mt-8">
                     <Button
                       variant="ghost"
                       size="sm"
@@ -227,7 +248,7 @@ function AppContent() {
                         setShowFavoritesOnly(false)
                         setMobileMenuOpen(false)
                       }}
-                      className="justify-start"
+                      className="justify-start font-semibold text-base"
                     >
                       {t.nav.explore}
                     </Button>
@@ -240,9 +261,9 @@ function AppContent() {
                             setShowFavoritesOnly(true)
                             setMobileMenuOpen(false)
                           }}
-                          className="justify-start"
+                          className="justify-start font-semibold text-base"
                         >
-                          <Heart className="h-3.5 w-3.5 mr-2" />
+                          <Heart className="h-4 w-4 mr-2" />
                           {t.nav.favorites}
                         </Button>
                         <Button
@@ -252,9 +273,9 @@ function AppContent() {
                             logout()
                             setMobileMenuOpen(false)
                           }}
-                          className="justify-start"
+                          className="justify-start font-semibold text-base"
                         >
-                          <SignOut className="h-3.5 w-3.5 mr-2" />
+                          <SignOut className="h-4 w-4 mr-2" />
                           {t.nav.logout}
                         </Button>
                       </>
@@ -265,6 +286,7 @@ function AppContent() {
                           setAuthDialogOpen(true)
                           setMobileMenuOpen(false)
                         }}
+                        className="gradient-primary text-white border-0 font-semibold"
                       >
                         {t.nav.login}
                       </Button>
@@ -286,16 +308,19 @@ function AppContent() {
         />
       )}
 
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto px-4 py-8">
         {showFavoritesOnly && (
           <motion.div 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mb-6"
+            transition={{ duration: 0.6 }}
+            className="mb-8"
           >
-            <h2 className="font-heading text-2xl font-bold mb-1 text-foreground">{t.favorites.title}</h2>
-            <p className="text-sm text-muted-foreground">
+            <div className="flex items-center gap-3 mb-2">
+              <Heart className="h-8 w-8 text-accent" weight="fill" />
+              <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">{t.favorites.title}</h2>
+            </div>
+            <p className="text-base text-muted-foreground">
               {(favoriteIds ?? []).length === 0
                 ? t.favorites.noFavorites
                 : `${(favoriteIds ?? []).length} ${(favoriteIds ?? []).length === 1 ? t.results.place : t.results.places} ${t.favorites.saved}`}
@@ -303,9 +328,9 @@ function AppContent() {
           </motion.div>
         )}
 
-        <div className="flex flex-col lg:flex-row gap-4">
-          <aside className="hidden lg:block w-64 shrink-0">
-            <div className="sticky top-20 bg-card rounded-lg border shadow-sm">
+        <div className="flex flex-col lg:flex-row gap-6">
+          <aside className="hidden lg:block w-72 shrink-0">
+            <div className="sticky top-24 glass-strong rounded-2xl border border-white/20 shadow-2xl overflow-hidden">
               <FilterPanel
                 filters={filters}
                 onFiltersChange={setFilters}
@@ -314,10 +339,15 @@ function AppContent() {
             </div>
           </aside>
 
-          <main className="flex-1 space-y-4">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-              <div className="flex items-center gap-2 flex-wrap">
-                <p className="text-xs text-foreground font-medium">
+          <main className="flex-1 space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+              className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 glass-strong p-4 rounded-xl border border-white/20"
+            >
+              <div className="flex items-center gap-3 flex-wrap">
+                <p className="text-sm text-foreground font-bold">
                   {filteredVenues.length} {filteredVenues.length === 1 ? t.results.place : t.results.places} {t.results.placesFound}
                 </p>
                 {hasActiveFilters && (
@@ -326,28 +356,33 @@ function AppContent() {
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Button variant="ghost" size="sm" onClick={clearFilters} className="h-7 text-xs text-foreground hover:text-primary">
-                      <X className="h-3 w-3 mr-1" />
+                    <Button 
+                      variant="ghost" 
+                      size="sm" 
+                      onClick={clearFilters} 
+                      className="h-8 text-sm text-foreground hover:text-primary font-semibold hover:scale-105 transition-all"
+                    >
+                      <X className="h-4 w-4 mr-1.5" />
                       {t.results.clearFilters}
                     </Button>
                   </motion.div>
                 )}
               </div>
 
-              <div className="flex items-center gap-2 w-full sm:w-auto">
+              <div className="flex items-center gap-3 w-full sm:w-auto">
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button variant="outline" size="sm" className="lg:hidden h-8 text-xs">
-                      <Funnel className="h-3.5 w-3.5 mr-1.5" />
+                    <Button variant="outline" size="sm" className="lg:hidden h-9 text-sm font-semibold glass border-white/30 hover:bg-white/50">
+                      <Funnel className="h-4 w-4 mr-2" />
                       {t.filters.title}
                       {hasActiveFilters && (
-                        <Badge variant="secondary" className="ml-1.5 text-[10px] px-1.5 py-0 bg-secondary text-secondary-foreground font-medium">
+                        <Badge variant="secondary" className="ml-2 text-xs px-2 py-0.5 gradient-accent text-white border-0 font-bold">
                           {t.results.filtersActive}
                         </Badge>
                       )}
                     </Button>
                   </SheetTrigger>
-                  <SheetContent side="left" className="w-72 p-0">
+                  <SheetContent side="left" className="w-80 p-0 glass-strong border-r border-white/20">
                     <FilterPanel
                       filters={filters}
                       onFiltersChange={setFilters}
@@ -357,77 +392,94 @@ function AppContent() {
                 </Sheet>
 
                 <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
-                  <SelectTrigger className="w-[140px] h-8 text-xs">
+                  <SelectTrigger className="w-[160px] h-9 text-sm font-semibold glass border-white/30">
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="popular" className="text-xs">{t.sort.mostPopular}</SelectItem>
-                    <SelectItem value="rating" className="text-xs">{t.sort.highestRated}</SelectItem>
-                    <SelectItem value="distance" className="text-xs">{t.sort.nearest}</SelectItem>
-                    <SelectItem value="price-low" className="text-xs">{t.sort.priceLowToHigh}</SelectItem>
-                    <SelectItem value="price-high" className="text-xs">{t.sort.priceHighToLow}</SelectItem>
+                  <SelectContent className="glass-strong border-white/20">
+                    <SelectItem value="popular" className="text-sm font-medium">{t.sort.mostPopular}</SelectItem>
+                    <SelectItem value="rating" className="text-sm font-medium">{t.sort.highestRated}</SelectItem>
+                    <SelectItem value="distance" className="text-sm font-medium">{t.sort.nearest}</SelectItem>
+                    <SelectItem value="price-low" className="text-sm font-medium">{t.sort.priceLowToHigh}</SelectItem>
+                    <SelectItem value="price-high" className="text-sm font-medium">{t.sort.priceHighToLow}</SelectItem>
                   </SelectContent>
                 </Select>
 
-                <div className="hidden sm:flex items-center gap-1 border rounded-md p-0.5 bg-muted/30">
+                <div className="hidden sm:flex items-center gap-1 glass rounded-lg p-1 border border-white/30">
                   <Button
                     variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
                     size="icon"
-                    className="h-7 w-7 transition-all duration-300"
+                    className={`h-7 w-7 transition-all duration-300 ${viewMode === 'grid' ? 'gradient-primary text-white' : ''}`}
                     onClick={() => setViewMode('grid')}
                   >
-                    <GridFour className="h-3.5 w-3.5" />
+                    <GridFour className="h-4 w-4" />
                   </Button>
                   <Button
                     variant={viewMode === 'list' ? 'secondary' : 'ghost'}
                     size="icon"
-                    className="h-7 w-7 transition-all duration-300"
+                    className={`h-7 w-7 transition-all duration-300 ${viewMode === 'list' ? 'gradient-primary text-white' : ''}`}
                     onClick={() => setViewMode('list')}
                   >
-                    <List className="h-3.5 w-3.5" />
+                    <List className="h-4 w-4" />
                   </Button>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {filteredVenues.length === 0 ? (
               <motion.div 
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="flex flex-col items-center justify-center py-12 text-center"
+                transition={{ duration: 0.6 }}
+                className="flex flex-col items-center justify-center py-20 text-center"
               >
-                <div className="mb-4 text-muted-foreground">
-                  <MagnifyingGlass className="h-12 w-12 mx-auto mb-3" />
-                  <h3 className="font-heading text-lg font-semibold mb-1 text-foreground">{t.results.noResults}</h3>
-                  <p className="text-xs max-w-md">
-                    {t.results.tryAdjusting}
-                  </p>
-                </div>
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 10, -10, 0]
+                  }}
+                  transition={{ 
+                    duration: 2,
+                    repeat: Infinity,
+                    repeatDelay: 1
+                  }}
+                  className="mb-6 text-muted-foreground"
+                >
+                  <MagnifyingGlass className="h-16 w-16 mx-auto mb-4" />
+                </motion.div>
+                <h3 className="font-heading text-2xl font-bold mb-2 text-foreground">{t.results.noResults}</h3>
+                <p className="text-sm text-muted-foreground max-w-md mb-6">
+                  {t.results.tryAdjusting}
+                </p>
                 {hasActiveFilters && (
-                  <Button onClick={clearFilters} size="sm" className="mt-3">
-                    {t.results.clearAllFilters}
-                  </Button>
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                  >
+                    <Button onClick={clearFilters} size="lg" className="gradient-primary text-white border-0 font-semibold shadow-lg btn-ripple">
+                      {t.results.clearAllFilters}
+                    </Button>
+                  </motion.div>
                 )}
               </motion.div>
             ) : (
               <motion.div
                 className={
                   viewMode === 'grid'
-                    ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'
-                    : 'space-y-3'
+                    ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'
+                    : 'space-y-4'
                 }
               >
                 <AnimatePresence mode="popLayout">
                   {filteredVenues.map((venue, index) => (
                     <motion.div
                       key={venue.id}
-                      initial={{ opacity: 0, y: 30 }}
+                      initial={{ opacity: 0, y: 40 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ 
-                        duration: 0.4, 
-                        delay: Math.min(index * 0.05, 0.6)
+                        duration: 0.5, 
+                        delay: Math.min(index * 0.08, 0.8),
+                        ease: "easeOut"
                       }}
                     >
                       <VenueCard
@@ -455,6 +507,10 @@ function AppContent() {
         richColors
         duration={3000}
         closeButton
+        className="glass-strong"
+        toastOptions={{
+          className: 'glass-strong border border-white/20 shadow-2xl',
+        }}
       />
     </div>
   )

@@ -90,52 +90,72 @@ This is a full-featured travel platform with user authentication, data persisten
 
 ## Design Direction
 
-The design should evoke excitement, wanderlust, and cultural richness of Vietnam through vibrant tropical colors, lush imagery, and warm inviting interfaces. Users should feel like they're embarking on an adventure while having a trusted, sophisticated guide. The aesthetic blends modern minimalism with Vietnamese cultural touches through color, typography, and subtle patterns.
+The design should evoke luxury, sophistication, and modern elegance through premium glassmorphism effects, dynamic gradients, and fluid animations. Users should feel they're experiencing a high-end, cutting-edge travel platform with stunning visuals and smooth micro-interactions. The aesthetic embraces contemporary design trends with vibrant gradients, transparent glass-like surfaces, and delightful motion design.
 
 ## Color Selection
 
-A tropical, vibrant palette inspired by Vietnamese landscapes - from turquoise waters to golden temples to lush jungles and warm sunsets.
+A modern, luxurious palette featuring dynamic gradients and glass-morphic transparency inspired by premium digital experiences.
 
-- **Primary Color**: Deep Turquoise (oklch(0.55 0.12 210)) - Evokes tropical waters, beaches, trust and adventure. Used for primary CTAs, active states, and brand elements
-- **Secondary Colors**: 
-  - Warm Sand (oklch(0.92 0.03 85)) - Subtle backgrounds, cards, provides breathing room
-  - Deep Teal (oklch(0.45 0.10 200)) - Secondary buttons, less prominent actions
-- **Accent Color**: Vibrant Sunset Orange (oklch(0.70 0.18 45)) - High-energy color for favorites, ratings, "Open Now" badges, and important highlights that demand attention
+- **Primary Gradient**: Turquoise to Blue (from oklch(0.65 0.15 200) to oklch(0.55 0.18 250)) - Creates depth and sophistication, used for hero sections, primary CTAs, and premium elements
+- **Secondary Gradient**: Orange to Pink (from oklch(0.72 0.20 40) to oklch(0.68 0.22 350)) - Warm, energetic accent for favorites, badges, and attention-grabbing elements
+- **Background Colors**:
+  - Pure White (oklch(0.99 0 0)) - Main background for clarity
+  - Soft Gray (oklch(0.96 0.005 260)) - Subtle backgrounds for cards
+  - Glass Overlay (oklch(1 0 0 / 0.8) with backdrop-blur-xl) - Glassmorphism effect
+- **Text Colors**:
+  - Dark Charcoal (oklch(0.22 0.01 260)) - Primary text on light backgrounds
+  - Medium Gray (oklch(0.50 0.01 260)) - Secondary text and metadata
+  - Pure White (oklch(0.99 0 0)) - Text on dark/gradient backgrounds
+- **Accent Elements**:
+  - Gold Gradient (from oklch(0.75 0.15 80) to oklch(0.68 0.18 60)) - Premium badges, rating stars
+  - Success Green (oklch(0.65 0.18 150)) - Positive actions
+  - Error Red (oklch(0.60 0.22 25)) - Warnings and errors
 - **Foreground/Background Pairings**: 
-  - Background White (oklch(0.99 0 0)): Deep Charcoal text (oklch(0.25 0.01 260)) - Ratio 12.8:1 ✓
-  - Primary Turquoise (oklch(0.55 0.12 210)): White text (oklch(0.99 0 0)) - Ratio 5.2:1 ✓
-  - Accent Orange (oklch(0.70 0.18 45)): White text (oklch(0.99 0 0)) - Ratio 4.7:1 ✓
-  - Sand Background (oklch(0.92 0.03 85)): Deep Charcoal (oklch(0.25 0.01 260)) - Ratio 11.4:1 ✓
+  - White Background (oklch(0.99 0 0)): Dark Charcoal (oklch(0.22 0.01 260)) - Ratio 14.2:1 ✓
+  - Turquoise Gradient: White text (oklch(0.99 0 0)) - Ratio 6.8:1 ✓
+  - Orange-Pink Gradient: White text (oklch(0.99 0 0)) - Ratio 5.4:1 ✓
+  - Glass Surface: Dark text with shadow for enhanced readability ✓
 
 ## Font Selection
 
-Typography should feel modern, adventurous, and highly readable for international tourists scanning information quickly on the go.
+Typography should feel bold, modern, and luxurious with strong hierarchy and generous spacing that commands attention.
 
-- **Primary Font**: Space Grotesk - Geometric, contemporary, distinctive character that feels both technical and friendly, perfect for a modern travel platform
-- **Secondary Font**: Inter - Clean, neutral, highly legible for body text and supporting information
+- **Primary Font**: Space Grotesk - Bold geometric display font for impactful headlines
+- **Secondary Font**: Inter - Clean system font for optimal readability in body text
 
 **Typographic Hierarchy**:
-- H1 (Hero Title): Space Grotesk Bold/36px/tight letter spacing/-0.02em
-- H2 (Section Headers): Space Grotesk Bold/24px/normal/0em  
-- H3 (Card Titles): Space Grotesk SemiBold/16px/normal/0em
-- Body (Descriptions): Inter Regular/14px/relaxed/1.5 line-height
-- Small (Metadata): Inter Medium/13px/normal/1.4 line-height
-- Button Text: Space Grotesk SemiBold/14px/tight letter spacing/0.02em
+- H1 (Hero Title): Space Grotesk Bold/56px/tight letter-spacing/-0.03em/responsive
+- H2 (Section Headers): Space Grotesk Bold/32px/tight/-0.02em  
+- H3 (Card Titles): Space Grotesk SemiBold/18px/normal/0em
+- Body (Descriptions): Inter Regular/15px/relaxed/1.6 line-height
+- Small (Metadata): Inter Medium/13px/normal/1.45 line-height
+- Button Text: Space Grotesk SemiBold/15px/wide letter-spacing/0.03em
 
 ## Animations
 
-Animations should create a sense of discovery and delight, reinforcing the excitement of exploring new places while maintaining clarity and function.
+Animations should feel premium, fluid, and delightful with micro-interactions throughout creating a luxurious, responsive experience.
 
-- **Page Transitions**: Smooth fade + subtle slide (300ms) when navigating between main sections
-- **Card Hovers**: Gentle lift with shadow expansion (200ms) to signal interactivity
-- **Favorite Heart**: Satisfying pop scale animation (400ms spring) when toggling favorites
-- **Filter Application**: Smooth height transitions and gentle fade for results updating
-- **Map Markers**: Subtle bounce on drop, pulse on hover to draw attention
-- **Image Galleries**: Smooth slide transitions with momentum-based physics for natural feel
-- **Modal Entry/Exit**: Scale + fade from center (250ms ease-out) for focused attention
-- **Toast Notifications**: Slide in from top-right with bounce (300ms), auto-dismiss with fade
-- **Skeleton Loading**: Gentle shimmer wave effect across placeholder content
-- **Star Rating Interactions**: Individual star scale and color transition on hover/select
+- **Page Load**: Hero section fades in with upward movement (600ms), staggered card appearance (50ms delay each)
+- **Card Hovers**: Lift with scale (1.05x) and enhanced shadow (300ms ease-out), image zoom (1.1x/400ms)
+- **Favorite Heart**: Satisfying heartbeat scale animation (500ms spring) with gradient color shift
+- **Button Interactions**: Gradient shimmer on hover, ripple effect on click, subtle bounce on press
+- **Glassmorphism Elements**: Smooth backdrop-blur transitions, frosted glass appearance
+- **Scroll Animations**: Parallax background, reveal animations as elements enter viewport
+- **Loading States**: Skeleton screens with gradient shimmer sweep (2s infinite), smooth pulse
+- **Modal Entry**: Slide up from bottom on mobile (350ms), scale + fade on desktop (300ms)
+- **Form Inputs**: Floating label rise on focus (250ms), border gradient glow
+- **Navigation**: Smooth sticky navbar with blur background, active state underline slide
+- **Badge Animations**: "Open Now" pulsing glow effect (2s infinite)
+- **Image Galleries**: Smooth swipe with momentum, lightbox zoom transition (400ms)
+- **Particles**: Subtle floating particles in hero section for depth and ambiance
+- **Cursor Glow**: Soft gradient glow following cursor on desktop (premium touch)
+- **Toggle/Switch**: Smooth slide transition (300ms) with gradient thumb
+- **Checkbox**: Checkmark draws in with path animation (400ms)
+- **Toast Notifications**: Slide in from right with spring bounce (350ms)
+- **Dropdown Menus**: Slide down with fade (250ms ease-out)
+- **Star Ratings**: Individual star fill with gradient animation on hover/select
+- **Scroll Progress**: Gradient bar showing page scroll progress at top
+- **Dark Mode Toggle**: Smooth color transition across all elements (400ms)
 
 ## Component Selection
 
