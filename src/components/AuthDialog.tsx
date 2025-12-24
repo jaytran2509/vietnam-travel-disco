@@ -89,49 +89,49 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md bg-white border border-border rounded-xl shadow-card-hover">
-        <DialogHeader className="border-b border-border pb-4">
-          <DialogTitle className="text-2xl font-semibold">Welcome</DialogTitle>
+        <DialogHeader className="border-b border-border pb-3">
+          <DialogTitle className="text-xl font-semibold">Welcome</DialogTitle>
         </DialogHeader>
 
         <Tabs defaultValue="login" className="w-full">
           <TabsList className="grid w-full grid-cols-2 h-auto p-0 bg-transparent">
             <TabsTrigger 
               value="login" 
-              className="text-sm font-semibold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-b-2 border-transparent data-[state=active]:border-foreground rounded-none pb-3"
+              className="text-xs font-semibold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-b-2 border-transparent data-[state=active]:border-foreground rounded-none pb-2.5"
             >
               Log in
             </TabsTrigger>
             <TabsTrigger 
               value="signup" 
-              className="text-sm font-semibold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-b-2 border-transparent data-[state=active]:border-foreground rounded-none pb-3"
+              className="text-xs font-semibold data-[state=active]:bg-transparent data-[state=active]:shadow-none border-b-2 border-transparent data-[state=active]:border-foreground rounded-none pb-2.5"
             >
               Sign up
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="login" className="mt-6">
-            <form onSubmit={handleLogin} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="login-email" className="text-sm font-semibold">Email</Label>
+          <TabsContent value="login" className="mt-5">
+            <form onSubmit={handleLogin} className="space-y-3.5">
+              <div className="space-y-1.5">
+                <Label htmlFor="login-email" className="text-xs font-semibold">Email</Label>
                 <Input
                   id="login-email"
                   type="email"
                   placeholder="your@email.com"
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
-                  className="h-11 border-input rounded-lg focus:border-foreground"
+                  className="h-10 text-sm border-input rounded-lg focus:border-foreground"
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="login-password" className="text-sm font-semibold">Password</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="login-password" className="text-xs font-semibold">Password</Label>
                 <Input
                   id="login-password"
                   type="password"
                   placeholder="••••••••"
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
-                  className="h-11 border-input rounded-lg focus:border-foreground"
+                  className="h-10 text-sm border-input rounded-lg focus:border-foreground"
                 />
               </div>
 
@@ -143,7 +143,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                 />
                 <Label
                   htmlFor="remember-me"
-                  className="text-sm cursor-pointer"
+                  className="text-xs cursor-pointer"
                 >
                   Remember me
                 </Label>
@@ -151,7 +151,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
 
               <Button 
                 type="submit" 
-                className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold rounded-lg"
+                className="w-full h-10 text-sm bg-primary text-primary-foreground hover:bg-primary/90 font-semibold rounded-lg"
               >
                 Log in
               </Button>
@@ -159,7 +159,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
               <Button
                 type="button"
                 variant="ghost"
-                className="w-full text-sm text-primary hover:text-primary/80"
+                className="w-full text-xs text-primary hover:text-primary/80"
                 onClick={() => toast.info('Password recovery coming soon!')}
               >
                 Forgot password?
@@ -167,59 +167,59 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
             </form>
           </TabsContent>
 
-          <TabsContent value="signup" className="mt-6">
-            <form onSubmit={handleSignup} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="signup-name" className="text-sm font-semibold">Name</Label>
+          <TabsContent value="signup" className="mt-5">
+            <form onSubmit={handleSignup} className="space-y-3.5">
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-name" className="text-xs font-semibold">Name</Label>
                 <Input
                   id="signup-name"
                   type="text"
                   placeholder="John Doe"
                   value={signupName}
                   onChange={(e) => setSignupName(e.target.value)}
-                  className="h-11 border-input rounded-lg focus:border-foreground"
+                  className="h-10 text-sm border-input rounded-lg focus:border-foreground"
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="signup-email" className="text-sm font-semibold">Email</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-email" className="text-xs font-semibold">Email</Label>
                 <Input
                   id="signup-email"
                   type="email"
                   placeholder="your@email.com"
                   value={signupEmail}
                   onChange={(e) => setSignupEmail(e.target.value)}
-                  className="h-11 border-input rounded-lg focus:border-foreground"
+                  className="h-10 text-sm border-input rounded-lg focus:border-foreground"
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="signup-password" className="text-sm font-semibold">Password</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-password" className="text-xs font-semibold">Password</Label>
                 <Input
                   id="signup-password"
                   type="password"
                   placeholder="••••••••"
                   value={signupPassword}
                   onChange={(e) => setSignupPassword(e.target.value)}
-                  className="h-11 border-input rounded-lg focus:border-foreground"
+                  className="h-10 text-sm border-input rounded-lg focus:border-foreground"
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="signup-confirm-password" className="text-sm font-semibold">Confirm Password</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-confirm-password" className="text-xs font-semibold">Confirm Password</Label>
                 <Input
                   id="signup-confirm-password"
                   type="password"
                   placeholder="••••••••"
                   value={signupConfirmPassword}
                   onChange={(e) => setSignupConfirmPassword(e.target.value)}
-                  className="h-11 border-input rounded-lg focus:border-foreground"
+                  className="h-10 text-sm border-input rounded-lg focus:border-foreground"
                 />
               </div>
 
               <Button 
                 type="submit" 
-                className="w-full h-12 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold rounded-lg"
+                className="w-full h-10 text-sm bg-primary text-primary-foreground hover:bg-primary/90 font-semibold rounded-lg"
               >
                 Sign up
               </Button>
@@ -227,7 +227,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
           </TabsContent>
         </Tabs>
 
-        <div className="pt-4 border-t border-border">
+        <div className="pt-3 border-t border-border">
           <p className="text-center text-sm text-text-body mb-4">Or continue with</p>
           <div className="grid grid-cols-2 gap-3">
             <Button

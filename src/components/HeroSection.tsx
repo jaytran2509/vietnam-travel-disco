@@ -44,7 +44,7 @@ export function HeroSection({
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8 }}
-      className="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden"
+      className="relative h-[400px] md:h-[500px] flex items-center justify-center overflow-hidden"
     >
       <div className="absolute inset-0 gradient-primary animate-gradient" />
       
@@ -90,15 +90,15 @@ export function HeroSection({
           <motion.div
             animate={{ rotate: [0, 10, -10, 0] }}
             transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
-            className="inline-block mb-4"
+            className="inline-block mb-3"
           >
-            <Sparkle className="h-8 w-8 text-white/80" weight="fill" />
+            <Sparkle className="h-6 w-6 text-white/80" weight="fill" />
           </motion.div>
           
-          <h1 className="font-heading text-4xl md:text-6xl font-bold text-white drop-shadow-2xl leading-tight">
+          <h1 className="font-heading text-3xl md:text-4xl font-bold text-white drop-shadow-2xl leading-tight">
             {t.hero.title}
           </h1>
-          <p className="text-base md:text-lg text-white/90 drop-shadow-lg max-w-2xl mx-auto font-medium">
+          <p className="text-sm md:text-base text-white/90 drop-shadow-lg max-w-2xl mx-auto font-medium">
             {t.hero.subtitle}
           </p>
         </motion.div>
@@ -107,21 +107,21 @@ export function HeroSection({
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="max-w-2xl mx-auto space-y-5"
+          className="max-w-2xl mx-auto space-y-4"
         >
-          <div className="relative group glass-strong rounded-2xl p-1.5 shadow-2xl">
+          <div className="relative group glass-strong rounded-xl p-1 shadow-2xl">
             <div className="relative">
-              <MagnifyingGlass className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-foreground/60 transition-colors group-focus-within:text-primary z-10" />
+              <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/60 transition-colors group-focus-within:text-primary z-10" />
               <Input
                 placeholder={t.hero.searchPlaceholder}
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="pl-12 pr-4 h-14 text-base bg-white/95 backdrop-blur-sm border-0 shadow-lg transition-all duration-300 focus:shadow-2xl focus:bg-white rounded-xl"
+                className="pl-10 pr-3 h-11 text-sm bg-white/95 backdrop-blur-sm border-0 shadow-lg transition-all duration-300 focus:shadow-2xl focus:bg-white rounded-lg"
               />
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             {categories.map((category, index) => {
               const isSelected = selectedCategories.includes(category.value)
               return (
@@ -130,13 +130,13 @@ export function HeroSection({
                   initial={{ opacity: 0, scale: 0.8, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                  whileHover={{ scale: 1.1, y: -4 }}
+                  whileHover={{ scale: 1.05, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <Badge
                     variant={isSelected ? 'default' : 'secondary'}
                     className={`
-                      cursor-pointer px-4 py-2.5 text-sm font-semibold
+                      cursor-pointer px-3 py-1.5 text-xs font-semibold
                       transition-all duration-300 shadow-lg
                       ${isSelected 
                         ? 'gradient-accent text-white border-0 animate-pulse' 
@@ -145,7 +145,7 @@ export function HeroSection({
                     `}
                     onClick={() => onCategoryClick(category.value)}
                   >
-                    <span className="mr-2 text-base">{category.emoji}</span>
+                    <span className="mr-1.5 text-sm">{category.emoji}</span>
                     {category.label}
                   </Badge>
                 </motion.div>

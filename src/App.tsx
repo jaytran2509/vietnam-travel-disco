@@ -25,13 +25,13 @@ function AppContent() {
       <div className="min-h-screen bg-background">
         <nav className="sticky top-0 z-50 bg-white border-b border-border">
           <div className="container mx-auto px-6">
-            <div className="flex items-center justify-between h-20">
-              <h1 className="text-xl font-bold text-foreground">VietnamTravel</h1>
-              <div className="flex items-center gap-4">
-                <span className="text-sm text-text-body">Welcome, {user?.name}</span>
+            <div className="flex items-center justify-between h-16">
+              <h1 className="text-lg font-bold text-foreground">VietnamTravel</h1>
+              <div className="flex items-center gap-3">
+                <span className="text-xs text-text-body">Welcome, {user?.name}</span>
                 <button 
                   onClick={logout}
-                  className="text-sm text-text-body hover:text-foreground"
+                  className="text-xs text-text-body hover:text-foreground"
                 >
                   Log out
                 </button>
@@ -39,9 +39,9 @@ function AppContent() {
             </div>
           </div>
         </nav>
-        <div className="container mx-auto px-6 py-12">
-          <h2 className="mb-6">Browse Page Coming Soon</h2>
-          <p className="text-text-body">The full browse experience is being built with Airbnb design.</p>
+        <div className="container mx-auto px-6 py-10">
+          <h2 className="mb-5 text-2xl">Browse Page Coming Soon</h2>
+          <p className="text-text-body text-sm">The full browse experience is being built with Airbnb design.</p>
         </div>
         <Toaster 
           position="top-right"
