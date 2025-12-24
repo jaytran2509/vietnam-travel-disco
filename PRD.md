@@ -1,229 +1,183 @@
-# Vietnam Travel Discovery App
+# Vietnam Travel Discovery Platform
 
-A comprehensive web application for international tourists to discover and explore authentic Vietnamese restaurants, cafés, and tourist attractions across Vietnam with an emphasis on Saigon and Hanoi.
+A complete Airbnb-style travel discovery platform for international tourists to explore Vietnamese restaurants, cafes, and attractions with clean, minimal, professional design.
 
 **Experience Qualities**:
-1. **Explorative** - Users should feel excited discovering hidden gems and popular spots through immersive visuals and detailed information
-2. **Trustworthy** - Authentic reviews, accurate information, and reliable data create confidence in travel decisions
-3. **Effortless** - Intuitive navigation, smart filters, and seamless map integration make planning simple and enjoyable
+1. **Trustworthy** - Clean Airbnb-inspired design with solid colors, minimal shadows, and clear information builds confidence in every decision
+2. **Effortless** - Simple navigation, intuitive filters, and content-first layout make exploration natural and enjoyable
+3. **Professional** - Polished interface with careful attention to spacing, typography, and visual hierarchy creates a premium feel
 
-**Complexity Level**: Complex Application (advanced functionality, likely with multiple views)
-This is a full-featured travel platform with user authentication, data persistence, review systems, favorites management, map integration, advanced filtering, and multiple interconnected views requiring sophisticated state management.
+**Complexity Level**: Complex Application (advanced functionality with multiple views)
+This is a comprehensive travel platform with public landing page, authentication, persistent data, review systems, favorites, map integration, advanced filtering, and multiple interconnected views.
 
 ## Essential Features
 
-### User Authentication System
-- **Functionality**: Complete account lifecycle management with email validation, secure login/logout, profile management (name, avatar, preferences), password recovery, and persistent sessions
-- **Purpose**: Enables personalized experiences, saves user preferences, protects user data, and builds trust through authenticated reviews
-- **Trigger**: User clicks "Sign Up" or "Login" buttons in navigation or when accessing protected features (favorites, reviews)
-- **Progression**: Click auth button → Form modal appears → Enter credentials → Validation feedback → Success toast → Modal closes → User logged in state → Profile icon appears
-- **Success criteria**: Users can register, login persists across sessions with "Remember me", profile updates save correctly, password recovery works
+### Public Landing Page
+- **Functionality**: Marketing homepage with hero section, category browse, featured places, how it works, statistics, testimonials, and CTA sections
+- **Purpose**: Convert visitors to users by showcasing value and building trust before requiring signup
+- **Trigger**: User visits root URL while not logged in
+- **Progression**: Page loads → Hero appears → Scroll through sections → Click "Get Started" → Auth modal opens
+- **Success criteria**: Clear value proposition, beautiful imagery, smooth scroll experience, converts to signup
 
-### Main Discovery Interface
-- **Functionality**: Grid/list view toggle showing categorized venues with images, ratings, pricing, distance, and favorite functionality
-- **Purpose**: Primary exploration tool that helps users browse and quickly evaluate options at a glance
-- **Trigger**: Landing page loads or user navigates to "Explore" section
-- **Progression**: Page loads → Hero section appears → Category chips visible → Venue cards render in grid → User toggles view → Smooth transition to list layout
-- **Success criteria**: Cards display all key information clearly, view transitions are smooth, favorites toggle instantly, distance calculations work
+### User Authentication
+- **Functionality**: Login/signup modals with email/password, social auth buttons (UI only), form validation
+- **Purpose**: Protect user data and enable personalized features
+- **Trigger**: Click "Log in", "Sign up", or try to favorite/review
+- **Progression**: Click auth button → Modal opens → Enter credentials → Validation → Success → Redirects to browse page
+- **Success criteria**: Secure auth, persistent sessions, clear error messages, smooth modal experience
 
-### Advanced Search & Filter System
-- **Functionality**: Real-time search with multiple filters (category, price range, rating threshold, distance radius, open now, dietary preferences) and sorting options
-- **Purpose**: Helps users narrow down options to match specific needs and preferences quickly
-- **Trigger**: User types in search bar or opens filter panel
-- **Progression**: Enter search term → Results update with debounce → Open filters → Adjust criteria → Apply filters → Results update → Sort dropdown → Re-order results
-- **Success criteria**: Search responds within 300ms, filters work independently and combined, result count updates, clear filters resets to default
+### Browse/Discovery Page
+- **Functionality**: Grid view of all venues with filters, search, sort options, and view toggle
+- **Purpose**: Main exploration interface after login
+- **Trigger**: After login or click logo when authenticated
+- **Progression**: Page loads → Filter bar appears → Cards render → Apply filters → Results update → Click card → Detail page
+- **Success criteria**: Fast filtering, clear cards, smooth interactions, helpful empty states
 
-### Google Maps Integration
-- **Functionality**: Interactive map displaying all venues as markers with clustering, popup previews, current location marker, and directions linking
-- **Purpose**: Provides geographic context, helps users plan routes, visualize distances, and discover nearby venues
-- **Trigger**: User clicks "Map View" toggle or views venue detail page
-- **Progression**: Click map view → Map loads with markers → Zoom/pan interaction → Click marker → Popup appears → Click "Directions" → Opens Google Maps app/web
-- **Success criteria**: All venues display correctly, clustering works on zoom out, popups show key info, directions link works on mobile and desktop
+### Advanced Filters
+- **Functionality**: Price range slider, rating selector, distance radius, dietary checkboxes, open now toggle, sort options
+- **Purpose**: Help users find exactly what they need
+- **Trigger**: Click filter pills or "More filters" button
+- **Progression**: Click filter → Modal/drawer opens → Adjust criteria → "Show results" → Page updates
+- **Success criteria**: Filters work independently and combined, clear all resets, active filter count badge
+
+### Map View
+- **Functionality**: Google Maps with custom markers, clustering, popups, split layout on desktop
+- **Purpose**: Geographic context and route planning
+- **Trigger**: Toggle "Show map" button
+- **Progression**: Click toggle → Map loads → Zoom/pan → Click marker → Popup with venue preview → "View details"
+- **Success criteria**: All venues marked, clustering works, popups show key info, smooth toggle
 
 ### Venue Detail Page
-- **Functionality**: Comprehensive venue information with photo gallery, full details, embedded map, user reviews with photos, helpful votes, and similar venue suggestions
-- **Purpose**: Provides all information needed to make informed decisions and take action (call, navigate, bookmark)
-- **Trigger**: User clicks venue card from discovery interface or map popup
-- **Progression**: Click venue → Page loads with skeleton → Images load → Scroll for info → View reviews → Click "Write Review" → Review modal → Submit → Success toast → Review appears
-- **Success criteria**: All venue data displays correctly, photos open in lightbox, "Open Now" status accurate, embedded map shows correct location, reviews load
+- **Functionality**: 5-image gallery, full info, amenities grid, embedded map, reviews section with photos, write review
+- **Purpose**: All information needed to visit
+- **Trigger**: Click venue card anywhere in app
+- **Progression**: Click card → Page loads → Browse images → Read details → Scroll to reviews → Write review
+- **Success criteria**: Complete info, working map, gallery lightbox, review submission works
 
-### Favorites & Collections
-- **Functionality**: Save venues to favorites, create custom named collections, view all saved items on profile page, share collection links
-- **Purpose**: Helps users organize discoveries, plan trips, and share recommendations with travel companions
-- **Trigger**: User clicks heart icon on venue card (requires login prompt if not authenticated)
-- **Progression**: Click heart → Login check → Icon fills → Toast confirms → View profile → See favorites → Create collection → Name it → Drag venues to collection → Share link → Others view collection
-- **Success criteria**: Favorites persist across sessions, collections can be created/renamed/deleted, sharing generates unique URL, heart state syncs everywhere
+### Favorites System
+- **Functionality**: Save venues, view all favorites, collections support
+- **Purpose**: Help users organize and plan
+- **Trigger**: Click heart icon (login required)
+- **Progression**: Click heart → Icon fills → Toast confirms → View favorites page → See saved venues
+- **Success criteria**: Persist across sessions, sync everywhere, clear feedback
 
 ### Review System
-- **Functionality**: Submit star ratings with text reviews, upload up to 5 photos, select visit date, vote reviews helpful/not helpful
-- **Purpose**: Builds community trust, provides authentic insights, helps others make decisions
-- **Trigger**: User clicks "Write a Review" button on venue detail page
-- **Progression**: Click review button → Login check → Modal opens → Select stars → Write text → Upload photos → Pick visit date → Submit → Validation → Success → Review appears at top
-- **Success criteria**: Reviews save with all data, photos upload and display, helpful votes update count, own reviews can be edited/deleted
-
-### Responsive Mobile Design
-- **Functionality**: Mobile-first responsive layout with hamburger menu, touch-friendly controls, optimized images, gesture support
-- **Purpose**: Ensures excellent experience for tourists using phones while traveling
-- **Trigger**: App loads on mobile device or browser window resized
-- **Progression**: Page loads → Mobile layout renders → Tap hamburger → Side drawer opens → Navigate sections → Swipe photo galleries → Tap to call → Maps open in app
-- **Success criteria**: All features work on mobile, touch targets minimum 44px, images load quickly, gestures feel natural
-
-### Multi-Language Support (i18n)
-- **Functionality**: Complete internationalization with English and Vietnamese language support, persistent language preference, language switcher in navigation
-- **Purpose**: Makes the app accessible to both international tourists and Vietnamese locals, enhancing usability for the target audience
-- **Trigger**: User clicks language switcher (flag icon) in navigation bar
-- **Progression**: Click language switcher → Dropdown opens with language options → Select language → All text updates instantly → Preference saved → Language persists across sessions
-- **Success criteria**: All UI text translates correctly, language preference persists, no layout breaks, smooth transitions between languages
+- **Functionality**: Star rating, text review, photo upload (up to 5), visit date, helpful votes
+- **Purpose**: Build community trust through authentic reviews
+- **Trigger**: Click "Write a review" on venue detail page
+- **Progression**: Click button → Modal opens → Rate stars → Write text → Upload photos → Submit → Appears in list
+- **Success criteria**: All data saves, photos upload, helpful votes work, reviews display beautifully
 
 ## Edge Case Handling
 
-- **No Search Results** - Display friendly empty state with search tips and suggestion to adjust filters
-- **Location Permission Denied** - Show venues without distance, prompt to enable location for better experience
-- **Offline/Network Error** - Show cached data if available, friendly error message with retry button
-- **Invalid Venue Data** - Gracefully handle missing images/info with placeholders and hide broken sections
-- **Unauthenticated Actions** - Intercept protected actions (favorites, reviews) with login modal instead of error
-- **Duplicate Reviews** - Prevent multiple reviews from same user on same venue, offer to edit existing
-- **Image Upload Failures** - Show individual upload status, allow retry, don't block review submission
-- **Map Loading Errors** - Fall back to static image with address or show error with alternative directions link
-- **Long Venue Names/Text** - Truncate with ellipsis, show full text on hover/expand
-- **Expired Sessions** - Detect and prompt re-login, preserve user's current action to resume after auth
+- **No Results** - Friendly empty state with suggestions to adjust filters
+- **Location Denied** - Hide distance, show venues without location-based features
+- **Network Error** - Show cached data if available, retry button
+- **Unauthenticated** - Show login modal instead of error for protected actions
+- **Missing Data** - Graceful fallbacks with placeholders
+- **Image Failures** - Show placeholder, don't break layout
+- **Long Text** - Truncate with ellipsis, expand on interaction
 
 ## Design Direction
 
-The design should evoke luxury, sophistication, and modern elegance through premium glassmorphism effects, dynamic gradients, and fluid animations. Users should feel they're experiencing a high-end, cutting-edge travel platform with stunning visuals and smooth micro-interactions. The aesthetic embraces contemporary design trends with vibrant gradients, transparent glass-like surfaces, and delightful motion design.
+The design should evoke trust, simplicity, and professionalism through clean solid colors, generous white space, and minimal shadows. Users should feel they're using a reliable, well-crafted platform like Airbnb where content is the focus and every element serves a purpose.
 
 ## Color Selection
 
-A modern, luxurious palette featuring dynamic gradients and glass-morphic transparency inspired by premium digital experiences.
+Airbnb-inspired solid color palette - NO gradients anywhere.
 
-- **Primary Gradient**: Turquoise to Blue (from oklch(0.65 0.15 200) to oklch(0.55 0.18 250)) - Creates depth and sophistication, used for hero sections, primary CTAs, and premium elements
-- **Secondary Gradient**: Orange to Pink (from oklch(0.72 0.20 40) to oklch(0.68 0.22 350)) - Warm, energetic accent for favorites, badges, and attention-grabbing elements
-- **Background Colors**:
-  - Pure White (oklch(0.99 0 0)) - Main background for clarity
-  - Soft Gray (oklch(0.96 0.005 260)) - Subtle backgrounds for cards
-  - Glass Overlay (oklch(1 0 0 / 0.8) with backdrop-blur-xl) - Glassmorphism effect
-- **Text Colors**:
-  - Dark Charcoal (oklch(0.22 0.01 260)) - Primary text on light backgrounds
-  - Medium Gray (oklch(0.50 0.01 260)) - Secondary text and metadata
-  - Pure White (oklch(0.99 0 0)) - Text on dark/gradient backgrounds
-- **Accent Elements**:
-  - Gold Gradient (from oklch(0.75 0.15 80) to oklch(0.68 0.18 60)) - Premium badges, rating stars
-  - Success Green (oklch(0.65 0.18 150)) - Positive actions
-  - Error Red (oklch(0.60 0.22 25)) - Warnings and errors
-- **Foreground/Background Pairings**: 
-  - White Background (oklch(0.99 0 0)): Dark Charcoal (oklch(0.22 0.01 260)) - Ratio 14.2:1 ✓
-  - Turquoise Gradient: White text (oklch(0.99 0 0)) - Ratio 6.8:1 ✓
-  - Orange-Pink Gradient: White text (oklch(0.99 0 0)) - Ratio 5.4:1 ✓
-  - Glass Surface: Dark text with shadow for enhanced readability ✓
+- **Primary (Coral Red)**: #FF385C (oklch(0.62 0.22 15)) - Main brand color for CTAs, active states, hearts
+- **Text Dark**: #222222 (oklch(0.20 0 0)) - Headings and primary text
+- **Text Body**: #717171 (oklch(0.52 0 0)) - Body text and descriptions  
+- **Text Light**: #B0B0B0 (oklch(0.73 0 0)) - Labels and metadata
+- **Background White**: #FFFFFF (oklch(1 0 0)) - Main background
+- **Background Gray**: #F7F7F7 (oklch(0.98 0 0)) - Alternate section backgrounds
+- **Border Light**: #EBEBEB (oklch(0.94 0 0)) - Card borders, dividers
+- **Border Medium**: #DDDDDD (oklch(0.89 0 0)) - Input borders, stronger dividers
+- **Success Green**: #008489 (oklch(0.52 0.08 200)) - Success states, "Open now"
+- **Error Red**: #C13515 (oklch(0.50 0.18 25)) - Errors and destructive actions
+
+**Foreground/Background Pairings**:
+- White (#FFFFFF): Dark text (#222222) - Ratio 17.6:1 ✓
+- Coral (#FF385C): White text (#FFFFFF) - Ratio 4.7:1 ✓  
+- Gray (#F7F7F7): Dark text (#222222) - Ratio 16.8:1 ✓
+- Success (#008489): White text (#FFFFFF) - Ratio 4.5:1 ✓
 
 ## Font Selection
 
-Typography should feel bold, modern, and luxurious with strong hierarchy and generous spacing that commands attention.
+Clean, professional sans-serif typography that prioritizes readability and hierarchy.
 
-- **Primary Font**: Space Grotesk - Bold geometric display font for impactful headlines
-- **Secondary Font**: Inter - Clean system font for optimal readability in body text
+- **Font Family**: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif
 
 **Typographic Hierarchy**:
-- H1 (Hero Title): Space Grotesk Bold/56px/tight letter-spacing/-0.03em/responsive
-- H2 (Section Headers): Space Grotesk Bold/32px/tight/-0.02em  
-- H3 (Card Titles): Space Grotesk SemiBold/18px/normal/0em
-- Body (Descriptions): Inter Regular/15px/relaxed/1.6 line-height
-- Small (Metadata): Inter Medium/13px/normal/1.45 line-height
-- Button Text: Space Grotesk SemiBold/15px/wide letter-spacing/0.03em
+- H1 (Hero Title): 48px bold / line-height 1.1 / letter-spacing -0.02em
+- H2 (Section Headers): 32px bold / line-height 1.2 / letter-spacing -0.01em
+- H3 (Card Titles): 16px semi-bold / line-height 1.3
+- Body (Descriptions): 16px regular / line-height 1.5
+- Small (Metadata): 14px regular / line-height 1.4
+- Button Text: 16px semi-bold
 
 ## Animations
 
-Animations should feel premium, fluid, and delightful with micro-interactions throughout creating a luxurious, responsive experience.
+Minimal, purposeful animations that feel natural and fast - Airbnb style.
 
-- **Page Load**: Hero section fades in with upward movement (600ms), staggered card appearance (50ms delay each)
-- **Card Hovers**: Lift with scale (1.05x) and enhanced shadow (300ms ease-out), image zoom (1.1x/400ms)
-- **Favorite Heart**: Satisfying heartbeat scale animation (500ms spring) with gradient color shift
-- **Button Interactions**: Gradient shimmer on hover, ripple effect on click, subtle bounce on press
-- **Glassmorphism Elements**: Smooth backdrop-blur transitions, frosted glass appearance
-- **Scroll Animations**: Parallax background, reveal animations as elements enter viewport
-- **Loading States**: Skeleton screens with gradient shimmer sweep (2s infinite), smooth pulse
-- **Modal Entry**: Slide up from bottom on mobile (350ms), scale + fade on desktop (300ms)
-- **Form Inputs**: Floating label rise on focus (250ms), border gradient glow
-- **Navigation**: Smooth sticky navbar with blur background, active state underline slide
-- **Badge Animations**: "Open Now" pulsing glow effect (2s infinite)
-- **Image Galleries**: Smooth swipe with momentum, lightbox zoom transition (400ms)
-- **Particles**: Subtle floating particles in hero section for depth and ambiance
-- **Cursor Glow**: Soft gradient glow following cursor on desktop (premium touch)
-- **Toggle/Switch**: Smooth slide transition (300ms) with gradient thumb
-- **Checkbox**: Checkmark draws in with path animation (400ms)
-- **Toast Notifications**: Slide in from right with spring bounce (350ms)
-- **Dropdown Menus**: Slide down with fade (250ms ease-out)
-- **Star Ratings**: Individual star fill with gradient animation on hover/select
-- **Scroll Progress**: Gradient bar showing page scroll progress at top
-- **Dark Mode Toggle**: Smooth color transition across all elements (400ms)
+- **Hover Effects**: Subtle opacity change (1.0 → 0.9) and slight shadow increase (200ms ease)
+- **Card Hover**: Border color change + shadow (200ms), NO lift or scale
+- **Button Press**: Slight scale (0.98) on active state
+- **Heart Animation**: Smooth fill with subtle scale (300ms)
+- **Page Transitions**: Simple fade (300ms)
+- **Image Load**: Blur-up from gray placeholder
+- **Toggle/Switch**: Smooth slide (250ms)
+- **Modal Entry**: Fade in (200ms), NO slide or complex entrance
+- **Loading**: Simple rotating spinner, skeleton boxes (NO shimmer)
+- **Form Focus**: Border color transition (200ms)
+
+NO: Entrance animations, parallax, particles, gradient animations, complex hovers, lift effects
 
 ## Component Selection
 
 **Components**:
-- **Card** - Primary container for venue displays in grid/list views, customized with hover states and image overlays
-- **Button** - All CTAs with variants (primary turquoise, secondary teal, ghost for subtle actions, destructive for cancel)
-- **Dialog** - Authentication forms, review submission, collection creation modals
-- **Avatar** - User profiles in navigation and review sections
-- **Badge** - Category labels, "Open Now" status, dietary preference tags
-- **Input** - Search bars, form fields with icon prefixes
-- **Slider** - Price range and distance radius filters
-- **Select** - Sort dropdown, category multi-select in filters
-- **Tabs** - Toggle between grid/list views, different profile sections
-- **Separator** - Divide sections cleanly
-- **Scroll Area** - Filter panels, review lists, photo galleries
-- **Sheet** - Mobile navigation drawer, mobile filter panel
-- **Popover** - Quick filter options, user menu dropdown
-- **Skeleton** - Loading states for cards and content
-- **Toast (Sonner)** - Success/error feedback for all actions
-- **Form** (with react-hook-form + zod) - All user input validation
+- **Card** - Venue display with simple border, rounded corners, hover state
+- **Button** - Coral primary, outlined secondary, ghost tertiary
+- **Dialog** - Authentication, review submission, centered modals
+- **Avatar** - User profiles, circle with image
+- **Badge** - Category labels, simple pills
+- **Input** - Clean bordered inputs with focus states
+- **Slider** - Price/distance range with simple track
+- **Select** - Sort dropdown, minimal styling
+- **Sheet** - Mobile drawer for navigation and filters
+- **Checkbox** - Simple checkbox with coral check
+- **Switch** - Toggle for filters
+- **Skeleton** - Loading states, simple gray boxes
+- **Toast (Sonner)** - Notifications, minimal styling
 
 **Customizations**:
-- **VenueCard** - Custom component with image, gradient overlay, favorite heart absolute positioned, rating stars, distance badge
-- **StarRating** - Interactive star selector with hover preview and filled state using Phosphor icons
-- **ImageGallery** - Swipeable lightbox with thumbnails and navigation
-- **MapView** - Custom Google Maps wrapper with marker clustering and custom popup styling
-- **FilterPanel** - Collapsible accordion sections for different filter groups
-- **HeroSection** - Full-width hero with background image, overlay, centered search bar
+- **VenueCard** - White card, 12px radius, 1px border, image 4:3 ratio, heart top-right
+- **StarRating** - Yellow/gold stars, clickable, outline when empty
+- **ImageGallery** - 5-image grid layout (1 large + 4 small), lightbox on click
+- **MapView** - Google Maps with custom coral markers
+- **FilterPanel** - Clean sections with dividers
 
 **States**:
-- Buttons: Default, hover (lift + darken), active (pressed scale), focus (ring), disabled (opacity + no pointer)
-- Inputs: Default border, focus (primary color ring + border), error (destructive color), success (green accent)
-- Cards: Default, hover (shadow + lift), active (slight press), loading (skeleton)
-- Heart Icon: Empty outline, filled solid with scale animation, loading spinner during save
+- Buttons: Default, hover (darker), active (scale 0.98), disabled (opacity 0.5)
+- Inputs: Default border, focus (black border), error (red border)
+- Cards: Default, hover (border color change + shadow)
+- Heart: Outline empty, filled coral with smooth transition
 
-**Icon Selection**:
-- MagnifyingGlass - Search functionality
-- Funnel - Filter panel toggle
-- MapPin - Location markers and venue locations
-- Heart - Favorites (outline and filled states)
-- Star - Ratings (outline and filled)
-- Phone - Call action
-- GlobeHemisphereWest - Website links
-- Clock - Opening hours
-- CurrencyDollar - Pricing information
-- NavigationArrow - Directions/navigation
-- User - Profile and authentication
-- List/GridFour - View toggles
-- Plus - Add to collection, create new
-- ShareNetwork - Share collections
-- X - Close modals, remove items
-- CaretDown - Dropdowns and accordions
-- Camera - Photo upload
-- ThumbsUp - Helpful vote
+**Icon Selection** (Phosphor React - simple outline style):
+- MagnifyingGlass, Funnel, MapPin, Heart, Star, Phone, Globe, Clock, CurrencyDollar
+- ArrowRight, User, List, GridFour, Plus, ShareNetwork, X, CaretDown, Camera, ThumbsUp
 
-**Spacing**:
-- Section padding: p-6 md:p-12
-- Card padding: p-4 md:p-6
-- Component gap: gap-4 (16px) for related groups, gap-8 (32px) for sections
-- Grid columns: grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
-- Consistent margin-bottom: mb-6 for section headers, mb-4 for subsections
+**Spacing** (using 8px base):
+- Sections: 64px (py-16) vertical padding
+- Cards: 24px padding
+- Components: 16px (gap-4) for related items, 24px (gap-6) between groups
+- Grids: 24px (gap-6) between cards
 
 **Mobile**:
-- Hero height reduces from h-[600px] to h-[400px]
-- Navigation collapses to hamburger menu with Sheet drawer
-- Grid switches from 4 columns to single column
-- Filter panel becomes bottom sheet instead of sidebar
-- Images prioritize portrait orientation on mobile
-- Touch targets minimum 44x44px for all interactive elements
-- Sticky search bar on scroll for quick access
-- Swipe gestures for image galleries and card actions
+- Hero height: 70vh → 50vh
+- Grid: 4 cols → 2 cols tablet → 1 col mobile
+- Navigation: Hamburger menu with drawer
+- Filters: Bottom sheet instead of sidebar
+- Sticky search bar on scroll
+- Minimum 44px touch targets
