@@ -68,6 +68,13 @@ This is a full-featured travel platform with user authentication, data persisten
 - **Progression**: Page loads → Mobile layout renders → Tap hamburger → Side drawer opens → Navigate sections → Swipe photo galleries → Tap to call → Maps open in app
 - **Success criteria**: All features work on mobile, touch targets minimum 44px, images load quickly, gestures feel natural
 
+### Multi-Language Support (i18n)
+- **Functionality**: Complete internationalization with English and Vietnamese language support, persistent language preference, language switcher in navigation
+- **Purpose**: Makes the app accessible to both international tourists and Vietnamese locals, enhancing usability for the target audience
+- **Trigger**: User clicks language switcher (flag icon) in navigation bar
+- **Progression**: Click language switcher → Dropdown opens with language options → Select language → All text updates instantly → Preference saved → Language persists across sessions
+- **Success criteria**: All UI text translates correctly, language preference persists, no layout breaks, smooth transitions between languages
+
 ## Edge Case Handling
 
 - **No Search Results** - Display friendly empty state with search tips and suggestion to adjust filters

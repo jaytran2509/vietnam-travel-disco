@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { useLanguage } from '@/contexts/LanguageContext'
 import type { SearchFilters, VenueCategory, DietaryPreference } from '@/lib/types'
 
 interface FilterPanelProps {
@@ -13,19 +14,20 @@ interface FilterPanelProps {
   onClearFilters: () => void
 }
 
-const categories: { value: VenueCategory; label: string }[] = [
-  { value: 'restaurant', label: 'Restaurants' },
-  { value: 'cafe', label: 'Cafés' },
-  { value: 'attraction', label: 'Attractions' },
-]
-
-const dietaryOptions: { value: DietaryPreference; label: string }[] = [
-  { value: 'vegetarian', label: 'Vegetarian' },
-  { value: 'vegan', label: 'Vegan' },
-  { value: 'halal', label: 'Halal' },
-]
-
 export function FilterPanel({ filters, onFiltersChange, onClearFilters }: FilterPanelProps) {
+  const { t } = useLanguage()
+
+  const categories: { value: VenueCategory; label: string }[] = [
+    { value: 'restaurant', label: t.categories.restaurants },
+    { value: 'cafe', label: t.categories.cafes },
+    { value: 'attraction', label: t.categories.attractions },
+  ]
+
+  const dietaryOptions: { value: DietaryPreference; label: string }[] = [
+    { value: 'vegetarian', label: t.filters.vegetarian },
+    { value: 'vegan', label: t.filters.vegan },
+    { value: 'halal', label: t.filters.halal },
+  ]
   const updateFilters = (updates: Partial<SearchFilters>) => {
     onFiltersChange({ ...filters, ...updates })
   }
@@ -58,10 +60,10 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
     <ScrollArea className="h-full">
       <div className="p-4 space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="font-heading text-base font-semibold">Filters</h3>
+          <h3 className="font-heading text-base font-semibold">{t.filters.title}</h3>
           {hasActiveFilters && (
             <Button variant="ghost" size="sm" onClick={onClearFilters} className="h-7 text-xs">
-              Clear All
+              {t.filters.clearAll}
             </Button>
           )}
         </div>
@@ -69,7 +71,7 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
         <Separator />
 
         <div className="space-y-3">
-          <Label className="text-sm font-semibold">Categories</Label>
+          <Label className="text-sm font-semibold">{t.filters.categories}</Label>
           <div className="space-y-2">
             {categories.map((category) => (
               <div key={category.value} className="flex items-center space-x-2">
@@ -94,7 +96,7 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-sm font-semibold">Price Range</Label>
+            <Label className="text-sm font-semibold">{t.filters.priceRange}</Label>
             <div className="flex gap-0.5">
               {Array.from({ length: filters.priceRange[1] - filters.priceRange[0] + 1 }, (_, i) =>
                 '$'.repeat(filters.priceRange[0] + i)
@@ -119,8 +121,8 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-sm font-semibold">Minimum Rating</Label>
-            <Badge variant="secondary" className="text-[10px] px-1.5 py-0">{filters.minRating}+ Stars</Badge>
+            <Label className="text-sm font-semibold">{t.filters.minRating}</Label>
+            <Badge variant="secondary" className="text-[10px] px-1.5 py-0">{filters.minRating}+ {t.filters.stars}</Badge>
           </div>
           <Slider
             min={0}
@@ -136,9 +138,9 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-sm font-semibold">Distance</Label>
+            <Label className="text-sm font-semibold">{t.filters.distance}</Label>
             <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
-              {filters.maxDistance >= 50 ? 'Any' : `${filters.maxDistance}km`}
+              {filters.maxDistance >= 50 ? t.filters.any : `${filters.maxDistance}km`}
             </Badge>
           </div>
           <Slider
@@ -154,7 +156,7 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
         <Separator />
 
         <div className="space-y-2">
-          <Label className="text-sm font-semibold">Availability</Label>
+          <Label className="text-sm font-semibold">{t.filters.availability}</Label>
           <div className="space-y-2">
             <div className="flex items-center space-x-2">
               <Checkbox
@@ -164,7 +166,7 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
                 className="h-4 w-4"
               />
               <Label htmlFor="open-now" className="text-xs font-normal cursor-pointer">
-                Open Now
+                {t.filters.openNow}
               </Label>
             </div>
             <div className="flex items-center space-x-2">
@@ -175,7 +177,7 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
                 className="h-4 w-4"
               />
               <Label htmlFor="open-24h" className="text-xs font-normal cursor-pointer">
-                Open 24 Hours
+                {t.filters.open24Hours}
               </Label>
             </div>
           </div>
@@ -184,7 +186,7 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
         <Separator />
 
         <div className="space-y-3">
-          <Label className="text-sm font-semibold">Dietary Preferences</Label>
+          <Label className="text-sm font-semibold">{t.filters.dietary}</Label>
           <div className="space-y-2">
             {dietaryOptions.map((option) => (
               <div key={option.value} className="flex items-center space-x-2">

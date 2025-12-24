@@ -35,6 +35,8 @@ import { HeroSection } from '@/components/HeroSection'
 import { VenueCard } from '@/components/VenueCard'
 import { FilterPanel } from '@/components/FilterPanel'
 import { AuthDialog } from '@/components/AuthDialog'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { LanguageProvider, useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/hooks/use-auth'
 import { useFavorites } from '@/hooks/use-favorites'
 import { useUserLocation } from '@/hooks/use-user-location'
@@ -42,10 +44,11 @@ import { venues } from '@/lib/venues-data'
 import { filterVenues, sortVenues, debounce } from '@/lib/helpers'
 import type { SearchFilters, SortOption, ViewMode, VenueCategory } from '@/lib/types'
 
-function App() {
+function AppContent() {
   const { user, isAuthenticated, login, logout } = useAuth()
   const { favoriteIds, toggleFavorite, isFavorite } = useFavorites()
   const { location: userLocation } = useUserLocation()
+  const { t } = useLanguage()
 
   const [authDialogOpen, setAuthDialogOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -104,19 +107,19 @@ function App() {
   const handleToggleFavorite = (venueId: string) => {
     if (!isAuthenticated) {
       setAuthDialogOpen(true)
-      toast.info('Please login to save favorites')
+      toast.info(t.favorites.loginRequired)
       return
     }
     toggleFavorite(venueId)
     if (isFavorite(venueId)) {
-      toast.success('Removed from favorites')
+      toast.success(t.favorites.removedFromFavorites)
     } else {
-      toast.success('Added to favorites')
+      toast.success(t.favorites.addedToFavorites)
     }
   }
 
   const handleCardClick = (venueId: string) => {
-    toast.info('Venue detail view coming soon!')
+    toast.info(t.common.comingSoon)
   }
 
   const filteredVenues = useMemo(() => {
@@ -146,7 +149,7 @@ function App() {
           <div className="flex items-center justify-between h-14">
             <div className="flex items-center gap-6">
               <h1 className="font-heading text-base md:text-lg font-bold text-primary">
-                Vietnam Travel
+                {t.nav.appTitle}
               </h1>
               <div className="hidden md:flex items-center gap-4">
                 <Button
@@ -155,7 +158,7 @@ function App() {
                   onClick={() => setShowFavoritesOnly(false)}
                   className={!showFavoritesOnly ? 'text-primary' : ''}
                 >
-                  Explore
+                  {t.nav.explore}
                 </Button>
                 {isAuthenticated && (
                   <Button
@@ -165,7 +168,7 @@ function App() {
                     className={showFavoritesOnly ? 'text-primary' : ''}
                   >
                     <Heart className="h-3.5 w-3.5 mr-1.5" weight={showFavoritesOnly ? 'fill' : 'regular'} />
-                    Favorites
+                    {t.nav.favorites}
                     {(favoriteIds ?? []).length > 0 && (
                       <Badge variant="secondary" className="ml-1.5 text-[10px] px-1.5 py-0">
                         {(favoriteIds ?? []).length}
@@ -177,6 +180,7 @@ function App() {
             </div>
 
             <div className="flex items-center gap-2">
+              <LanguageSwitcher />
               {isAuthenticated ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
@@ -192,13 +196,13 @@ function App() {
                     <DropdownMenuSeparator />
                     <DropdownMenuItem onClick={logout} className="text-xs">
                       <SignOut className="h-3.5 w-3.5 mr-2" />
-                      Logout
+                      {t.nav.logout}
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
                 <Button onClick={() => setAuthDialogOpen(true)} className="hidden md:flex h-8 text-xs">
-                  Login / Sign Up
+                  {t.nav.login}
                 </Button>
               )}
 
@@ -219,7 +223,7 @@ function App() {
                       }}
                       className="justify-start"
                     >
-                      Explore
+                      {t.nav.explore}
                     </Button>
                     {isAuthenticated ? (
                       <>
@@ -233,7 +237,7 @@ function App() {
                           className="justify-start"
                         >
                           <Heart className="h-3.5 w-3.5 mr-2" />
-                          Favorites
+                          {t.nav.favorites}
                         </Button>
                         <Button
                           variant="ghost"
@@ -245,7 +249,7 @@ function App() {
                           className="justify-start"
                         >
                           <SignOut className="h-3.5 w-3.5 mr-2" />
-                          Logout
+                          {t.nav.logout}
                         </Button>
                       </>
                     ) : (
@@ -256,7 +260,7 @@ function App() {
                           setMobileMenuOpen(false)
                         }}
                       >
-                        Login / Sign Up
+                        {t.nav.login}
                       </Button>
                     )}
                   </div>
@@ -279,11 +283,11 @@ function App() {
       <div className="container mx-auto px-4 py-6">
         {showFavoritesOnly && (
           <div className="mb-6">
-            <h2 className="font-heading text-2xl font-bold mb-1">My Favorites</h2>
+            <h2 className="font-heading text-2xl font-bold mb-1">{t.favorites.title}</h2>
             <p className="text-sm text-muted-foreground">
               {(favoriteIds ?? []).length === 0
-                ? 'No favorites yet. Start exploring and save your favorite places!'
-                : `You have ${(favoriteIds ?? []).length} saved ${(favoriteIds ?? []).length === 1 ? 'place' : 'places'}`}
+                ? t.favorites.noFavorites
+                : `${(favoriteIds ?? []).length} ${(favoriteIds ?? []).length === 1 ? t.results.place : t.results.places} ${t.favorites.saved}`}
             </p>
           </div>
         )}
@@ -303,12 +307,12 @@ function App() {
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="flex items-center gap-2 flex-wrap">
                 <p className="text-xs text-muted-foreground">
-                  {filteredVenues.length} {filteredVenues.length === 1 ? 'place' : 'places'} found
+                  {filteredVenues.length} {filteredVenues.length === 1 ? t.results.place : t.results.places} {t.results.placesFound}
                 </p>
                 {hasActiveFilters && (
                   <Button variant="ghost" size="sm" onClick={clearFilters} className="h-7 text-xs">
                     <X className="h-3 w-3 mr-1" />
-                    Clear filters
+                    {t.results.clearFilters}
                   </Button>
                 )}
               </div>
@@ -318,10 +322,10 @@ function App() {
                   <SheetTrigger asChild>
                     <Button variant="outline" size="sm" className="lg:hidden h-8 text-xs">
                       <Funnel className="h-3.5 w-3.5 mr-1.5" />
-                      Filters
+                      {t.filters.title}
                       {hasActiveFilters && (
                         <Badge variant="secondary" className="ml-1.5 text-[10px] px-1.5 py-0">
-                          Active
+                          {t.results.filtersActive}
                         </Badge>
                       )}
                     </Button>
@@ -340,11 +344,11 @@ function App() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="popular" className="text-xs">Most Popular</SelectItem>
-                    <SelectItem value="rating" className="text-xs">Highest Rated</SelectItem>
-                    <SelectItem value="distance" className="text-xs">Nearest</SelectItem>
-                    <SelectItem value="price-low" className="text-xs">Price: Low to High</SelectItem>
-                    <SelectItem value="price-high" className="text-xs">Price: High to Low</SelectItem>
+                    <SelectItem value="popular" className="text-xs">{t.sort.mostPopular}</SelectItem>
+                    <SelectItem value="rating" className="text-xs">{t.sort.highestRated}</SelectItem>
+                    <SelectItem value="distance" className="text-xs">{t.sort.nearest}</SelectItem>
+                    <SelectItem value="price-low" className="text-xs">{t.sort.priceLowToHigh}</SelectItem>
+                    <SelectItem value="price-high" className="text-xs">{t.sort.priceHighToLow}</SelectItem>
                   </SelectContent>
                 </Select>
 
@@ -373,14 +377,14 @@ function App() {
               <div className="flex flex-col items-center justify-center py-12 text-center">
                 <div className="mb-4 text-muted-foreground">
                   <MagnifyingGlass className="h-12 w-12 mx-auto mb-3" />
-                  <h3 className="font-heading text-lg font-semibold mb-1">No places found</h3>
+                  <h3 className="font-heading text-lg font-semibold mb-1">{t.results.noResults}</h3>
                   <p className="text-xs max-w-md">
-                    Try adjusting your filters or search terms to find more results
+                    {t.results.tryAdjusting}
                   </p>
                 </div>
                 {hasActiveFilters && (
                   <Button onClick={clearFilters} size="sm" className="mt-3">
-                    Clear all filters
+                    {t.results.clearAllFilters}
                   </Button>
                 )}
               </div>
@@ -416,4 +420,10 @@ function App() {
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
+  )
+}

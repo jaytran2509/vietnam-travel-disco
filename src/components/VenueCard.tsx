@@ -4,6 +4,7 @@ import { calculateDistance, formatDistance, isVenueOpen } from '@/lib/helpers'
 import { Card } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
@@ -24,6 +25,7 @@ export function VenueCard({
   userLocation,
   viewMode = 'grid',
 }: VenueCardProps) {
+  const { t } = useLanguage()
   const distance = userLocation
     ? calculateDistance(userLocation, venue.coordinates)
     : null
@@ -78,7 +80,7 @@ export function VenueCard({
                       {venue.category}
                     </Badge>
                     {isOpen && (
-                      <Badge className="bg-accent text-accent-foreground text-xs px-2 py-0.5">Open Now</Badge>
+                      <Badge className="bg-accent text-accent-foreground text-xs px-2 py-0.5">{t.filters.openNow}</Badge>
                     )}
                   </div>
                 </div>
@@ -151,7 +153,7 @@ export function VenueCard({
 
           {isOpen && (
             <Badge className="absolute top-2 left-2 bg-accent text-accent-foreground text-xs px-2 py-0.5">
-              Open Now
+              {t.filters.openNow}
             </Badge>
           )}
 

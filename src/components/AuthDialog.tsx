@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { toast } from 'sonner'
 import { generateId } from '@/lib/helpers'
 import type { User } from '@/lib/types'
@@ -16,6 +17,7 @@ interface AuthDialogProps {
 }
 
 export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
+  const { t } = useLanguage()
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
@@ -42,7 +44,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     }
 
     onLogin(user, rememberMe)
-    toast.success('Welcome back!')
+    toast.success(t.auth.loginSuccess)
     onOpenChange(false)
 
     setLoginEmail('')
@@ -77,7 +79,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     }
 
     onLogin(user, false)
-    toast.success(`Welcome, ${signupName}!`)
+    toast.success(t.auth.signupSuccess)
     onOpenChange(false)
 
     setSignupName('')
@@ -90,19 +92,19 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="font-heading text-lg">Welcome</DialogTitle>
+          <DialogTitle className="font-heading text-lg">{t.nav.login}</DialogTitle>
         </DialogHeader>
 
         <Tabs defaultValue="login" className="w-full">
           <TabsList className="grid w-full grid-cols-2 h-9">
-            <TabsTrigger value="login" className="text-xs">Login</TabsTrigger>
-            <TabsTrigger value="signup" className="text-xs">Sign Up</TabsTrigger>
+            <TabsTrigger value="login" className="text-xs">{t.auth.loginButton}</TabsTrigger>
+            <TabsTrigger value="signup" className="text-xs">{t.auth.signupButton}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="login">
             <form onSubmit={handleLogin} className="space-y-3">
               <div className="space-y-1.5">
-                <Label htmlFor="login-email" className="text-xs">Email</Label>
+                <Label htmlFor="login-email" className="text-xs">{t.auth.email}</Label>
                 <Input
                   id="login-email"
                   type="email"
@@ -114,7 +116,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="login-password" className="text-xs">Password</Label>
+                <Label htmlFor="login-password" className="text-xs">{t.auth.password}</Label>
                 <Input
                   id="login-password"
                   type="password"
@@ -136,12 +138,12 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                   htmlFor="remember-me"
                   className="text-xs font-normal cursor-pointer"
                 >
-                  Remember me
+                  {t.auth.rememberMe}
                 </Label>
               </div>
 
               <Button type="submit" className="w-full h-9 text-sm">
-                Login
+                {t.auth.loginButton}
               </Button>
 
               <Button
@@ -158,7 +160,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
           <TabsContent value="signup">
             <form onSubmit={handleSignup} className="space-y-3">
               <div className="space-y-1.5">
-                <Label htmlFor="signup-name" className="text-xs">Full Name</Label>
+                <Label htmlFor="signup-name" className="text-xs">{t.auth.name}</Label>
                 <Input
                   id="signup-name"
                   type="text"
@@ -170,7 +172,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="signup-email" className="text-xs">Email</Label>
+                <Label htmlFor="signup-email" className="text-xs">{t.auth.email}</Label>
                 <Input
                   id="signup-email"
                   type="email"
@@ -182,7 +184,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="signup-password" className="text-xs">Password</Label>
+                <Label htmlFor="signup-password" className="text-xs">{t.auth.password}</Label>
                 <Input
                   id="signup-password"
                   type="password"
@@ -206,7 +208,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
               </div>
 
               <Button type="submit" className="w-full h-9 text-sm">
-                Create Account
+                {t.auth.signupButton}
               </Button>
             </form>
           </TabsContent>

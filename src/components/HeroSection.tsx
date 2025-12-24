@@ -1,6 +1,7 @@
 import { MagnifyingGlass } from '@phosphor-icons/react'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
+import { useLanguage } from '@/contexts/LanguageContext'
 import type { VenueCategory } from '@/lib/types'
 
 interface HeroSectionProps {
@@ -10,18 +11,20 @@ interface HeroSectionProps {
   onCategoryClick: (category: VenueCategory) => void
 }
 
-const categories: { value: VenueCategory; label: string; emoji: string }[] = [
-  { value: 'restaurant', label: 'Restaurants', emoji: '🍜' },
-  { value: 'cafe', label: 'Cafés', emoji: '☕' },
-  { value: 'attraction', label: 'Attractions', emoji: '🏛️' },
-]
-
 export function HeroSection({
   searchQuery,
   onSearchChange,
   selectedCategories,
   onCategoryClick,
 }: HeroSectionProps) {
+  const { t } = useLanguage()
+
+  const categories: { value: VenueCategory; label: string; emoji: string }[] = [
+    { value: 'restaurant', label: t.categories.restaurants, emoji: '🍜' },
+    { value: 'cafe', label: t.categories.cafes, emoji: '☕' },
+    { value: 'attraction', label: t.categories.attractions, emoji: '🏛️' },
+  ]
+
   return (
     <div className="relative h-[380px] md:h-[460px] flex items-center justify-center overflow-hidden">
       <div
@@ -38,11 +41,10 @@ export function HeroSection({
       <div className="relative z-10 w-full max-w-3xl px-4 text-center space-y-6">
         <div className="space-y-2">
           <h1 className="font-heading text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
-            Discover Vietnam
+            {t.hero.title}
           </h1>
           <p className="text-sm md:text-base text-white/90 max-w-xl mx-auto">
-            Explore authentic restaurants, trendy cafés, and cultural attractions across Saigon
-            and Hanoi
+            {t.hero.subtitle}
           </p>
         </div>
 
@@ -50,7 +52,7 @@ export function HeroSection({
           <div className="relative">
             <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
-              placeholder="Search for places, cuisine, or location..."
+              placeholder={t.hero.searchPlaceholder}
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
               className="pl-10 h-11 text-sm bg-white/95 backdrop-blur-sm border-0 shadow-xl"
