@@ -143,14 +143,15 @@ function App() {
     <div className="min-h-screen bg-background">
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b shadow-sm">
         <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center gap-8">
-              <h1 className="font-heading text-xl md:text-2xl font-bold text-primary">
+          <div className="flex items-center justify-between h-14">
+            <div className="flex items-center gap-6">
+              <h1 className="font-heading text-base md:text-lg font-bold text-primary">
                 Vietnam Travel
               </h1>
-              <div className="hidden md:flex items-center gap-6">
+              <div className="hidden md:flex items-center gap-4">
                 <Button
                   variant="ghost"
+                  size="sm"
                   onClick={() => setShowFavoritesOnly(false)}
                   className={!showFavoritesOnly ? 'text-primary' : ''}
                 >
@@ -159,13 +160,14 @@ function App() {
                 {isAuthenticated && (
                   <Button
                     variant="ghost"
+                    size="sm"
                     onClick={() => setShowFavoritesOnly(true)}
                     className={showFavoritesOnly ? 'text-primary' : ''}
                   >
-                    <Heart className="h-4 w-4 mr-2" weight={showFavoritesOnly ? 'fill' : 'regular'} />
+                    <Heart className="h-3.5 w-3.5 mr-1.5" weight={showFavoritesOnly ? 'fill' : 'regular'} />
                     Favorites
                     {(favoriteIds ?? []).length > 0 && (
-                      <Badge variant="secondary" className="ml-2">
+                      <Badge variant="secondary" className="ml-1.5 text-[10px] px-1.5 py-0">
                         {(favoriteIds ?? []).length}
                       </Badge>
                     )}
@@ -178,38 +180,39 @@ function App() {
               {isAuthenticated ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon">
-                      <User className="h-5 w-5" />
+                    <Button variant="ghost" size="icon" className="h-8 w-8">
+                      <User className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end">
                     <div className="px-2 py-1.5">
-                      <p className="font-semibold">{user?.name}</p>
-                      <p className="text-sm text-muted-foreground">{user?.email}</p>
+                      <p className="font-semibold text-sm">{user?.name}</p>
+                      <p className="text-xs text-muted-foreground">{user?.email}</p>
                     </div>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={logout}>
-                      <SignOut className="h-4 w-4 mr-2" />
+                    <DropdownMenuItem onClick={logout} className="text-xs">
+                      <SignOut className="h-3.5 w-3.5 mr-2" />
                       Logout
                     </DropdownMenuItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
               ) : (
-                <Button onClick={() => setAuthDialogOpen(true)} className="hidden md:flex">
+                <Button onClick={() => setAuthDialogOpen(true)} className="hidden md:flex h-8 text-xs">
                   Login / Sign Up
                 </Button>
               )}
 
               <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
                 <SheetTrigger asChild>
-                  <Button variant="ghost" size="icon" className="md:hidden">
-                    <List className="h-5 w-5" />
+                  <Button variant="ghost" size="icon" className="md:hidden h-8 w-8">
+                    <List className="h-4 w-4" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right">
-                  <div className="flex flex-col gap-4 mt-8">
+                  <div className="flex flex-col gap-3 mt-6">
                     <Button
                       variant="ghost"
+                      size="sm"
                       onClick={() => {
                         setShowFavoritesOnly(false)
                         setMobileMenuOpen(false)
@@ -222,29 +225,32 @@ function App() {
                       <>
                         <Button
                           variant="ghost"
+                          size="sm"
                           onClick={() => {
                             setShowFavoritesOnly(true)
                             setMobileMenuOpen(false)
                           }}
                           className="justify-start"
                         >
-                          <Heart className="h-4 w-4 mr-2" />
+                          <Heart className="h-3.5 w-3.5 mr-2" />
                           Favorites
                         </Button>
                         <Button
                           variant="ghost"
+                          size="sm"
                           onClick={() => {
                             logout()
                             setMobileMenuOpen(false)
                           }}
                           className="justify-start"
                         >
-                          <SignOut className="h-4 w-4 mr-2" />
+                          <SignOut className="h-3.5 w-3.5 mr-2" />
                           Logout
                         </Button>
                       </>
                     ) : (
                       <Button
+                        size="sm"
                         onClick={() => {
                           setAuthDialogOpen(true)
                           setMobileMenuOpen(false)
@@ -270,11 +276,11 @@ function App() {
         />
       )}
 
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 py-6">
         {showFavoritesOnly && (
-          <div className="mb-8">
-            <h2 className="font-heading text-3xl font-bold mb-2">My Favorites</h2>
-            <p className="text-muted-foreground">
+          <div className="mb-6">
+            <h2 className="font-heading text-2xl font-bold mb-1">My Favorites</h2>
+            <p className="text-sm text-muted-foreground">
               {(favoriteIds ?? []).length === 0
                 ? 'No favorites yet. Start exploring and save your favorite places!'
                 : `You have ${(favoriteIds ?? []).length} saved ${(favoriteIds ?? []).length === 1 ? 'place' : 'places'}`}
@@ -282,9 +288,9 @@ function App() {
           </div>
         )}
 
-        <div className="flex flex-col lg:flex-row gap-6">
-          <aside className="hidden lg:block w-80 shrink-0">
-            <div className="sticky top-24 bg-card rounded-lg border shadow-sm">
+        <div className="flex flex-col lg:flex-row gap-4">
+          <aside className="hidden lg:block w-64 shrink-0">
+            <div className="sticky top-20 bg-card rounded-lg border shadow-sm">
               <FilterPanel
                 filters={filters}
                 onFiltersChange={setFilters}
@@ -293,15 +299,15 @@ function App() {
             </div>
           </aside>
 
-          <main className="flex-1 space-y-6">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <main className="flex-1 space-y-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="flex items-center gap-2 flex-wrap">
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs text-muted-foreground">
                   {filteredVenues.length} {filteredVenues.length === 1 ? 'place' : 'places'} found
                 </p>
                 {hasActiveFilters && (
-                  <Button variant="ghost" size="sm" onClick={clearFilters}>
-                    <X className="h-4 w-4 mr-1" />
+                  <Button variant="ghost" size="sm" onClick={clearFilters} className="h-7 text-xs">
+                    <X className="h-3 w-3 mr-1" />
                     Clear filters
                   </Button>
                 )}
@@ -310,17 +316,17 @@ function App() {
               <div className="flex items-center gap-2 w-full sm:w-auto">
                 <Sheet>
                   <SheetTrigger asChild>
-                    <Button variant="outline" size="sm" className="lg:hidden">
-                      <Funnel className="h-4 w-4 mr-2" />
+                    <Button variant="outline" size="sm" className="lg:hidden h-8 text-xs">
+                      <Funnel className="h-3.5 w-3.5 mr-1.5" />
                       Filters
                       {hasActiveFilters && (
-                        <Badge variant="secondary" className="ml-2">
+                        <Badge variant="secondary" className="ml-1.5 text-[10px] px-1.5 py-0">
                           Active
                         </Badge>
                       )}
                     </Button>
                   </SheetTrigger>
-                  <SheetContent side="left" className="w-80 p-0">
+                  <SheetContent side="left" className="w-72 p-0">
                     <FilterPanel
                       filters={filters}
                       onFiltersChange={setFilters}
@@ -330,50 +336,50 @@ function App() {
                 </Sheet>
 
                 <Select value={sortBy} onValueChange={(value) => setSortBy(value as SortOption)}>
-                  <SelectTrigger className="w-[160px]">
+                  <SelectTrigger className="w-[140px] h-8 text-xs">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="popular">Most Popular</SelectItem>
-                    <SelectItem value="rating">Highest Rated</SelectItem>
-                    <SelectItem value="distance">Nearest</SelectItem>
-                    <SelectItem value="price-low">Price: Low to High</SelectItem>
-                    <SelectItem value="price-high">Price: High to Low</SelectItem>
+                    <SelectItem value="popular" className="text-xs">Most Popular</SelectItem>
+                    <SelectItem value="rating" className="text-xs">Highest Rated</SelectItem>
+                    <SelectItem value="distance" className="text-xs">Nearest</SelectItem>
+                    <SelectItem value="price-low" className="text-xs">Price: Low to High</SelectItem>
+                    <SelectItem value="price-high" className="text-xs">Price: High to Low</SelectItem>
                   </SelectContent>
                 </Select>
 
-                <div className="hidden sm:flex items-center gap-1 border rounded-md p-1">
+                <div className="hidden sm:flex items-center gap-1 border rounded-md p-0.5">
                   <Button
                     variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
                     size="icon"
-                    className="h-8 w-8"
+                    className="h-7 w-7"
                     onClick={() => setViewMode('grid')}
                   >
-                    <GridFour className="h-4 w-4" />
+                    <GridFour className="h-3.5 w-3.5" />
                   </Button>
                   <Button
                     variant={viewMode === 'list' ? 'secondary' : 'ghost'}
                     size="icon"
-                    className="h-8 w-8"
+                    className="h-7 w-7"
                     onClick={() => setViewMode('list')}
                   >
-                    <List className="h-4 w-4" />
+                    <List className="h-3.5 w-3.5" />
                   </Button>
                 </div>
               </div>
             </div>
 
             {filteredVenues.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-16 text-center">
+              <div className="flex flex-col items-center justify-center py-12 text-center">
                 <div className="mb-4 text-muted-foreground">
-                  <MagnifyingGlass className="h-16 w-16 mx-auto mb-4" />
-                  <h3 className="font-heading text-xl font-semibold mb-2">No places found</h3>
-                  <p className="text-sm max-w-md">
+                  <MagnifyingGlass className="h-12 w-12 mx-auto mb-3" />
+                  <h3 className="font-heading text-lg font-semibold mb-1">No places found</h3>
+                  <p className="text-xs max-w-md">
                     Try adjusting your filters or search terms to find more results
                   </p>
                 </div>
                 {hasActiveFilters && (
-                  <Button onClick={clearFilters} className="mt-4">
+                  <Button onClick={clearFilters} size="sm" className="mt-3">
                     Clear all filters
                   </Button>
                 )}
@@ -382,8 +388,8 @@ function App() {
               <div
                 className={
                   viewMode === 'grid'
-                    ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'
-                    : 'space-y-4'
+                    ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'
+                    : 'space-y-3'
                 }
               >
                 {filteredVenues.map((venue) => (

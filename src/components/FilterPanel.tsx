@@ -56,11 +56,11 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
   return (
     <ScrollArea className="h-full">
-      <div className="p-6 space-y-6">
+      <div className="p-4 space-y-4">
         <div className="flex items-center justify-between">
-          <h3 className="font-heading text-lg font-semibold">Filters</h3>
+          <h3 className="font-heading text-base font-semibold">Filters</h3>
           {hasActiveFilters && (
-            <Button variant="ghost" size="sm" onClick={onClearFilters}>
+            <Button variant="ghost" size="sm" onClick={onClearFilters} className="h-7 text-xs">
               Clear All
             </Button>
           )}
@@ -68,19 +68,20 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <Separator />
 
-        <div className="space-y-4">
-          <Label className="text-base font-semibold">Categories</Label>
-          <div className="space-y-3">
+        <div className="space-y-3">
+          <Label className="text-sm font-semibold">Categories</Label>
+          <div className="space-y-2">
             {categories.map((category) => (
               <div key={category.value} className="flex items-center space-x-2">
                 <Checkbox
                   id={`category-${category.value}`}
                   checked={filters.categories.includes(category.value)}
                   onCheckedChange={() => toggleCategory(category.value)}
+                  className="h-4 w-4"
                 />
                 <Label
                   htmlFor={`category-${category.value}`}
-                  className="font-normal cursor-pointer"
+                  className="text-xs font-normal cursor-pointer"
                 >
                   {category.label}
                 </Label>
@@ -91,14 +92,14 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <Separator />
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-base font-semibold">Price Range</Label>
-            <div className="flex gap-1">
+            <Label className="text-sm font-semibold">Price Range</Label>
+            <div className="flex gap-0.5">
               {Array.from({ length: filters.priceRange[1] - filters.priceRange[0] + 1 }, (_, i) =>
                 '$'.repeat(filters.priceRange[0] + i)
               ).map((price, i) => (
-                <Badge key={i} variant="secondary" className="text-xs">
+                <Badge key={i} variant="secondary" className="text-[10px] px-1.5 py-0">
                   {price}
                 </Badge>
               ))}
@@ -116,10 +117,10 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <Separator />
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-base font-semibold">Minimum Rating</Label>
-            <Badge variant="secondary">{filters.minRating}+ Stars</Badge>
+            <Label className="text-sm font-semibold">Minimum Rating</Label>
+            <Badge variant="secondary" className="text-[10px] px-1.5 py-0">{filters.minRating}+ Stars</Badge>
           </div>
           <Slider
             min={0}
@@ -133,10 +134,10 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <Separator />
 
-        <div className="space-y-4">
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-base font-semibold">Distance</Label>
-            <Badge variant="secondary">
+            <Label className="text-sm font-semibold">Distance</Label>
+            <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
               {filters.maxDistance >= 50 ? 'Any' : `${filters.maxDistance}km`}
             </Badge>
           </div>
@@ -152,16 +153,17 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <Separator />
 
-        <div className="space-y-3">
-          <Label className="text-base font-semibold">Availability</Label>
-          <div className="space-y-3">
+        <div className="space-y-2">
+          <Label className="text-sm font-semibold">Availability</Label>
+          <div className="space-y-2">
             <div className="flex items-center space-x-2">
               <Checkbox
                 id="open-now"
                 checked={filters.openNow}
                 onCheckedChange={(checked) => updateFilters({ openNow: checked as boolean })}
+                className="h-4 w-4"
               />
-              <Label htmlFor="open-now" className="font-normal cursor-pointer">
+              <Label htmlFor="open-now" className="text-xs font-normal cursor-pointer">
                 Open Now
               </Label>
             </div>
@@ -170,8 +172,9 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
                 id="open-24h"
                 checked={filters.open24Hours}
                 onCheckedChange={(checked) => updateFilters({ open24Hours: checked as boolean })}
+                className="h-4 w-4"
               />
-              <Label htmlFor="open-24h" className="font-normal cursor-pointer">
+              <Label htmlFor="open-24h" className="text-xs font-normal cursor-pointer">
                 Open 24 Hours
               </Label>
             </div>
@@ -180,19 +183,20 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <Separator />
 
-        <div className="space-y-4">
-          <Label className="text-base font-semibold">Dietary Preferences</Label>
-          <div className="space-y-3">
+        <div className="space-y-3">
+          <Label className="text-sm font-semibold">Dietary Preferences</Label>
+          <div className="space-y-2">
             {dietaryOptions.map((option) => (
               <div key={option.value} className="flex items-center space-x-2">
                 <Checkbox
                   id={`dietary-${option.value}`}
                   checked={filters.dietary.includes(option.value)}
                   onCheckedChange={() => toggleDietary(option.value)}
+                  className="h-4 w-4"
                 />
                 <Label
                   htmlFor={`dietary-${option.value}`}
-                  className="font-normal cursor-pointer"
+                  className="text-xs font-normal cursor-pointer"
                 >
                   {option.label}
                 </Label>

@@ -90,36 +90,38 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="font-heading text-2xl">Welcome</DialogTitle>
+          <DialogTitle className="font-heading text-lg">Welcome</DialogTitle>
         </DialogHeader>
 
         <Tabs defaultValue="login" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="login">Login</TabsTrigger>
-            <TabsTrigger value="signup">Sign Up</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 h-9">
+            <TabsTrigger value="login" className="text-xs">Login</TabsTrigger>
+            <TabsTrigger value="signup" className="text-xs">Sign Up</TabsTrigger>
           </TabsList>
 
           <TabsContent value="login">
-            <form onSubmit={handleLogin} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="login-email">Email</Label>
+            <form onSubmit={handleLogin} className="space-y-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="login-email" className="text-xs">Email</Label>
                 <Input
                   id="login-email"
                   type="email"
                   placeholder="your@email.com"
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
+                  className="h-9 text-sm"
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="login-password">Password</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="login-password" className="text-xs">Password</Label>
                 <Input
                   id="login-password"
                   type="password"
                   placeholder="••••••••"
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
+                  className="h-9 text-sm"
                 />
               </div>
 
@@ -128,23 +130,24 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                   id="remember-me"
                   checked={rememberMe}
                   onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                  className="h-4 w-4"
                 />
                 <Label
                   htmlFor="remember-me"
-                  className="text-sm font-normal cursor-pointer"
+                  className="text-xs font-normal cursor-pointer"
                 >
                   Remember me
                 </Label>
               </div>
 
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full h-9 text-sm">
                 Login
               </Button>
 
               <Button
                 type="button"
                 variant="ghost"
-                className="w-full text-sm text-muted-foreground"
+                className="w-full h-8 text-xs text-muted-foreground"
                 onClick={() => toast.info('Password recovery coming soon!')}
               >
                 Forgot password?
@@ -153,52 +156,56 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
           </TabsContent>
 
           <TabsContent value="signup">
-            <form onSubmit={handleSignup} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="signup-name">Full Name</Label>
+            <form onSubmit={handleSignup} className="space-y-3">
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-name" className="text-xs">Full Name</Label>
                 <Input
                   id="signup-name"
                   type="text"
                   placeholder="John Doe"
                   value={signupName}
                   onChange={(e) => setSignupName(e.target.value)}
+                  className="h-9 text-sm"
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="signup-email">Email</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-email" className="text-xs">Email</Label>
                 <Input
                   id="signup-email"
                   type="email"
                   placeholder="your@email.com"
                   value={signupEmail}
                   onChange={(e) => setSignupEmail(e.target.value)}
+                  className="h-9 text-sm"
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="signup-password">Password</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-password" className="text-xs">Password</Label>
                 <Input
                   id="signup-password"
                   type="password"
                   placeholder="••••••••"
                   value={signupPassword}
                   onChange={(e) => setSignupPassword(e.target.value)}
+                  className="h-9 text-sm"
                 />
               </div>
 
-              <div className="space-y-2">
-                <Label htmlFor="signup-confirm-password">Confirm Password</Label>
+              <div className="space-y-1.5">
+                <Label htmlFor="signup-confirm-password" className="text-xs">Confirm Password</Label>
                 <Input
                   id="signup-confirm-password"
                   type="password"
                   placeholder="••••••••"
                   value={signupConfirmPassword}
                   onChange={(e) => setSignupConfirmPassword(e.target.value)}
+                  className="h-9 text-sm"
                 />
               </div>
 
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full h-9 text-sm">
                 Create Account
               </Button>
             </form>

@@ -23,7 +23,7 @@ export function HeroSection({
   onCategoryClick,
 }: HeroSectionProps) {
   return (
-    <div className="relative h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden">
+    <div className="relative h-[380px] md:h-[460px] flex items-center justify-center overflow-hidden">
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
@@ -35,39 +35,39 @@ export function HeroSection({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.3)_100%)]" />
       </div>
 
-      <div className="relative z-10 w-full max-w-4xl px-6 text-center space-y-8">
-        <div className="space-y-4">
-          <h1 className="font-heading text-4xl md:text-6xl font-bold text-white drop-shadow-lg">
+      <div className="relative z-10 w-full max-w-3xl px-4 text-center space-y-6">
+        <div className="space-y-2">
+          <h1 className="font-heading text-3xl md:text-4xl font-bold text-white drop-shadow-lg">
             Discover Vietnam
           </h1>
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
+          <p className="text-sm md:text-base text-white/90 max-w-xl mx-auto">
             Explore authentic restaurants, trendy cafés, and cultural attractions across Saigon
             and Hanoi
           </p>
         </div>
 
-        <div className="max-w-2xl mx-auto space-y-4">
+        <div className="max-w-xl mx-auto space-y-3">
           <div className="relative">
-            <MagnifyingGlass className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+            <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
             <Input
               placeholder="Search for places, cuisine, or location..."
               value={searchQuery}
               onChange={(e) => onSearchChange(e.target.value)}
-              className="pl-12 h-14 text-base bg-white/95 backdrop-blur-sm border-0 shadow-xl"
+              className="pl-10 h-11 text-sm bg-white/95 backdrop-blur-sm border-0 shadow-xl"
             />
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-2">
             {categories.map((category) => {
               const isSelected = selectedCategories.includes(category.value)
               return (
                 <Badge
                   key={category.value}
                   variant={isSelected ? 'default' : 'secondary'}
-                  className="cursor-pointer px-4 py-2 text-sm bg-white/90 backdrop-blur-sm hover:bg-white transition-all hover:scale-105"
+                  className="cursor-pointer px-3 py-1 text-xs bg-white/90 backdrop-blur-sm hover:bg-white transition-all hover:scale-105"
                   onClick={() => onCategoryClick(category.value)}
                 >
-                  <span className="mr-2">{category.emoji}</span>
+                  <span className="mr-1.5 text-sm">{category.emoji}</span>
                   {category.label}
                 </Badge>
               )

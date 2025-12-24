@@ -48,7 +48,7 @@ export function VenueCard({
           onClick={() => onCardClick(venue.id)}
         >
           <div className="flex flex-col md:flex-row">
-            <div className="relative w-full md:w-64 h-48 md:h-auto overflow-hidden">
+            <div className="relative w-full md:w-48 h-36 md:h-auto overflow-hidden">
               <img
                 src={venue.coverImage}
                 alt={venue.name}
@@ -58,39 +58,39 @@ export function VenueCard({
                 size="icon"
                 variant="ghost"
                 className={cn(
-                  'absolute top-3 right-3 bg-white/90 backdrop-blur-sm hover:bg-white',
+                  'absolute top-2 right-2 h-8 w-8 bg-white/90 backdrop-blur-sm hover:bg-white',
                   isFavorite && 'text-accent'
                 )}
                 onClick={handleFavoriteClick}
               >
-                <Heart weight={isFavorite ? 'fill' : 'regular'} className="h-5 w-5" />
+                <Heart weight={isFavorite ? 'fill' : 'regular'} className="h-4 w-4" />
               </Button>
             </div>
 
-            <div className="flex-1 p-6">
+            <div className="flex-1 p-4">
               <div className="flex items-start justify-between mb-2">
                 <div className="flex-1">
-                  <h3 className="font-heading text-xl font-semibold mb-1 group-hover:text-primary transition-colors">
+                  <h3 className="font-heading text-base font-semibold mb-1 group-hover:text-primary transition-colors">
                     {venue.name}
                   </h3>
-                  <div className="flex items-center gap-2 mb-3">
-                    <Badge variant="secondary" className="capitalize">
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <Badge variant="secondary" className="capitalize text-xs px-2 py-0.5">
                       {venue.category}
                     </Badge>
                     {isOpen && (
-                      <Badge className="bg-accent text-accent-foreground">Open Now</Badge>
+                      <Badge className="bg-accent text-accent-foreground text-xs px-2 py-0.5">Open Now</Badge>
                     )}
                   </div>
                 </div>
               </div>
 
-              <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+              <p className="text-muted-foreground text-xs mb-3 line-clamp-2">
                 {venue.description}
               </p>
 
-              <div className="flex flex-wrap items-center gap-4 text-sm">
+              <div className="flex flex-wrap items-center gap-3 text-xs">
                 <div className="flex items-center gap-1">
-                  <Star weight="fill" className="h-4 w-4 text-accent" />
+                  <Star weight="fill" className="h-3.5 w-3.5 text-accent" />
                   <span className="font-semibold">{venue.rating}</span>
                   <span className="text-muted-foreground">({venue.reviewCount})</span>
                 </div>
@@ -103,7 +103,7 @@ export function VenueCard({
 
                 {distance !== null && (
                   <div className="flex items-center gap-1 text-muted-foreground">
-                    <MapPin className="h-4 w-4" />
+                    <MapPin className="h-3.5 w-3.5" />
                     <span>{formatDistance(distance)}</span>
                   </div>
                 )}
@@ -126,7 +126,7 @@ export function VenueCard({
         className="overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-200 cursor-pointer group"
         onClick={() => onCardClick(venue.id)}
       >
-        <div className="relative h-48 overflow-hidden">
+        <div className="relative h-40 overflow-hidden">
           <img
             src={venue.coverImage}
             alt={venue.name}
@@ -138,50 +138,50 @@ export function VenueCard({
             size="icon"
             variant="ghost"
             className={cn(
-              'absolute top-3 right-3 bg-white/90 backdrop-blur-sm hover:bg-white',
+              'absolute top-2 right-2 h-8 w-8 bg-white/90 backdrop-blur-sm hover:bg-white',
               isFavorite && 'text-accent'
             )}
             onClick={handleFavoriteClick}
           >
             <Heart
               weight={isFavorite ? 'fill' : 'regular'}
-              className="h-5 w-5 transition-transform group-hover:scale-110"
+              className="h-4 w-4 transition-transform group-hover:scale-110"
             />
           </Button>
 
           {isOpen && (
-            <Badge className="absolute top-3 left-3 bg-accent text-accent-foreground">
+            <Badge className="absolute top-2 left-2 bg-accent text-accent-foreground text-xs px-2 py-0.5">
               Open Now
             </Badge>
           )}
 
-          <div className="absolute bottom-3 left-3">
-            <Badge variant="secondary" className="capitalize backdrop-blur-sm bg-white/90">
+          <div className="absolute bottom-2 left-2">
+            <Badge variant="secondary" className="capitalize backdrop-blur-sm bg-white/90 text-xs px-2 py-0.5">
               {venue.category}
             </Badge>
           </div>
         </div>
 
-        <div className="p-4">
-          <h3 className="font-heading text-lg font-semibold mb-2 line-clamp-1 group-hover:text-primary transition-colors">
+        <div className="p-3">
+          <h3 className="font-heading text-sm font-semibold mb-1.5 line-clamp-1 group-hover:text-primary transition-colors">
             {venue.name}
           </h3>
 
-          <div className="flex items-center gap-2 mb-2">
-            <div className="flex items-center gap-1">
-              <Star weight="fill" className="h-4 w-4 text-accent" />
-              <span className="font-semibold text-sm">{venue.rating}</span>
+          <div className="flex items-center gap-1.5 mb-1.5">
+            <div className="flex items-center gap-0.5">
+              <Star weight="fill" className="h-3.5 w-3.5 text-accent" />
+              <span className="font-semibold text-xs">{venue.rating}</span>
             </div>
-            <span className="text-muted-foreground text-xs">
+            <span className="text-muted-foreground text-[10px]">
               ({venue.reviewCount})
             </span>
-            <span className="text-muted-foreground text-xs">·</span>
-            <span className="font-semibold text-sm">{venue.priceLevel}</span>
+            <span className="text-muted-foreground text-[10px]">·</span>
+            <span className="font-semibold text-xs">{venue.priceLevel}</span>
           </div>
 
           {distance !== null && (
-            <div className="flex items-center gap-1 text-muted-foreground text-sm">
-              <MapPin className="h-3.5 w-3.5" />
+            <div className="flex items-center gap-0.5 text-muted-foreground text-xs">
+              <MapPin className="h-3 w-3" />
               <span>{formatDistance(distance)}</span>
             </div>
           )}

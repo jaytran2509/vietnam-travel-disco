@@ -108,12 +108,12 @@ Typography should feel modern, adventurous, and highly readable for internationa
 - **Secondary Font**: Inter - Clean, neutral, highly legible for body text and supporting information
 
 **Typographic Hierarchy**:
-- H1 (Hero Title): Space Grotesk Bold/48px/tight letter spacing/-0.02em
-- H2 (Section Headers): Space Grotesk Bold/32px/normal/0em  
-- H3 (Card Titles): Space Grotesk SemiBold/20px/normal/0em
-- Body (Descriptions): Inter Regular/16px/relaxed/1.6 line-height
-- Small (Metadata): Inter Medium/14px/normal/1.5 line-height
-- Button Text: Space Grotesk SemiBold/16px/tight letter spacing/0.02em
+- H1 (Hero Title): Space Grotesk Bold/36px/tight letter spacing/-0.02em
+- H2 (Section Headers): Space Grotesk Bold/24px/normal/0em  
+- H3 (Card Titles): Space Grotesk SemiBold/16px/normal/0em
+- Body (Descriptions): Inter Regular/14px/relaxed/1.5 line-height
+- Small (Metadata): Inter Medium/13px/normal/1.4 line-height
+- Button Text: Space Grotesk SemiBold/14px/tight letter spacing/0.02em
 
 ## Animations
 
