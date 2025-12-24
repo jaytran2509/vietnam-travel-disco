@@ -38,41 +38,42 @@ function AppContent() {
 
   if (isAuthenticated) {
     return (
-      <div className="min-h-screen bg-background">
-        <nav className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
-          <div className="container mx-auto px-4">
-            <div className="flex items-center justify-between h-16">
+      <div className="min-h-screen bg-white">
+        <nav className="sticky top-0 z-50 bg-white border-b border-border-light">
+          <div className="container mx-auto px-4 md:px-6 lg:px-8">
+            <div className="flex items-center justify-between h-20">
               <button 
                 onClick={() => setCurrentView('browse')}
-                className="text-lg font-bold text-foreground hover:text-primary transition-colors"
+                className="text-xl font-bold text-primary hover:text-primary-hover transition-colors"
               >
                 {t.nav.appTitle}
               </button>
               
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-6">
                 <LanguageSwitcher />
                 
                 <Button
                   variant="ghost"
                   size="sm"
                   onClick={() => setCurrentView('favorites')}
-                  className="gap-2"
+                  className="gap-2 text-text-dark hover:bg-bg-gray rounded-lg"
                 >
-                  <Heart size={18} weight={currentView === 'favorites' ? 'fill' : 'regular'} />
+                  <Heart size={20} weight={currentView === 'favorites' ? 'fill' : 'regular'} className={currentView === 'favorites' ? 'text-accent' : ''} />
                   <span className="hidden sm:inline">{t.nav.favorites}</span>
                 </Button>
 
-                <div className="flex items-center gap-3 pl-3 border-l border-border">
-                  <div className="hidden sm:flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
-                      <User size={16} className="text-primary" weight="bold" />
+                <div className="flex items-center gap-4 pl-4 border-l border-border-light">
+                  <div className="hidden sm:flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-bg-gray flex items-center justify-center">
+                      <User size={20} className="text-text-body" weight="bold" />
                     </div>
-                    <span className="text-sm font-medium text-foreground">{user?.name}</span>
+                    <span className="text-sm font-medium text-text-dark">{user?.name}</span>
                   </div>
                   <Button 
                     onClick={logout}
                     variant="outline"
                     size="sm"
+                    className="border-border-medium hover:border-text-dark rounded-lg"
                   >
                     {t.nav.logout}
                   </Button>

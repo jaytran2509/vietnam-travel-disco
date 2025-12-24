@@ -1,9 +1,6 @@
 import { Heart, Star, MapPin } from '@phosphor-icons/react'
 import type { Venue, Coordinates } from '@/lib/types'
 import { calculateDistance, formatDistance, isVenueOpen } from '@/lib/helpers'
-import { Card } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { cn } from '@/lib/utils'
 
@@ -39,157 +36,134 @@ export function VenueCard({
 
   if (viewMode === 'list') {
     return (
-      <Card
-        className="overflow-hidden hover:shadow-lg transition-all cursor-pointer group border border-border rounded-lg"
+      <div
+        className="bg-white border border-border-light rounded-xl overflow-hidden hover:border-text-dark hover:shadow-lg transition-all duration-200 cursor-pointer group"
         onClick={() => onCardClick(venue.id)}
       >
-        <div className="flex flex-col md:flex-row">
-          <div className="relative w-full md:w-40 h-32 md:h-auto overflow-hidden shrink-0">
+        <div className="flex flex-col sm:flex-row">
+          <div className="relative w-full sm:w-64 h-48 sm:h-56 overflow-hidden shrink-0">
             <img
               src={venue.coverImage}
               alt={venue.name}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
-            <Button
-              size="icon"
-              variant="ghost"
+            <button
               className={cn(
-                'absolute top-2 right-2 h-7 w-7 bg-white/95 hover:bg-white shadow-sm transition-all',
-                isFavorite && 'bg-accent text-accent-foreground hover:bg-accent/90'
+                'absolute top-3 right-3 p-2 rounded-full bg-white/90 hover:bg-white hover:scale-110 transition-all duration-200',
+                isFavorite && 'text-accent'
               )}
               onClick={handleFavoriteClick}
             >
               <Heart 
                 weight={isFavorite ? 'fill' : 'regular'} 
-                className="h-3.5 w-3.5" 
+                className="h-4 w-4" 
               />
-            </Button>
+            </button>
           </div>
 
-          <div className="flex-1 p-3">
-            <div className="flex items-start justify-between mb-1.5">
-              <div className="flex-1">
-                <h3 className="font-semibold text-sm mb-1 text-foreground group-hover:text-primary transition-colors line-clamp-1">
-                  {venue.name}
-                </h3>
-                <div className="flex items-center gap-1.5 mb-1.5 flex-wrap">
-                  <Badge 
-                    variant="secondary" 
-                    className="capitalize text-xs px-1.5 py-0 h-5"
-                  >
-                    {venue.category}
-                  </Badge>
+          <div className="flex-1 p-4">
+            <div className="flex items-start justify-between gap-2 mb-2">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2 mb-1">
+                  <span className="text-xs text-text-body capitalize">{t.categories[venue.category] || venue.category}</span>
                   {isOpen && (
-                    <Badge className="bg-accent text-accent-foreground text-xs px-1.5 py-0 h-5">
-                      {t.filters.openNow}
-                    </Badge>
+                    <>
+                      <span className="text-xs text-text-light">·</span>
+                      <span className="text-xs text-success font-medium">{t.filters.openNow}</span>
+                    </>
                   )}
                 </div>
+                <h3 className="font-semibold text-base text-text-dark group-hover:text-primary transition-colors line-clamp-1">
+                  {venue.name}
+                </h3>
               </div>
             </div>
 
-            <p className="text-muted-foreground text-xs mb-2 line-clamp-2 leading-relaxed">
+            <p className="text-text-body text-sm mb-3 line-clamp-2">
               {venue.description}
             </p>
 
-            <div className="flex flex-wrap items-center gap-2.5 text-xs">
-              <div className="flex items-center gap-0.5">
-                <Star weight="fill" className="h-3.5 w-3.5 text-accent" />
-                <span className="font-medium text-foreground">{venue.rating}</span>
-                <span className="text-muted-foreground">({venue.reviewCount})</span>
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
+              <div className="flex items-center gap-1">
+                <Star weight="fill" className="h-4 w-4 text-text-dark" />
+                <span className="font-semibold text-text-dark">{venue.rating.toFixed(1)}</span>
+                <span className="text-text-body">({venue.reviewCount})</span>
               </div>
-
-              <div className="flex items-center gap-1.5 text-muted-foreground">
-                <span className="font-medium text-foreground">{venue.priceLevel}</span>
-                <span>·</span>
-                <span>{venue.cuisineType || venue.category}</span>
-              </div>
-
+              <span className="text-text-light">·</span>
+              <span className="text-text-dark font-medium">{venue.priceLevel}</span>
+              <span className="text-text-light">·</span>
+              <span className="text-text-body">{venue.cuisineType || t.categories[venue.category]}</span>
               {distance !== null && (
-                <div className="flex items-center gap-0.5 text-muted-foreground">
-                  <MapPin className="h-3 w-3" weight="fill" />
-                  <span>{formatDistance(distance)}</span>
-                </div>
+                <>
+                  <span className="text-text-light">·</span>
+                  <span className="text-text-body">{formatDistance(distance)}</span>
+                </>
               )}
             </div>
           </div>
         </div>
-      </Card>
+      </div>
     )
   }
 
   return (
-    <Card
-      className="overflow-hidden hover:shadow-lg transition-all cursor-pointer group border border-border rounded-lg"
+    <div
+      className="cursor-pointer group"
       onClick={() => onCardClick(venue.id)}
     >
-      <div className="relative h-40 overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-xl mb-3">
         <img
           src={venue.coverImage}
           alt={venue.name}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-        
-        <Button
-          size="icon"
-          variant="ghost"
+        <button
           className={cn(
-            'absolute top-2 right-2 h-7 w-7 bg-white/95 hover:bg-white shadow-sm transition-all',
-            isFavorite && 'bg-accent text-accent-foreground hover:bg-accent/90'
+            'absolute top-3 right-3 p-2 rounded-full bg-white/90 hover:bg-white hover:scale-110 transition-all duration-200',
+            isFavorite && 'text-accent'
           )}
           onClick={handleFavoriteClick}
         >
           <Heart
             weight={isFavorite ? 'fill' : 'regular'}
-            className="h-3.5 w-3.5"
+            className="h-4 w-4"
           />
-        </Button>
-
-        {isOpen && (
-          <Badge className="absolute top-2 left-2 bg-accent text-accent-foreground text-xs px-1.5 py-0 h-5 shadow-sm">
-            {t.filters.openNow}
-          </Badge>
-        )}
-
-        <div className="absolute bottom-2 left-2">
-          <Badge 
-            variant="secondary" 
-            className="capitalize text-xs px-1.5 py-0 h-5 bg-white/95"
-          >
-            {venue.category}
-          </Badge>
-        </div>
+        </button>
       </div>
 
-      <div className="p-2.5">
-        <h3 className="font-semibold text-sm mb-1 line-clamp-1 text-foreground group-hover:text-primary transition-colors">
-          {venue.name}
-        </h3>
+      <div>
+        <div className="flex items-start justify-between gap-1 mb-1">
+          <h3 className="font-semibold text-sm text-text-dark line-clamp-1 flex-1">
+            {venue.name}
+          </h3>
+        </div>
 
-        <div className="flex items-center gap-1.5 flex-wrap text-xs">
-          <div className="flex items-center gap-0.5">
-            <Star weight="fill" className="h-3 w-3 text-accent flex-shrink-0" />
-            <span className="font-medium text-foreground">{venue.rating}</span>
-          </div>
-          <span className="text-muted-foreground">
-            ({venue.reviewCount})
-          </span>
-          <span className="text-muted-foreground">·</span>
-          <span className="font-medium text-foreground">{venue.priceLevel}</span>
+        <div className="flex items-center gap-1 text-sm text-text-body mb-1">
+          <span className="capitalize text-xs">{t.categories[venue.category] || venue.category}</span>
+          {isOpen && (
+            <>
+              <span className="text-text-light">·</span>
+              <span className="text-success font-medium text-xs">{t.filters.openNow}</span>
+            </>
+          )}
+        </div>
 
+        <div className="flex items-center gap-1 text-sm">
+          <Star weight="fill" className="h-3.5 w-3.5 text-text-dark flex-shrink-0" />
+          <span className="font-semibold text-text-dark">{venue.rating.toFixed(1)}</span>
+          <span className="text-text-body">({venue.reviewCount})</span>
+        </div>
+
+        <div className="flex items-center gap-1.5 text-sm text-text-body mt-1">
+          <span className="font-medium text-text-dark">{venue.priceLevel}</span>
           {distance !== null && (
             <>
-              <span className="text-muted-foreground">·</span>
-              <div className="flex items-center gap-0.5 text-muted-foreground">
-                <MapPin className="h-2.5 w-2.5 flex-shrink-0" weight="fill" />
-                <span>{formatDistance(distance)}</span>
-              </div>
+              <span className="text-text-light">·</span>
+              <span>{formatDistance(distance)}</span>
             </>
           )}
         </div>
       </div>
-    </Card>
+    </div>
   )
 }

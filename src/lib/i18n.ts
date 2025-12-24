@@ -17,6 +17,9 @@ export interface Translations {
     restaurants: string
     cafes: string
     attractions: string
+    restaurant: string
+    cafe: string
+    attraction: string
   }
   filters: {
     title: string
@@ -105,6 +108,9 @@ export const translations: Record<Language, Translations> = {
       restaurants: 'Restaurants',
       cafes: 'Cafés',
       attractions: 'Attractions',
+      restaurant: 'Restaurant',
+      cafe: 'Café',
+      attraction: 'Attraction',
     },
     filters: {
       title: 'Filters',
@@ -191,6 +197,9 @@ export const translations: Record<Language, Translations> = {
       restaurants: 'Nhà Hàng',
       cafes: 'Quán Cà Phê',
       attractions: 'Điểm Tham Quan',
+      restaurant: 'Nhà Hàng',
+      cafe: 'Quán Cà Phê',
+      attraction: 'Điểm Tham Quan',
     },
     filters: {
       title: 'Bộ Lọc',

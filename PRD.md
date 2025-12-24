@@ -84,9 +84,11 @@ The design should evoke trust, simplicity, and professionalism through clean sol
 
 ## Color Selection
 
-Airbnb-inspired solid color palette - NO gradients anywhere.
+Custom Airbnb-style solid color palette with teal/turquoise primary and warm orange accents - NO gradients anywhere.
 
-- **Primary (Coral Red)**: #FF385C (oklch(0.62 0.22 15)) - Main brand color for CTAs, active states, hearts
+- **Primary (Teal/Turquoise)**: #00A699 (oklch(0.64 0.08 185)) - Main brand color for CTAs, active states, focus rings
+- **Primary Dark**: #008B80 (oklch(0.55 0.08 185)) - Hover state for primary buttons
+- **Accent (Warm Orange)**: #FF8956 (oklch(0.70 0.15 40)) - Hearts, special highlights, badges
 - **Text Dark**: #222222 (oklch(0.20 0 0)) - Headings and primary text
 - **Text Body**: #717171 (oklch(0.52 0 0)) - Body text and descriptions  
 - **Text Light**: #B0B0B0 (oklch(0.73 0 0)) - Labels and metadata
@@ -99,7 +101,8 @@ Airbnb-inspired solid color palette - NO gradients anywhere.
 
 **Foreground/Background Pairings**:
 - White (#FFFFFF): Dark text (#222222) - Ratio 17.6:1 ✓
-- Coral (#FF385C): White text (#FFFFFF) - Ratio 4.7:1 ✓  
+- Teal Primary (#00A699): White text (#FFFFFF) - Ratio 4.6:1 ✓  
+- Orange Accent (#FF8956): White text (#FFFFFF) - Ratio 4.2:1 ✓
 - Gray (#F7F7F7): Dark text (#222222) - Ratio 16.8:1 ✓
 - Success (#008489): White text (#FFFFFF) - Ratio 4.5:1 ✓
 

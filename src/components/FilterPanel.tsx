@@ -2,11 +2,10 @@ import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { Star } from '@phosphor-icons/react'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { motion } from 'framer-motion'
 import type { SearchFilters, VenueCategory, DietaryPreference } from '@/lib/types'
 
 interface FilterPanelProps {
@@ -29,6 +28,7 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
     { value: 'vegan', label: t.filters.vegan },
     { value: 'halal', label: t.filters.halal },
   ]
+
   const updateFilters = (updates: Partial<SearchFilters>) => {
     onFiltersChange({ ...filters, ...updates })
   }
@@ -57,195 +57,165 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
     filters.open24Hours ||
     filters.dietary.length > 0
 
+  const priceLabels = ['$', '$$', '$$$', '$$$$']
+
   return (
-    <ScrollArea className="h-full max-h-[calc(100vh-8rem)]">
-      <motion.div 
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.4 }}
-        className="p-6 space-y-6"
-      >
+    <ScrollArea className="h-full">
+      <div className="p-6 space-y-8">
         <div className="flex items-center justify-between">
-          <h3 className="font-heading text-xl font-bold text-foreground">{t.filters.title}</h3>
+          <h3 className="text-xl font-semibold text-text-dark">{t.filters.title}</h3>
           {hasActiveFilters && (
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                onClick={onClearFilters} 
-                className="h-8 text-sm hover:text-primary transition-colors font-semibold"
-              >
-                {t.filters.clearAll}
-              </Button>
-            </motion.div>
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              onClick={onClearFilters} 
+              className="text-sm text-text-body hover:text-text-dark underline"
+            >
+              {t.filters.clearAll}
+            </Button>
           )}
         </div>
 
-        <Separator className="bg-border/50" />
+        <Separator className="bg-border-light" />
 
         <div className="space-y-4">
-          <Label className="text-base font-bold text-foreground">{t.filters.categories}</Label>
+          <Label className="text-base font-semibold text-text-dark">{t.filters.categories}</Label>
           <div className="space-y-3">
-            {categories.map((category, index) => (
-              <motion.div 
+            {categories.map((category) => (
+              <div 
                 key={category.value} 
-                className="flex items-center space-x-3 p-2 rounded-lg hover:bg-secondary/30 transition-colors"
-                whileHover={{ x: 4 }}
-                transition={{ duration: 0.2 }}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                style={{ transitionDelay: `${index * 0.05}s` }}
+                className="flex items-center space-x-3"
               >
                 <Checkbox
                   id={`category-${category.value}`}
                   checked={filters.categories.includes(category.value)}
                   onCheckedChange={() => toggleCategory(category.value)}
-                  className="h-5 w-5"
+                  className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                 />
-                <Label
+                <label
                   htmlFor={`category-${category.value}`}
-                  className="text-sm font-medium cursor-pointer text-foreground hover:text-primary transition-colors flex-1"
+                  className="text-sm text-text-dark cursor-pointer flex-1"
                 >
                   {category.label}
-                </Label>
-              </motion.div>
+                </label>
+              </div>
             ))}
           </div>
         </div>
 
-        <Separator className="bg-border/50" />
+        <Separator className="bg-border-light" />
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <Label className="text-base font-bold text-foreground">{t.filters.priceRange}</Label>
-            <div className="flex gap-1">
-              {Array.from({ length: filters.priceRange[1] - filters.priceRange[0] + 1 }, (_, i) =>
-                '$'.repeat(filters.priceRange[0] + i)
-              ).map((price, i) => (
-                <Badge key={i} variant="secondary" className="text-xs px-2 py-1 gradient-gold text-white border-0 font-bold shadow-sm">
-                  {price}
-                </Badge>
-              ))}
+          <Label className="text-base font-semibold text-text-dark">{t.filters.priceRange}</Label>
+          <div className="space-y-4">
+            <Slider
+              min={1}
+              max={4}
+              step={1}
+              value={filters.priceRange}
+              onValueChange={(value) => updateFilters({ priceRange: value as [number, number] })}
+              className="[&_[role=slider]]:bg-primary [&_[role=slider]]:border-primary"
+            />
+            <div className="flex justify-between text-sm text-text-body">
+              <span>{priceLabels[filters.priceRange[0] - 1]}</span>
+              <span>{priceLabels[filters.priceRange[1] - 1]}</span>
             </div>
           </div>
-          <Slider
-            min={1}
-            max={4}
-            step={1}
-            value={filters.priceRange}
-            onValueChange={(value) => updateFilters({ priceRange: value as [number, number] })}
-            className="w-full"
-          />
         </div>
 
-        <Separator className="bg-border/50" />
+        <Separator className="bg-border-light" />
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <Label className="text-base font-bold text-foreground">{t.filters.minRating}</Label>
-            <Badge variant="secondary" className="text-xs px-3 py-1 gradient-accent text-white border-0 font-bold shadow-sm">
-              {filters.minRating}+ {t.filters.stars}
-            </Badge>
+          <Label className="text-base font-semibold text-text-dark">{t.filters.minRating}</Label>
+          <div className="grid grid-cols-2 gap-2">
+            {[0, 3, 4, 5].map((rating) => (
+              <button
+                key={rating}
+                onClick={() => updateFilters({ minRating: rating })}
+                className={`
+                  flex items-center justify-center gap-1 px-3 py-2 rounded-lg border transition-all text-sm
+                  ${filters.minRating === rating 
+                    ? 'border-text-dark bg-bg-gray' 
+                    : 'border-border-medium hover:border-text-dark'
+                  }
+                `}
+              >
+                {rating === 0 ? (
+                  <span className="text-text-body">{t.filters.any}</span>
+                ) : (
+                  <>
+                    <Star weight="fill" className="h-4 w-4" />
+                    <span className="font-medium">{rating}+</span>
+                  </>
+                )}
+              </button>
+            ))}
           </div>
-          <Slider
-            min={0}
-            max={5}
-            step={0.5}
-            value={[filters.minRating]}
-            onValueChange={(value) => updateFilters({ minRating: value[0] })}
-            className="w-full"
-          />
         </div>
 
-        <Separator className="bg-border/50" />
+        <Separator className="bg-border-light" />
 
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <Label className="text-base font-bold text-foreground">{t.filters.distance}</Label>
-            <Badge variant="secondary" className="text-xs px-3 py-1 gradient-primary text-white border-0 font-bold shadow-sm">
-              {filters.maxDistance >= 50 ? t.filters.any : `${filters.maxDistance}km`}
-            </Badge>
-          </div>
-          <Slider
-            min={1}
-            max={50}
-            step={1}
-            value={[filters.maxDistance]}
-            onValueChange={(value) => updateFilters({ maxDistance: value[0] })}
-            className="w-full"
-          />
-        </div>
-
-        <Separator className="bg-border/50" />
-
-        <div className="space-y-4">
-          <Label className="text-base font-bold text-foreground">{t.filters.availability}</Label>
+          <Label className="text-base font-semibold text-text-dark">{t.filters.availability}</Label>
           <div className="space-y-3">
-            <motion.div 
-              className="flex items-center space-x-3 p-2 rounded-lg hover:bg-secondary/30 transition-colors"
-              whileHover={{ x: 4 }}
-              transition={{ duration: 0.2 }}
-            >
+            <div className="flex items-center space-x-3">
               <Checkbox
                 id="open-now"
                 checked={filters.openNow}
-                onCheckedChange={(checked) => updateFilters({ openNow: !!checked })}
-                className="h-5 w-5"
+                onCheckedChange={(checked) => updateFilters({ openNow: checked as boolean })}
+                className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
               />
-              <Label htmlFor="open-now" className="text-sm font-medium cursor-pointer text-foreground hover:text-primary transition-colors flex-1">
+              <label
+                htmlFor="open-now"
+                className="text-sm text-text-dark cursor-pointer flex-1"
+              >
                 {t.filters.openNow}
-              </Label>
-            </motion.div>
-            <motion.div 
-              className="flex items-center space-x-3 p-2 rounded-lg hover:bg-secondary/30 transition-colors"
-              whileHover={{ x: 4 }}
-              transition={{ duration: 0.2 }}
-            >
+              </label>
+            </div>
+            <div className="flex items-center space-x-3">
               <Checkbox
                 id="open-24"
                 checked={filters.open24Hours}
-                onCheckedChange={(checked) => updateFilters({ open24Hours: !!checked })}
-                className="h-5 w-5"
+                onCheckedChange={(checked) => updateFilters({ open24Hours: checked as boolean })}
+                className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
               />
-              <Label htmlFor="open-24" className="text-sm font-medium cursor-pointer text-foreground hover:text-primary transition-colors flex-1">
+              <label
+                htmlFor="open-24"
+                className="text-sm text-text-dark cursor-pointer flex-1"
+              >
                 {t.filters.open24Hours}
-              </Label>
-            </motion.div>
+              </label>
+            </div>
           </div>
         </div>
 
-        <Separator className="bg-border/50" />
+        <Separator className="bg-border-light" />
 
         <div className="space-y-4">
-          <Label className="text-base font-bold text-foreground">{t.filters.dietary}</Label>
+          <Label className="text-base font-semibold text-text-dark">{t.filters.dietary}</Label>
           <div className="space-y-3">
-            {dietaryOptions.map((option, index) => (
-              <motion.div 
-                key={option.value}
-                className="flex items-center space-x-3 p-2 rounded-lg hover:bg-secondary/30 transition-colors"
-                whileHover={{ x: 4 }}
-                transition={{ duration: 0.2 }}
-                initial={{ opacity: 0, x: -10 }}
-                animate={{ opacity: 1, x: 0 }}
-                style={{ transitionDelay: `${index * 0.05}s` }}
+            {dietaryOptions.map((option) => (
+              <div 
+                key={option.value} 
+                className="flex items-center space-x-3"
               >
                 <Checkbox
                   id={`dietary-${option.value}`}
                   checked={filters.dietary.includes(option.value)}
                   onCheckedChange={() => toggleDietary(option.value)}
-                  className="h-5 w-5"
+                  className="data-[state=checked]:bg-primary data-[state=checked]:border-primary"
                 />
-                <Label
+                <label
                   htmlFor={`dietary-${option.value}`}
-                  className="text-sm font-medium cursor-pointer text-foreground hover:text-primary transition-colors flex-1"
+                  className="text-sm text-text-dark cursor-pointer flex-1"
                 >
                   {option.label}
-                </Label>
-              </motion.div>
+                </label>
+              </div>
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
     </ScrollArea>
   )
 }

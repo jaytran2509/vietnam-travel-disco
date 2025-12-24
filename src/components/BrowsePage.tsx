@@ -148,26 +148,26 @@ export function BrowsePage({ isAuthenticated, onLoginRequired }: BrowsePageProps
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="sticky top-0 z-40 bg-white border-b border-border shadow-sm">
-        <div className="container mx-auto px-4 py-3">
+    <div className="min-h-screen bg-white">
+      <div className="sticky top-0 z-40 bg-white border-b border-border-light">
+        <div className="container mx-auto px-4 md:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-3">
             <div className="flex-1 max-w-2xl">
               <div className="relative">
-                <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
+                <MagnifyingGlass className="absolute left-4 top-1/2 -translate-y-1/2 text-text-body" size={20} />
                 <Input
                   type="text"
                   placeholder={t.hero.searchPlaceholder}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-10 h-10 border-input focus-visible:ring-1"
+                  className="pl-12 pr-12 h-12 border-border-medium rounded-full text-sm focus-visible:ring-1 focus-visible:ring-text-dark focus-visible:border-text-dark transition-all"
                 />
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-text-body hover:text-text-dark transition-colors"
                   >
-                    <X size={18} />
+                    <X size={20} />
                   </button>
                 )}
               </div>
@@ -176,12 +176,12 @@ export function BrowsePage({ isAuthenticated, onLoginRequired }: BrowsePageProps
             <Button
               variant="outline"
               onClick={() => setShowFilters(!showFilters)}
-              className="h-10 px-4 relative"
+              className="h-12 px-5 rounded-full border-border-medium hover:border-text-dark transition-colors relative"
             >
-              <Funnel size={18} className="mr-2" />
-              {t.filters.title}
+              <Funnel size={20} className="mr-2" />
+              <span className="hidden sm:inline">{t.filters.title}</span>
               {activeFilterCount > 0 && (
-                <span className="ml-2 px-1.5 py-0.5 text-xs font-semibold bg-primary text-primary-foreground rounded-full min-w-[20px] text-center">
+                <span className="ml-2 px-2 py-0.5 text-xs font-semibold bg-primary text-white rounded-full min-w-[20px] text-center">
                   {activeFilterCount}
                 </span>
               )}
@@ -192,7 +192,7 @@ export function BrowsePage({ isAuthenticated, onLoginRequired }: BrowsePageProps
 
       <div className="flex">
         {showFilters && (
-          <div className="hidden lg:block w-80 border-r border-border bg-white sticky top-[65px] h-[calc(100vh-65px)] overflow-y-auto">
+          <div className="hidden lg:block w-80 border-r border-border-light bg-white sticky top-[81px] h-[calc(100vh-81px)] overflow-y-auto">
             <FilterPanel
               filters={filters}
               onFiltersChange={setFilters}
@@ -202,14 +202,14 @@ export function BrowsePage({ isAuthenticated, onLoginRequired }: BrowsePageProps
         )}
 
         <div className="flex-1">
-          <div className="container mx-auto px-4 py-6">
-            <div className="flex items-center justify-between mb-6">
-              <div className="text-sm text-muted-foreground">
-                <span className="font-semibold text-foreground">{filteredVenues.length}</span> {filteredVenues.length === 1 ? t.results.place : t.results.places} {t.results.placesFound}
+          <div className="container mx-auto px-4 md:px-6 lg:px-8 py-6 md:py-8">
+            <div className="flex items-center justify-between mb-8">
+              <div className="text-sm text-text-body">
+                <span className="font-semibold text-text-dark">{filteredVenues.length}</span> {filteredVenues.length === 1 ? t.results.place : t.results.places} {t.results.placesFound}
                 {activeFilterCount > 0 && (
                   <button
                     onClick={handleClearFilters}
-                    className="ml-3 text-primary hover:underline font-medium"
+                    className="ml-4 text-primary hover:text-primary-hover underline font-medium transition-colors"
                   >
                     {t.results.clearFilters}
                   </button>
@@ -219,7 +219,7 @@ export function BrowsePage({ isAuthenticated, onLoginRequired }: BrowsePageProps
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="h-9 px-3 text-sm border border-input rounded-md bg-background hover:bg-muted/50 transition-colors cursor-pointer focus:outline-none focus:ring-1 focus:ring-ring"
+                className="h-10 px-4 text-sm border border-border-medium rounded-lg bg-white hover:border-text-dark transition-colors cursor-pointer focus:outline-none focus:ring-1 focus:ring-text-dark"
               >
                 <option value="popular">{t.sort.mostPopular}</option>
                 <option value="rating">{t.sort.highestRated}</option>
@@ -229,20 +229,24 @@ export function BrowsePage({ isAuthenticated, onLoginRequired }: BrowsePageProps
             </div>
 
             {filteredVenues.length === 0 ? (
-              <div className="text-center py-16">
-                <div className="mb-4 text-5xl opacity-20">🔍</div>
-                <h3 className="text-lg font-semibold mb-2">{t.results.noResults}</h3>
-                <p className="text-sm text-muted-foreground mb-6 max-w-md mx-auto">
+              <div className="text-center py-20">
+                <div className="mb-6 text-6xl opacity-20">🔍</div>
+                <h3 className="text-2xl font-semibold text-text-dark mb-3">{t.results.noResults}</h3>
+                <p className="text-base text-text-body mb-8 max-w-md mx-auto">
                   {t.results.tryAdjusting}
                 </p>
                 {(activeFilterCount > 0 || searchQuery) && (
-                  <Button onClick={handleClearFilters} variant="outline">
+                  <Button 
+                    onClick={handleClearFilters} 
+                    variant="outline"
+                    className="border-2 border-text-dark hover:bg-bg-gray rounded-lg px-6 h-12"
+                  >
                     {t.results.clearAllFilters}
                   </Button>
                 )}
               </div>
             ) : (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
                 {filteredVenues.map((venue) => (
                   <VenueCard
                     key={venue.id}
