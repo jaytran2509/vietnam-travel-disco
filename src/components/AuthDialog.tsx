@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { motion } from 'framer-motion'
 import { toast } from 'sonner'
 import { generateId } from '@/lib/helpers'
 import type { User } from '@/lib/types'
@@ -92,38 +93,44 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle className="font-heading text-lg">{t.nav.login}</DialogTitle>
+          <DialogTitle className="font-heading text-lg text-foreground">{t.nav.login}</DialogTitle>
         </DialogHeader>
 
         <Tabs defaultValue="login" className="w-full">
           <TabsList className="grid w-full grid-cols-2 h-9">
-            <TabsTrigger value="login" className="text-xs">{t.auth.loginButton}</TabsTrigger>
-            <TabsTrigger value="signup" className="text-xs">{t.auth.signupButton}</TabsTrigger>
+            <TabsTrigger value="login" className="text-xs transition-all duration-300">{t.auth.loginButton}</TabsTrigger>
+            <TabsTrigger value="signup" className="text-xs transition-all duration-300">{t.auth.signupButton}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="login">
-            <form onSubmit={handleLogin} className="space-y-3">
+            <motion.form 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              onSubmit={handleLogin} 
+              className="space-y-3"
+            >
               <div className="space-y-1.5">
-                <Label htmlFor="login-email" className="text-xs">{t.auth.email}</Label>
+                <Label htmlFor="login-email" className="text-xs text-foreground">{t.auth.email}</Label>
                 <Input
                   id="login-email"
                   type="email"
                   placeholder="your@email.com"
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
-                  className="h-9 text-sm"
+                  className="h-9 text-sm transition-all duration-300 focus:shadow-md"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="login-password" className="text-xs">{t.auth.password}</Label>
+                <Label htmlFor="login-password" className="text-xs text-foreground">{t.auth.password}</Label>
                 <Input
                   id="login-password"
                   type="password"
                   placeholder="••••••••"
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
-                  className="h-9 text-sm"
+                  className="h-9 text-sm transition-all duration-300 focus:shadow-md"
                 />
               </div>
 
@@ -136,81 +143,87 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                 />
                 <Label
                   htmlFor="remember-me"
-                  className="text-xs font-normal cursor-pointer"
+                  className="text-xs font-normal cursor-pointer text-foreground hover:text-primary transition-colors"
                 >
                   {t.auth.rememberMe}
                 </Label>
               </div>
 
-              <Button type="submit" className="w-full h-9 text-sm">
+              <Button type="submit" className="w-full h-9 text-sm transition-all duration-300 hover:scale-[1.02]">
                 {t.auth.loginButton}
               </Button>
 
               <Button
                 type="button"
                 variant="ghost"
-                className="w-full h-8 text-xs text-muted-foreground"
+                className="w-full h-8 text-xs text-muted-foreground hover:text-primary transition-colors"
                 onClick={() => toast.info('Password recovery coming soon!')}
               >
                 Forgot password?
               </Button>
-            </form>
+            </motion.form>
           </TabsContent>
 
           <TabsContent value="signup">
-            <form onSubmit={handleSignup} className="space-y-3">
+            <motion.form 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              onSubmit={handleSignup} 
+              className="space-y-3"
+            >
               <div className="space-y-1.5">
-                <Label htmlFor="signup-name" className="text-xs">{t.auth.name}</Label>
+                <Label htmlFor="signup-name" className="text-xs text-foreground">{t.auth.name}</Label>
                 <Input
                   id="signup-name"
                   type="text"
                   placeholder="John Doe"
                   value={signupName}
                   onChange={(e) => setSignupName(e.target.value)}
-                  className="h-9 text-sm"
+                  className="h-9 text-sm transition-all duration-300 focus:shadow-md"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="signup-email" className="text-xs">{t.auth.email}</Label>
+                <Label htmlFor="signup-email" className="text-xs text-foreground">{t.auth.email}</Label>
                 <Input
                   id="signup-email"
                   type="email"
                   placeholder="your@email.com"
                   value={signupEmail}
                   onChange={(e) => setSignupEmail(e.target.value)}
-                  className="h-9 text-sm"
+                  className="h-9 text-sm transition-all duration-300 focus:shadow-md"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="signup-password" className="text-xs">{t.auth.password}</Label>
+                <Label htmlFor="signup-password" className="text-xs text-foreground">{t.auth.password}</Label>
                 <Input
                   id="signup-password"
                   type="password"
                   placeholder="••••••••"
                   value={signupPassword}
                   onChange={(e) => setSignupPassword(e.target.value)}
-                  className="h-9 text-sm"
+                  className="h-9 text-sm transition-all duration-300 focus:shadow-md"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <Label htmlFor="signup-confirm-password" className="text-xs">Confirm Password</Label>
+                <Label htmlFor="signup-confirm-password" className="text-xs text-foreground">Confirm Password</Label>
                 <Input
                   id="signup-confirm-password"
                   type="password"
                   placeholder="••••••••"
                   value={signupConfirmPassword}
                   onChange={(e) => setSignupConfirmPassword(e.target.value)}
-                  className="h-9 text-sm"
+                  className="h-9 text-sm transition-all duration-300 focus:shadow-md"
                 />
               </div>
 
-              <Button type="submit" className="w-full h-9 text-sm">
+              <Button type="submit" className="w-full h-9 text-sm transition-all duration-300 hover:scale-[1.02]">
                 {t.auth.signupButton}
               </Button>
-            </form>
+            </motion.form>
           </TabsContent>
         </Tabs>
       </DialogContent>

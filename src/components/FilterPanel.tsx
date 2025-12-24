@@ -6,6 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { motion } from 'framer-motion'
 import type { SearchFilters, VenueCategory, DietaryPreference } from '@/lib/types'
 
 interface FilterPanelProps {
@@ -58,11 +59,16 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
   return (
     <ScrollArea className="h-full">
-      <div className="p-4 space-y-4">
+      <motion.div 
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.4 }}
+        className="p-4 space-y-4"
+      >
         <div className="flex items-center justify-between">
-          <h3 className="font-heading text-base font-semibold">{t.filters.title}</h3>
+          <h3 className="font-heading text-base font-semibold text-foreground">{t.filters.title}</h3>
           {hasActiveFilters && (
-            <Button variant="ghost" size="sm" onClick={onClearFilters} className="h-7 text-xs">
+            <Button variant="ghost" size="sm" onClick={onClearFilters} className="h-7 text-xs hover:text-primary transition-colors">
               {t.filters.clearAll}
             </Button>
           )}
@@ -71,10 +77,15 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
         <Separator />
 
         <div className="space-y-3">
-          <Label className="text-sm font-semibold">{t.filters.categories}</Label>
+          <Label className="text-sm font-semibold text-foreground">{t.filters.categories}</Label>
           <div className="space-y-2">
             {categories.map((category) => (
-              <div key={category.value} className="flex items-center space-x-2">
+              <motion.div 
+                key={category.value} 
+                className="flex items-center space-x-2"
+                whileHover={{ x: 2 }}
+                transition={{ duration: 0.2 }}
+              >
                 <Checkbox
                   id={`category-${category.value}`}
                   checked={filters.categories.includes(category.value)}
@@ -83,11 +94,11 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
                 />
                 <Label
                   htmlFor={`category-${category.value}`}
-                  className="text-xs font-normal cursor-pointer"
+                  className="text-xs font-normal cursor-pointer text-foreground hover:text-primary transition-colors"
                 >
                   {category.label}
                 </Label>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -96,12 +107,12 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-sm font-semibold">{t.filters.priceRange}</Label>
+            <Label className="text-sm font-semibold text-foreground">{t.filters.priceRange}</Label>
             <div className="flex gap-0.5">
               {Array.from({ length: filters.priceRange[1] - filters.priceRange[0] + 1 }, (_, i) =>
                 '$'.repeat(filters.priceRange[0] + i)
               ).map((price, i) => (
-                <Badge key={i} variant="secondary" className="text-[10px] px-1.5 py-0">
+                <Badge key={i} variant="secondary" className="text-[10px] px-1.5 py-0 bg-secondary text-secondary-foreground font-medium">
                   {price}
                 </Badge>
               ))}
@@ -121,8 +132,8 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-sm font-semibold">{t.filters.minRating}</Label>
-            <Badge variant="secondary" className="text-[10px] px-1.5 py-0">{filters.minRating}+ {t.filters.stars}</Badge>
+            <Label className="text-sm font-semibold text-foreground">{t.filters.minRating}</Label>
+            <Badge variant="secondary" className="text-[10px] px-1.5 py-0 bg-secondary text-secondary-foreground font-medium">{filters.minRating}+ {t.filters.stars}</Badge>
           </div>
           <Slider
             min={0}
@@ -138,8 +149,8 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
 
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <Label className="text-sm font-semibold">{t.filters.distance}</Label>
-            <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
+            <Label className="text-sm font-semibold text-foreground">{t.filters.distance}</Label>
+            <Badge variant="secondary" className="text-[10px] px-1.5 py-0 bg-secondary text-secondary-foreground font-medium">
               {filters.maxDistance >= 50 ? t.filters.any : `${filters.maxDistance}km`}
             </Badge>
           </div>
@@ -156,40 +167,53 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
         <Separator />
 
         <div className="space-y-2">
-          <Label className="text-sm font-semibold">{t.filters.availability}</Label>
+          <Label className="text-sm font-semibold text-foreground">{t.filters.availability}</Label>
           <div className="space-y-2">
-            <div className="flex items-center space-x-2">
+            <motion.div 
+              className="flex items-center space-x-2"
+              whileHover={{ x: 2 }}
+              transition={{ duration: 0.2 }}
+            >
               <Checkbox
                 id="open-now"
                 checked={filters.openNow}
                 onCheckedChange={(checked) => updateFilters({ openNow: checked as boolean })}
                 className="h-4 w-4"
               />
-              <Label htmlFor="open-now" className="text-xs font-normal cursor-pointer">
+              <Label htmlFor="open-now" className="text-xs font-normal cursor-pointer text-foreground hover:text-primary transition-colors">
                 {t.filters.openNow}
               </Label>
-            </div>
-            <div className="flex items-center space-x-2">
+            </motion.div>
+            <motion.div 
+              className="flex items-center space-x-2"
+              whileHover={{ x: 2 }}
+              transition={{ duration: 0.2 }}
+            >
               <Checkbox
                 id="open-24h"
                 checked={filters.open24Hours}
                 onCheckedChange={(checked) => updateFilters({ open24Hours: checked as boolean })}
                 className="h-4 w-4"
               />
-              <Label htmlFor="open-24h" className="text-xs font-normal cursor-pointer">
+              <Label htmlFor="open-24h" className="text-xs font-normal cursor-pointer text-foreground hover:text-primary transition-colors">
                 {t.filters.open24Hours}
               </Label>
-            </div>
+            </motion.div>
           </div>
         </div>
 
         <Separator />
 
         <div className="space-y-3">
-          <Label className="text-sm font-semibold">{t.filters.dietary}</Label>
+          <Label className="text-sm font-semibold text-foreground">{t.filters.dietary}</Label>
           <div className="space-y-2">
             {dietaryOptions.map((option) => (
-              <div key={option.value} className="flex items-center space-x-2">
+              <motion.div 
+                key={option.value} 
+                className="flex items-center space-x-2"
+                whileHover={{ x: 2 }}
+                transition={{ duration: 0.2 }}
+              >
                 <Checkbox
                   id={`dietary-${option.value}`}
                   checked={filters.dietary.includes(option.value)}
@@ -198,15 +222,15 @@ export function FilterPanel({ filters, onFiltersChange, onClearFilters }: Filter
                 />
                 <Label
                   htmlFor={`dietary-${option.value}`}
-                  className="text-xs font-normal cursor-pointer"
+                  className="text-xs font-normal cursor-pointer text-foreground hover:text-primary transition-colors"
                 >
                   {option.label}
                 </Label>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
-      </div>
+      </motion.div>
     </ScrollArea>
   )
 }

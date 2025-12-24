@@ -10,6 +10,7 @@ import {
   SignOut,
   X,
 } from '@phosphor-icons/react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
@@ -144,7 +145,12 @@ function AppContent() {
 
   return (
     <div className="min-h-screen bg-background">
-      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b shadow-sm">
+      <motion.nav 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b shadow-sm"
+      >
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between h-14">
             <div className="flex items-center gap-6">
@@ -156,7 +162,7 @@ function AppContent() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setShowFavoritesOnly(false)}
-                  className={!showFavoritesOnly ? 'text-primary' : ''}
+                  className={`transition-all duration-300 ${!showFavoritesOnly ? 'text-primary' : 'text-foreground hover:text-primary'}`}
                 >
                   {t.nav.explore}
                 </Button>
@@ -165,12 +171,12 @@ function AppContent() {
                     variant="ghost"
                     size="sm"
                     onClick={() => setShowFavoritesOnly(true)}
-                    className={showFavoritesOnly ? 'text-primary' : ''}
+                    className={`transition-all duration-300 ${showFavoritesOnly ? 'text-primary' : 'text-foreground hover:text-primary'}`}
                   >
                     <Heart className="h-3.5 w-3.5 mr-1.5" weight={showFavoritesOnly ? 'fill' : 'regular'} />
                     {t.nav.favorites}
                     {(favoriteIds ?? []).length > 0 && (
-                      <Badge variant="secondary" className="ml-1.5 text-[10px] px-1.5 py-0">
+                      <Badge variant="secondary" className="ml-1.5 text-[10px] px-1.5 py-0 bg-secondary text-secondary-foreground font-medium">
                         {(favoriteIds ?? []).length}
                       </Badge>
                     )}
@@ -184,17 +190,17 @@ function AppContent() {
               {isAuthenticated ? (
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
+                    <Button variant="ghost" size="icon" className="h-8 w-8 hover:bg-secondary transition-colors duration-300">
                       <User className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
+                  <DropdownMenuContent align="end" className="animate-slideInRight">
                     <div className="px-2 py-1.5">
-                      <p className="font-semibold text-sm">{user?.name}</p>
+                      <p className="font-semibold text-sm text-foreground">{user?.name}</p>
                       <p className="text-xs text-muted-foreground">{user?.email}</p>
                     </div>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={logout} className="text-xs">
+                    <DropdownMenuItem onClick={logout} className="text-xs text-foreground hover:text-primary transition-colors">
                       <SignOut className="h-3.5 w-3.5 mr-2" />
                       {t.nav.logout}
                     </DropdownMenuItem>
@@ -269,7 +275,7 @@ function AppContent() {
             </div>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {!showFavoritesOnly && (
         <HeroSection
@@ -282,14 +288,19 @@ function AppContent() {
 
       <div className="container mx-auto px-4 py-6">
         {showFavoritesOnly && (
-          <div className="mb-6">
-            <h2 className="font-heading text-2xl font-bold mb-1">{t.favorites.title}</h2>
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="mb-6"
+          >
+            <h2 className="font-heading text-2xl font-bold mb-1 text-foreground">{t.favorites.title}</h2>
             <p className="text-sm text-muted-foreground">
               {(favoriteIds ?? []).length === 0
                 ? t.favorites.noFavorites
                 : `${(favoriteIds ?? []).length} ${(favoriteIds ?? []).length === 1 ? t.results.place : t.results.places} ${t.favorites.saved}`}
             </p>
-          </div>
+          </motion.div>
         )}
 
         <div className="flex flex-col lg:flex-row gap-4">
@@ -306,14 +317,20 @@ function AppContent() {
           <main className="flex-1 space-y-4">
             <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
               <div className="flex items-center gap-2 flex-wrap">
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs text-foreground font-medium">
                   {filteredVenues.length} {filteredVenues.length === 1 ? t.results.place : t.results.places} {t.results.placesFound}
                 </p>
                 {hasActiveFilters && (
-                  <Button variant="ghost" size="sm" onClick={clearFilters} className="h-7 text-xs">
-                    <X className="h-3 w-3 mr-1" />
-                    {t.results.clearFilters}
-                  </Button>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <Button variant="ghost" size="sm" onClick={clearFilters} className="h-7 text-xs text-foreground hover:text-primary">
+                      <X className="h-3 w-3 mr-1" />
+                      {t.results.clearFilters}
+                    </Button>
+                  </motion.div>
                 )}
               </div>
 
@@ -324,7 +341,7 @@ function AppContent() {
                       <Funnel className="h-3.5 w-3.5 mr-1.5" />
                       {t.filters.title}
                       {hasActiveFilters && (
-                        <Badge variant="secondary" className="ml-1.5 text-[10px] px-1.5 py-0">
+                        <Badge variant="secondary" className="ml-1.5 text-[10px] px-1.5 py-0 bg-secondary text-secondary-foreground font-medium">
                           {t.results.filtersActive}
                         </Badge>
                       )}
@@ -352,11 +369,11 @@ function AppContent() {
                   </SelectContent>
                 </Select>
 
-                <div className="hidden sm:flex items-center gap-1 border rounded-md p-0.5">
+                <div className="hidden sm:flex items-center gap-1 border rounded-md p-0.5 bg-muted/30">
                   <Button
                     variant={viewMode === 'grid' ? 'secondary' : 'ghost'}
                     size="icon"
-                    className="h-7 w-7"
+                    className="h-7 w-7 transition-all duration-300"
                     onClick={() => setViewMode('grid')}
                   >
                     <GridFour className="h-3.5 w-3.5" />
@@ -364,7 +381,7 @@ function AppContent() {
                   <Button
                     variant={viewMode === 'list' ? 'secondary' : 'ghost'}
                     size="icon"
-                    className="h-7 w-7"
+                    className="h-7 w-7 transition-all duration-300"
                     onClick={() => setViewMode('list')}
                   >
                     <List className="h-3.5 w-3.5" />
@@ -374,10 +391,15 @@ function AppContent() {
             </div>
 
             {filteredVenues.length === 0 ? (
-              <div className="flex flex-col items-center justify-center py-12 text-center">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="flex flex-col items-center justify-center py-12 text-center"
+              >
                 <div className="mb-4 text-muted-foreground">
                   <MagnifyingGlass className="h-12 w-12 mx-auto mb-3" />
-                  <h3 className="font-heading text-lg font-semibold mb-1">{t.results.noResults}</h3>
+                  <h3 className="font-heading text-lg font-semibold mb-1 text-foreground">{t.results.noResults}</h3>
                   <p className="text-xs max-w-md">
                     {t.results.tryAdjusting}
                   </p>
@@ -387,27 +409,39 @@ function AppContent() {
                     {t.results.clearAllFilters}
                   </Button>
                 )}
-              </div>
+              </motion.div>
             ) : (
-              <div
+              <motion.div
                 className={
                   viewMode === 'grid'
                     ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4'
                     : 'space-y-3'
                 }
               >
-                {filteredVenues.map((venue) => (
-                  <VenueCard
-                    key={venue.id}
-                    venue={venue}
-                    isFavorite={isFavorite(venue.id)}
-                    onToggleFavorite={handleToggleFavorite}
-                    onCardClick={handleCardClick}
-                    userLocation={userLocation ?? undefined}
-                    viewMode={viewMode}
-                  />
-                ))}
-              </div>
+                <AnimatePresence mode="popLayout">
+                  {filteredVenues.map((venue, index) => (
+                    <motion.div
+                      key={venue.id}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ 
+                        duration: 0.4, 
+                        delay: Math.min(index * 0.05, 0.6)
+                      }}
+                    >
+                      <VenueCard
+                        venue={venue}
+                        isFavorite={isFavorite(venue.id)}
+                        onToggleFavorite={handleToggleFavorite}
+                        onCardClick={handleCardClick}
+                        userLocation={userLocation ?? undefined}
+                        viewMode={viewMode}
+                      />
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              </motion.div>
             )}
           </main>
         </div>
@@ -415,7 +449,13 @@ function AppContent() {
 
       <AuthDialog open={authDialogOpen} onOpenChange={setAuthDialogOpen} onLogin={login} />
 
-      <Toaster position="top-right" />
+      <Toaster 
+        position="top-right" 
+        expand={true}
+        richColors
+        duration={3000}
+        closeButton
+      />
     </div>
   )
 }
