@@ -37,7 +37,7 @@ export function VenueCard({
   if (viewMode === 'list') {
     return (
       <div
-        className="bg-white border border-border-light rounded-xl overflow-hidden hover:border-text-dark hover:shadow-lg transition-all duration-200 cursor-pointer group"
+        className="bg-white border border-border-light rounded-2xl overflow-hidden hover:border-text-dark hover:shadow-lg transition-all duration-200 cursor-pointer group"
         onClick={() => onCardClick(venue.id)}
       >
         <div className="flex flex-col sm:flex-row">
@@ -49,48 +49,48 @@ export function VenueCard({
             />
             <button
               className={cn(
-                'absolute top-3 right-3 p-2 rounded-full bg-white/90 hover:bg-white hover:scale-110 transition-all duration-200',
+                'absolute top-3 right-3 p-2.5 rounded-full bg-white/90 hover:bg-white hover:scale-110 transition-all duration-200',
                 isFavorite && 'text-accent'
               )}
               onClick={handleFavoriteClick}
             >
               <Heart 
                 weight={isFavorite ? 'fill' : 'regular'} 
-                className="h-4 w-4" 
+                className="h-5 w-5" 
               />
             </button>
           </div>
 
-          <div className="flex-1 p-4">
+          <div className="flex-1 p-5">
             <div className="flex items-start justify-between gap-2 mb-2">
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-xs text-text-body capitalize">{t.categories[venue.category] || venue.category}</span>
+                <div className="flex items-center gap-2 mb-1.5">
+                  <span className="text-sm text-text-body capitalize font-medium">{t.categories[venue.category] || venue.category}</span>
                   {isOpen && (
                     <>
-                      <span className="text-xs text-text-light">·</span>
-                      <span className="text-xs text-success font-medium">{t.filters.openNow}</span>
+                      <span className="text-sm text-text-light">·</span>
+                      <span className="text-sm text-success font-semibold">{t.filters.openNow}</span>
                     </>
                   )}
                 </div>
-                <h3 className="font-semibold text-base text-text-dark group-hover:text-primary transition-colors line-clamp-1">
+                <h3 className="font-semibold text-lg text-text-dark group-hover:text-primary transition-colors line-clamp-1 tracking-tight">
                   {venue.name}
                 </h3>
               </div>
             </div>
 
-            <p className="text-text-body text-sm mb-3 line-clamp-2">
+            <p className="text-text-body text-[15px] mb-4 line-clamp-2 leading-relaxed">
               {venue.description}
             </p>
 
-            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-sm">
-              <div className="flex items-center gap-1">
+            <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[15px]">
+              <div className="flex items-center gap-1.5">
                 <Star weight="fill" className="h-4 w-4 text-text-dark" />
                 <span className="font-semibold text-text-dark">{venue.rating.toFixed(1)}</span>
                 <span className="text-text-body">({venue.reviewCount})</span>
               </div>
               <span className="text-text-light">·</span>
-              <span className="text-text-dark font-medium">{venue.priceLevel}</span>
+              <span className="text-text-dark font-semibold">{venue.priceLevel}</span>
               <span className="text-text-light">·</span>
               <span className="text-text-body">{venue.cuisineType || t.categories[venue.category]}</span>
               {distance !== null && (
@@ -111,7 +111,7 @@ export function VenueCard({
       className="cursor-pointer group"
       onClick={() => onCardClick(venue.id)}
     >
-      <div className="relative aspect-[4/3] overflow-hidden rounded-xl mb-3">
+      <div className="relative aspect-[4/3] overflow-hidden rounded-2xl mb-3">
         <img
           src={venue.coverImage}
           alt={venue.name}
@@ -119,43 +119,43 @@ export function VenueCard({
         />
         <button
           className={cn(
-            'absolute top-3 right-3 p-2 rounded-full bg-white/90 hover:bg-white hover:scale-110 transition-all duration-200',
+            'absolute top-3 right-3 p-2.5 rounded-full bg-white/90 hover:bg-white hover:scale-110 transition-all duration-200',
             isFavorite && 'text-accent'
           )}
           onClick={handleFavoriteClick}
         >
           <Heart
             weight={isFavorite ? 'fill' : 'regular'}
-            className="h-4 w-4"
+            className="h-5 w-5"
           />
         </button>
       </div>
 
       <div>
-        <div className="flex items-start justify-between gap-1 mb-1">
-          <h3 className="font-semibold text-sm text-text-dark line-clamp-1 flex-1">
+        <div className="flex items-start justify-between gap-1 mb-1.5">
+          <h3 className="font-semibold text-base text-text-dark line-clamp-1 flex-1 tracking-tight">
             {venue.name}
           </h3>
         </div>
 
-        <div className="flex items-center gap-1 text-sm text-text-body mb-1">
-          <span className="capitalize text-xs">{t.categories[venue.category] || venue.category}</span>
+        <div className="flex items-center gap-1.5 text-sm text-text-body mb-1.5">
+          <span className="capitalize font-medium">{t.categories[venue.category] || venue.category}</span>
           {isOpen && (
             <>
               <span className="text-text-light">·</span>
-              <span className="text-success font-medium text-xs">{t.filters.openNow}</span>
+              <span className="text-success font-semibold">{t.filters.openNow}</span>
             </>
           )}
         </div>
 
-        <div className="flex items-center gap-1 text-sm">
-          <Star weight="fill" className="h-3.5 w-3.5 text-text-dark flex-shrink-0" />
+        <div className="flex items-center gap-1.5 text-[15px] mb-1">
+          <Star weight="fill" className="h-4 w-4 text-text-dark flex-shrink-0" />
           <span className="font-semibold text-text-dark">{venue.rating.toFixed(1)}</span>
           <span className="text-text-body">({venue.reviewCount})</span>
         </div>
 
-        <div className="flex items-center gap-1.5 text-sm text-text-body mt-1">
-          <span className="font-medium text-text-dark">{venue.priceLevel}</span>
+        <div className="flex items-center gap-2 text-[15px] text-text-body">
+          <span className="font-semibold text-text-dark">{venue.priceLevel}</span>
           {distance !== null && (
             <>
               <span className="text-text-light">·</span>

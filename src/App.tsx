@@ -44,7 +44,7 @@ function AppContent() {
             <div className="flex items-center justify-between h-16">
               <button 
                 onClick={() => setCurrentView('browse')}
-                className="text-base font-bold text-primary hover:text-primary-hover transition-colors"
+                className="text-xl font-bold text-primary hover:text-primary-hover transition-colors tracking-tight"
               >
                 {t.nav.appTitle}
               </button>
@@ -56,24 +56,24 @@ function AppContent() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setCurrentView('favorites')}
-                  className="gap-2 text-text-dark hover:bg-bg-gray rounded-lg h-9 px-3"
+                  className="gap-2 text-text-dark hover:bg-bg-gray rounded-xl h-10 px-4"
                 >
-                  <Heart size={18} weight={currentView === 'favorites' ? 'fill' : 'regular'} className={currentView === 'favorites' ? 'text-accent' : ''} />
-                  <span className="hidden sm:inline text-sm">{t.nav.favorites}</span>
+                  <Heart size={20} weight={currentView === 'favorites' ? 'fill' : 'regular'} className={currentView === 'favorites' ? 'text-accent' : ''} />
+                  <span className="hidden sm:inline text-[15px] font-medium">{t.nav.favorites}</span>
                 </Button>
 
-                <div className="flex items-center gap-3 pl-3 border-l border-border-light">
-                  <div className="hidden sm:flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-full bg-bg-gray flex items-center justify-center">
-                      <User size={16} className="text-text-body" weight="bold" />
+                <div className="flex items-center gap-3 pl-4 border-l border-border-light">
+                  <div className="hidden sm:flex items-center gap-2.5">
+                    <div className="w-9 h-9 rounded-full bg-bg-gray flex items-center justify-center">
+                      <User size={18} className="text-text-body" weight="bold" />
                     </div>
-                    <span className="text-sm font-medium text-text-dark">{user?.name}</span>
+                    <span className="text-[15px] font-semibold text-text-dark">{user?.name}</span>
                   </div>
                   <Button 
                     onClick={logout}
                     variant="outline"
                     size="sm"
-                    className="border-border-medium hover:border-text-dark rounded-lg h-9 px-3 text-sm"
+                    className="border-border-medium hover:border-text-dark rounded-xl h-10 px-4 text-[15px] font-medium"
                   >
                     {t.nav.logout}
                   </Button>

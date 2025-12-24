@@ -131,12 +131,12 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
       <nav className="sticky top-0 z-50 bg-white border-b border-border-light">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <h1 className="text-lg font-bold text-primary">Vietnam Travel</h1>
+            <h1 className="text-xl font-bold text-primary tracking-tight">Vietnam Travel</h1>
             <div className="flex items-center gap-3">
               <LanguageSwitcher />
               <Button 
                 onClick={onGetStarted} 
-                className="bg-primary text-white hover:bg-primary-hover font-medium px-4 text-sm h-9 rounded-lg transition-colors duration-200"
+                className="bg-primary text-white hover:bg-primary-hover font-semibold px-5 text-[15px] h-10 rounded-lg transition-colors duration-200"
               >
                 Sign up
               </Button>
@@ -145,36 +145,36 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </nav>
 
-      <section className="relative h-[60vh] min-h-[450px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[65vh] min-h-[500px] flex items-center justify-center overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
             backgroundImage: 'url(https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=1920&h=1080&fit=crop)',
           }}
         />
-        <div className="absolute inset-0 bg-black/20" />
+        <div className="absolute inset-0 bg-black/25" />
         
         <div className="relative z-10 container mx-auto px-4 md:px-6 lg:px-8 text-center">
-          <h1 className="text-white font-bold mb-4 text-3xl md:text-4xl max-w-3xl mx-auto leading-tight">
+          <h1 className="text-white font-bold mb-5 text-4xl md:text-5xl lg:text-[56px] max-w-4xl mx-auto leading-[1.1] tracking-tight">
             Discover Authentic Vietnam
           </h1>
-          <p className="text-white/90 text-base md:text-lg mb-6 max-w-2xl mx-auto">
+          <p className="text-white/95 text-lg md:text-xl mb-8 max-w-2xl mx-auto font-medium leading-relaxed">
             Find the best restaurants, cafes, and attractions recommended by travelers
           </p>
           
-          <div className="max-w-xl mx-auto bg-white rounded-lg shadow-lg p-1.5 flex items-center gap-2">
-            <div className="flex-1 flex items-center gap-2 pl-3">
-              <MagnifyingGlass className="h-4 w-4 text-text-body flex-shrink-0" />
+          <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-xl p-2 flex items-center gap-2">
+            <div className="flex-1 flex items-center gap-3 pl-4">
+              <MagnifyingGlass className="h-5 w-5 text-text-body flex-shrink-0" weight="bold" />
               <Input
                 type="text"
                 placeholder="Where do you want to go?"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-sm placeholder:text-text-body h-10"
+                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-[15px] placeholder:text-text-light h-12 font-medium"
               />
             </div>
             <Button 
-              className="bg-primary hover:bg-primary-hover text-white font-medium px-6 h-10 rounded-md transition-colors duration-200 text-sm"
+              className="bg-primary hover:bg-primary-hover text-white font-semibold px-8 h-12 rounded-lg transition-colors duration-200 text-[15px]"
               onClick={onGetStarted}
             >
               Search
@@ -183,29 +183,29 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-text-dark text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-text-dark text-center mb-12 tracking-tight">
             Explore by category
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {categories.map((category) => (
               <div 
                 key={category.name}
                 className="group cursor-pointer"
                 onClick={onGetStarted}
               >
-                <div className="aspect-square overflow-hidden rounded-xl mb-3">
+                <div className="aspect-square overflow-hidden rounded-2xl mb-4">
                   <img
                     src={category.image}
                     alt={category.name}
                     className="w-full h-full object-cover group-hover:opacity-90 transition-opacity duration-200"
                   />
                 </div>
-                <h3 className="font-semibold text-base text-text-dark mb-1">
+                <h3 className="font-semibold text-lg text-text-dark mb-2 tracking-tight">
                   {category.name}
                 </h3>
-                <p className="text-text-body text-sm leading-relaxed">
+                <p className="text-text-body text-[15px] leading-relaxed">
                   {category.description}
                 </p>
               </div>
@@ -214,16 +214,16 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-bg-gray">
+      <section className="py-16 md:py-20 bg-bg-gray">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-text-dark text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-text-dark text-center mb-12 tracking-tight">
             Popular places
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {featuredPlaces.map((place) => (
               <div 
                 key={place.id}
-                className="bg-white border border-border-light rounded-xl overflow-hidden hover:border-text-dark hover:shadow-lg transition-all duration-200 cursor-pointer"
+                className="bg-white border border-border-light rounded-2xl overflow-hidden hover:border-text-dark hover:shadow-lg transition-all duration-200 cursor-pointer"
                 onClick={onGetStarted}
               >
                 <div className="aspect-[4/3] overflow-hidden">
@@ -233,29 +233,29 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="p-3">
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-xs text-text-body">{place.category}</span>
+                <div className="p-4">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-text-body font-medium">{place.category}</span>
                   </div>
-                  <h3 className="font-semibold text-sm text-text-dark mb-2 line-clamp-1">
+                  <h3 className="font-semibold text-base text-text-dark mb-2 line-clamp-1 tracking-tight">
                     {place.name}
                   </h3>
-                  <div className="flex items-center gap-1 text-xs mb-1">
-                    <Star weight="fill" className="h-3 w-3 text-text-dark" />
+                  <div className="flex items-center gap-1.5 text-sm mb-2">
+                    <Star weight="fill" className="h-3.5 w-3.5 text-text-dark" />
                     <span className="font-semibold text-text-dark">{place.rating}</span>
                     <span className="text-text-body">({place.reviews})</span>
                   </div>
-                  <div className="text-xs text-text-body">
-                    <span className="font-medium text-text-dark">{place.price}</span> · {place.cuisine}
+                  <div className="text-[15px] text-text-body">
+                    <span className="font-semibold text-text-dark">{place.price}</span> · {place.cuisine}
                   </div>
                 </div>
               </div>
             ))}
           </div>
-          <div className="text-center mt-8">
+          <div className="text-center mt-10">
             <Button 
               variant="outline"
-              className="border-2 border-text-dark text-text-dark hover:bg-bg-gray font-medium px-6 h-10 rounded-lg text-sm"
+              className="border-2 border-text-dark text-text-dark hover:bg-bg-gray font-semibold px-8 h-11 rounded-xl text-[15px]"
               onClick={onGetStarted}
             >
               Show all places
@@ -264,21 +264,21 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-text-dark text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-text-dark text-center mb-12 tracking-tight">
             How it works
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {steps.map((step) => (
               <div key={step.number} className="text-center">
-                <div className="w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold mx-auto mb-3">
+                <div className="w-14 h-14 rounded-full bg-primary text-white flex items-center justify-center text-2xl font-bold mx-auto mb-4">
                   {step.number}
                 </div>
-                <h3 className="text-base font-semibold text-text-dark mb-2">
+                <h3 className="text-lg font-semibold text-text-dark mb-3 tracking-tight">
                   {step.title}
                 </h3>
-                <p className="text-text-body text-sm leading-relaxed">
+                <p className="text-text-body text-[15px] leading-relaxed">
                   {step.description}
                 </p>
               </div>
@@ -287,15 +287,15 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-10 md:py-12 bg-bg-gray">
+      <section className="py-12 md:py-16 bg-bg-gray">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
             {stats.map((stat) => (
-              <div key={stat.label} className="bg-white rounded-xl p-6 text-center border border-border-light">
-                <div className="text-3xl md:text-4xl font-bold text-text-dark mb-1">
+              <div key={stat.label} className="bg-white rounded-2xl p-8 text-center border border-border-light">
+                <div className="text-4xl md:text-[44px] font-bold text-text-dark mb-2 tracking-tight">
                   {stat.value}
                 </div>
-                <div className="text-text-body text-sm">
+                <div className="text-text-body text-[15px] font-medium">
                   {stat.label}
                 </div>
               </div>
@@ -304,36 +304,36 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-white">
+      <section className="py-16 md:py-20 bg-white">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-text-dark text-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-text-dark text-center mb-12 tracking-tight">
             What travelers say
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index}
-                className="bg-white border border-border-light rounded-xl p-5"
+                className="bg-white border border-border-light rounded-2xl p-6"
               >
-                <div className="flex items-center gap-1 mb-3">
+                <div className="flex items-center gap-1 mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} weight="fill" className="h-3.5 w-3.5 text-primary" />
+                    <Star key={i} weight="fill" className="h-4 w-4 text-primary" />
                   ))}
                 </div>
-                <p className="text-text-dark text-sm mb-4 leading-relaxed">
+                <p className="text-text-dark text-[15px] mb-5 leading-relaxed">
                   "{testimonial.text}"
                 </p>
                 <div className="flex items-center gap-3">
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
-                    className="w-10 h-10 rounded-full object-cover"
+                    className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
-                    <div className="font-semibold text-sm text-text-dark">
+                    <div className="font-semibold text-[15px] text-text-dark">
                       {testimonial.name}
                     </div>
-                    <div className="text-xs text-text-body">
+                    <div className="text-sm text-text-body">
                       {testimonial.flag} {testimonial.country}
                     </div>
                   </div>
@@ -344,62 +344,62 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-accent/10">
+      <section className="py-16 md:py-20 bg-accent/10">
         <div className="container mx-auto px-4 md:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-text-dark mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold text-text-dark mb-4 tracking-tight">
             Start exploring Vietnam today
           </h2>
-          <p className="text-text-body text-base mb-6 max-w-2xl mx-auto">
+          <p className="text-text-body text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
             Join thousands of travelers discovering amazing places
           </p>
           <Button 
             onClick={onGetStarted}
-            className="bg-primary hover:bg-primary-hover text-white font-medium px-8 h-11 text-sm rounded-lg transition-colors duration-200"
+            className="bg-primary hover:bg-primary-hover text-white font-semibold px-10 h-12 text-[15px] rounded-xl transition-colors duration-200"
           >
-            Get Started - It's Free <ArrowRight className="ml-2 h-4 w-4" />
+            Get Started - It's Free <ArrowRight className="ml-2 h-5 w-5" weight="bold" />
           </Button>
-          <p className="text-text-body text-xs mt-3">
+          <p className="text-text-body text-sm mt-4 font-medium">
             No credit card required
           </p>
         </div>
       </section>
 
-      <footer className="bg-white border-t border-border-light py-10">
+      <footer className="bg-white border-t border-border-light py-12">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-bold text-text-dark mb-3 text-sm">Vietnam Travel</h3>
-              <p className="text-text-body text-xs leading-relaxed">
+              <h3 className="font-bold text-text-dark mb-4 text-base tracking-tight">Vietnam Travel</h3>
+              <p className="text-text-body text-sm leading-relaxed">
                 Discover authentic Vietnam
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-text-dark mb-2 text-xs">Explore</h4>
-              <ul className="space-y-1.5 text-xs text-text-body">
+              <h4 className="font-semibold text-text-dark mb-3 text-sm">Explore</h4>
+              <ul className="space-y-2 text-sm text-text-body">
                 <li><button onClick={onGetStarted} className="hover:text-text-dark transition-colors">Browse</button></li>
                 <li><button onClick={onGetStarted} className="hover:text-text-dark transition-colors">Map</button></li>
                 <li><button onClick={onGetStarted} className="hover:text-text-dark transition-colors">Favorites</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-text-dark mb-2 text-xs">Company</h4>
-              <ul className="space-y-1.5 text-xs text-text-body">
+              <h4 className="font-semibold text-text-dark mb-3 text-sm">Company</h4>
+              <ul className="space-y-2 text-sm text-text-body">
                 <li><button className="hover:text-text-dark transition-colors">About</button></li>
                 <li><button className="hover:text-text-dark transition-colors">Contact</button></li>
                 <li><button className="hover:text-text-dark transition-colors">Blog</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-text-dark mb-2 text-xs">Connect</h4>
-              <ul className="space-y-1.5 text-xs text-text-body">
+              <h4 className="font-semibold text-text-dark mb-3 text-sm">Connect</h4>
+              <ul className="space-y-2 text-sm text-text-body">
                 <li><button className="hover:text-text-dark transition-colors">Facebook</button></li>
                 <li><button className="hover:text-text-dark transition-colors">Instagram</button></li>
                 <li><button className="hover:text-text-dark transition-colors">Twitter</button></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-border-light pt-6 text-center">
-            <p className="text-text-body text-xs">
+          <div className="border-t border-border-light pt-8 text-center">
+            <p className="text-text-body text-sm">
               © 2024 Vietnam Travel. All rights reserved.
             </p>
           </div>
