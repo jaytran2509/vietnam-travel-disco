@@ -38,8 +38,8 @@ function AppContent() {
 
   if (isAuthenticated) {
     return (
-      <div className="min-h-screen bg-white">
-        <nav className="sticky top-0 z-50 bg-white border-b border-border-light">
+      <div className="min-h-screen bg-background">
+        <nav className="sticky top-0 z-50 bg-white border-b border-border">
           <div className="container mx-auto px-4 md:px-6 lg:px-8">
             <div className="flex items-center justify-between h-16">
               <button 
@@ -56,24 +56,24 @@ function AppContent() {
                   variant="ghost"
                   size="sm"
                   onClick={() => setCurrentView('favorites')}
-                  className="gap-2 text-text-dark hover:bg-bg-gray rounded-xl h-10 px-4"
+                  className="gap-2 text-foreground hover:bg-muted rounded-xl h-10 px-4"
                 >
                   <Heart size={20} weight={currentView === 'favorites' ? 'fill' : 'regular'} className={currentView === 'favorites' ? 'text-accent' : ''} />
                   <span className="hidden sm:inline text-[15px] font-medium">{t.nav.favorites}</span>
                 </Button>
 
-                <div className="flex items-center gap-3 pl-4 border-l border-border-light">
+                <div className="flex items-center gap-3 pl-4 border-l border-border">
                   <div className="hidden sm:flex items-center gap-2.5">
-                    <div className="w-9 h-9 rounded-full bg-bg-gray flex items-center justify-center">
-                      <User size={18} className="text-text-body" weight="bold" />
+                    <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center">
+                      <User size={18} className="text-muted-foreground" weight="bold" />
                     </div>
-                    <span className="text-[15px] font-semibold text-text-dark">{user?.name}</span>
+                    <span className="text-[15px] font-semibold text-foreground">{user?.name}</span>
                   </div>
                   <Button 
                     onClick={logout}
                     variant="outline"
                     size="sm"
-                    className="border-border-medium hover:border-text-dark rounded-xl h-10 px-4 text-[15px] font-medium"
+                    className="rounded-xl h-10 px-4 text-[15px] font-medium"
                   >
                     {t.nav.logout}
                   </Button>

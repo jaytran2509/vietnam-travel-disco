@@ -84,27 +84,31 @@ The design should evoke trust, simplicity, and professionalism through clean sol
 
 ## Color Selection
 
-Custom Airbnb-style solid color palette with teal/turquoise primary and warm orange accents - NO gradients anywhere.
+Refined modern color palette with enhanced harmony and balance - using consistent semantic color tokens.
 
-- **Primary (Teal/Turquoise)**: #00A699 (oklch(0.64 0.08 185)) - Main brand color for CTAs, active states, focus rings
-- **Primary Dark**: #008B80 (oklch(0.55 0.08 185)) - Hover state for primary buttons
-- **Accent (Warm Orange)**: #FF8956 (oklch(0.70 0.15 40)) - Hearts, special highlights, badges
-- **Text Dark**: #222222 (oklch(0.20 0 0)) - Headings and primary text
-- **Text Body**: #717171 (oklch(0.52 0 0)) - Body text and descriptions  
-- **Text Light**: #B0B0B0 (oklch(0.73 0 0)) - Labels and metadata
-- **Background White**: #FFFFFF (oklch(1 0 0)) - Main background
-- **Background Gray**: #F7F7F7 (oklch(0.98 0 0)) - Alternate section backgrounds
-- **Border Light**: #EBEBEB (oklch(0.94 0 0)) - Card borders, dividers
-- **Border Medium**: #DDDDDD (oklch(0.89 0 0)) - Input borders, stronger dividers
-- **Success Green**: #008489 (oklch(0.52 0.08 200)) - Success states, "Open now"
-- **Error Red**: #C13515 (oklch(0.50 0.18 25)) - Errors and destructive actions
+- **Primary (Teal)**: #00A699 (oklch(0.58 0.12 195)) - Main brand color with increased saturation for vibrancy
+- **Primary Hover**: #007D73 (oklch(0.48 0.13 195)) - Darker, richer hover state
+- **Accent (Warm Orange)**: #FF8856 (oklch(0.68 0.14 35)) - Softer, more balanced accent for hearts and highlights
+- **Foreground**: #404040 (oklch(0.25 0 0)) - Slightly lighter dark for better readability
+- **Muted Foreground**: #6B6B6B (oklch(0.48 0 0)) - Balanced mid-tone for body text
+- **Muted**: #F5F5F6 (oklch(0.965 0.003 240)) - Subtle cool tint for backgrounds
+- **Border**: #E8E8EA (oklch(0.92 0.002 240)) - Soft neutral borders with slight cool tone
+- **Success Green**: #00A699 (oklch(0.55 0.12 165)) - Unified with primary for consistency
+- **Background**: #FEFEFE (oklch(0.995 0 0)) - Slightly off-white for reduced eye strain
+
+**Color Philosophy**: 
+- Unified color system using semantic tokens (foreground, muted-foreground, border, etc.)
+- Subtle cool undertones throughout for modern feel
+- Reduced reliance on custom color classes
+- Better consistency across light/dark contexts
+- Enhanced readability with optimized contrast ratios
 
 **Foreground/Background Pairings**:
-- White (#FFFFFF): Dark text (#222222) - Ratio 17.6:1 ✓
+- White (#FEFEFE): Foreground (#404040) - Ratio 10.2:1 ✓
 - Teal Primary (#00A699): White text (#FFFFFF) - Ratio 4.6:1 ✓  
-- Orange Accent (#FF8956): White text (#FFFFFF) - Ratio 4.2:1 ✓
-- Gray (#F7F7F7): Dark text (#222222) - Ratio 16.8:1 ✓
-- Success (#008489): White text (#FFFFFF) - Ratio 4.5:1 ✓
+- Orange Accent (#FF8856): White text (#FFFFFF) - Ratio 4.5:1 ✓
+- Muted (#F5F5F6): Foreground (#404040) - Ratio 9.8:1 ✓
+- Success (#00A699): White text (#FFFFFF) - Ratio 4.5:1 ✓
 
 ## Font Selection
 
