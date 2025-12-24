@@ -1,14 +1,22 @@
 import { useState } from 'react'
 import { useAuth } from '@/hooks/use-auth'
-import { LanguageProvider } from '@/contexts/LanguageContext'
+import { useLanguage, LanguageProvider } from '@/contexts/LanguageContext'
 import { LandingPage } from '@/components/LandingPage'
 import { AuthDialog } from '@/components/AuthDialog'
+import { BrowsePage } from '@/components/BrowsePage'
+import { FavoritesPage } from '@/components/FavoritesPage'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 import { Toaster } from '@/components/ui/sonner'
-import type { User } from '@/lib/types'
+import { Button } from '@/components/ui/button'
+import { Heart, User } from '@phosphor-icons/react'
+import { toast } from 'sonner'
+import type { User as UserType } from '@/lib/types'
 
 function AppContent() {
   const { user, isAuthenticated, login, logout } = useAuth()
+  const { t } = useLanguage()
   const [authDialogOpen, setAuthDialogOpen] = useState(false)
+  const [currentView, setCurrentView] = useState<'browse' | 'favorites'>('browse')
 
   const handleGetStarted = () => {
     if (!isAuthenticated) {
@@ -16,33 +24,73 @@ function AppContent() {
     }
   }
 
-  const handleLogin = (userData: User, rememberMe: boolean) => {
+  const handleLogin = (userData: UserType, rememberMe: boolean) => {
     login(userData, rememberMe)
+  }
+
+  const handleLoginRequired = () => {
+    setAuthDialogOpen(true)
+  }
+
+  const handleVenueClick = (venueId: string) => {
+    toast.info(t.common.comingSoon)
   }
 
   if (isAuthenticated) {
     return (
       <div className="min-h-screen bg-background">
-        <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border shadow-sm">
-          <div className="container mx-auto px-4 md:px-6">
-            <div className="flex items-center justify-between h-14">
-              <h1 className="text-base font-bold text-foreground">VietnamTravel</h1>
-              <div className="flex items-center gap-3">
-                <span className="text-xs text-text-body hidden sm:inline">Welcome, {user?.name}</span>
-                <button 
-                  onClick={logout}
-                  className="text-xs text-text-body hover:text-foreground transition-colors font-medium"
+        <nav className="sticky top-0 z-50 bg-white border-b border-border shadow-sm">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between h-16">
+              <button 
+                onClick={() => setCurrentView('browse')}
+                className="text-lg font-bold text-foreground hover:text-primary transition-colors"
+              >
+                {t.nav.appTitle}
+              </button>
+              
+              <div className="flex items-center gap-4">
+                <LanguageSwitcher />
+                
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setCurrentView('favorites')}
+                  className="gap-2"
                 >
-                  Log out
-                </button>
+                  <Heart size={18} weight={currentView === 'favorites' ? 'fill' : 'regular'} />
+                  <span className="hidden sm:inline">{t.nav.favorites}</span>
+                </Button>
+
+                <div className="flex items-center gap-3 pl-3 border-l border-border">
+                  <div className="hidden sm:flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+                      <User size={16} className="text-primary" weight="bold" />
+                    </div>
+                    <span className="text-sm font-medium text-foreground">{user?.name}</span>
+                  </div>
+                  <Button 
+                    onClick={logout}
+                    variant="outline"
+                    size="sm"
+                  >
+                    {t.nav.logout}
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
         </nav>
-        <div className="container mx-auto px-4 md:px-6 py-8">
-          <h2 className="mb-4 text-xl font-bold">Browse Page Coming Soon</h2>
-          <p className="text-text-body text-sm">The full browse experience is being built with Airbnb design.</p>
-        </div>
+
+        {currentView === 'browse' ? (
+          <BrowsePage 
+            isAuthenticated={isAuthenticated}
+            onLoginRequired={handleLoginRequired}
+          />
+        ) : (
+          <FavoritesPage onVenueClick={handleVenueClick} />
+        )}
+
         <Toaster 
           position="top-right"
           duration={3000}

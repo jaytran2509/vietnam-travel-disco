@@ -128,45 +128,45 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
     <div className="min-h-screen bg-background">
       <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-border shadow-sm">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="flex items-center justify-between h-14">
-            <h1 className="text-base font-bold text-foreground">VietnamTravel</h1>
-            <Button onClick={onGetStarted} className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-4 text-sm h-8 rounded-md">
+          <div className="flex items-center justify-between h-16">
+            <h1 className="text-lg font-bold text-foreground">VietnamTravel</h1>
+            <Button onClick={onGetStarted} className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-5 text-sm h-10 rounded-lg shadow-sm">
               Sign up
             </Button>
           </div>
         </div>
       </nav>
 
-      <section className="relative h-[60vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+      <section className="relative h-[65vh] min-h-[450px] flex items-center justify-center overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center"
           style={{ 
             backgroundImage: 'url(https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=1920&h=1080&fit=crop)',
           }}
         />
-        <div className="absolute inset-0 bg-black/15" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/40" />
         
         <div className="relative z-10 container mx-auto px-4 md:px-6 text-center">
-          <h1 className="text-white font-bold mb-3 text-3xl md:text-4xl max-w-3xl mx-auto leading-tight">
+          <h1 className="text-white font-bold mb-4 text-4xl md:text-5xl max-w-4xl mx-auto leading-tight">
             Discover Authentic Vietnam
           </h1>
-          <p className="text-white/95 text-base md:text-lg mb-8 max-w-2xl mx-auto font-medium">
+          <p className="text-white/95 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-medium">
             Find the best restaurants, cafes, and attractions recommended by travelers
           </p>
           
-          <div className="max-w-xl mx-auto">
-            <div className="bg-white rounded-lg shadow-search flex items-center p-1">
-              <MagnifyingGlass className="text-text-light ml-2.5 flex-shrink-0" size={16} />
+          <div className="max-w-2xl mx-auto">
+            <div className="bg-white rounded-lg shadow-search flex items-center p-1.5">
+              <MagnifyingGlass className="text-muted-foreground ml-3 flex-shrink-0" size={20} />
               <Input
                 type="text"
                 placeholder="Where do you want to go?"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="border-0 shadow-none focus-visible:ring-0 text-sm h-9 placeholder:text-sm"
+                className="border-0 shadow-none focus-visible:ring-0 text-base h-11 placeholder:text-base"
               />
               <Button 
                 onClick={onGetStarted}
-                className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-5 text-sm rounded-md flex-shrink-0 h-9"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6 text-base rounded-lg flex-shrink-0 h-11 shadow-sm"
               >
                 Search
               </Button>
@@ -175,11 +175,11 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-10 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="text-center mb-8 text-xl font-bold">Explore by category</h2>
+          <h2 className="text-center mb-12 text-2xl font-bold">Explore by category</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {categories.map((category) => (
               <button
                 key={category.name}
@@ -191,12 +191,12 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                     <img 
                       src={category.image} 
                       alt={category.name}
-                      className="w-full h-full object-cover transition-all duration-300 group-hover:scale-105"
+                      className="w-full h-full object-cover transition-all duration-300 group-hover:scale-110"
                     />
                   </div>
-                  <div className="p-3.5">
-                    <h3 className="font-semibold text-sm mb-1">{category.name}</h3>
-                    <p className="text-text-body text-xs leading-relaxed">{category.description}</p>
+                  <div className="p-5">
+                    <h3 className="font-semibold text-base mb-2">{category.name}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">{category.description}</p>
                   </div>
                 </div>
               </button>
@@ -205,11 +205,11 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-10 bg-gray-bg">
+      <section className="py-16 bg-gray-bg">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="mb-8 text-xl font-bold">Popular places</h2>
+          <h2 className="mb-12 text-2xl font-bold">Popular places</h2>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
             {featuredPlaces.map((place) => (
               <div key={place.id} className="card-minimal overflow-hidden bg-white">
                 <div className="relative">
@@ -217,27 +217,27 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                     <img 
                       src={place.image} 
                       alt={place.name}
-                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
                     />
                   </div>
-                  <button className="absolute top-2 right-2 p-1.5 bg-white/95 rounded-full shadow-sm hover:scale-110 transition-all active:scale-95">
-                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <button className="absolute top-3 right-3 p-2 bg-white/95 rounded-full shadow-sm hover:scale-110 transition-all active:scale-95">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                   </button>
                 </div>
-                <div className="p-2.5">
-                  <div className="flex items-center gap-1 mb-1">
-                    <MapPin size={11} className="text-text-light flex-shrink-0" />
-                    <span className="text-text-light text-xs truncate">{place.category}</span>
+                <div className="p-3">
+                  <div className="flex items-center gap-1 mb-1.5">
+                    <MapPin size={12} className="text-muted-foreground flex-shrink-0" />
+                    <span className="text-muted-foreground text-xs truncate">{place.category}</span>
                   </div>
-                  <h3 className="font-semibold mb-1 text-sm truncate">{place.name}</h3>
-                  <div className="flex items-center gap-1 mb-1">
-                    <Star size={12} weight="fill" className="text-foreground flex-shrink-0" />
+                  <h3 className="font-semibold mb-1.5 text-sm truncate">{place.name}</h3>
+                  <div className="flex items-center gap-1 mb-1.5">
+                    <Star size={13} weight="fill" className="text-accent flex-shrink-0" />
                     <span className="font-semibold text-xs">{place.rating}</span>
-                    <span className="text-text-body text-xs">({place.reviews})</span>
+                    <span className="text-muted-foreground text-xs">({place.reviews})</span>
                   </div>
-                  <p className="text-text-body text-xs truncate">{place.price} • {place.cuisine}</p>
+                  <p className="text-muted-foreground text-xs truncate">{place.price} • {place.cuisine}</p>
                 </div>
               </div>
             ))}
@@ -247,7 +247,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             <Button 
               onClick={onGetStarted}
               variant="outline" 
-              className="font-semibold px-5 text-sm h-9 border-foreground text-foreground hover:bg-foreground hover:text-white rounded-md transition-all"
+              className="font-semibold px-6 text-sm h-11 border-foreground text-foreground hover:bg-foreground hover:text-white rounded-lg transition-all"
             >
               Show all places
             </Button>
@@ -255,59 +255,59 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-10 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="text-center mb-10 text-xl font-bold">How it works</h2>
+          <h2 className="text-center mb-12 text-2xl font-bold">How it works</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-5xl mx-auto">
             {steps.map((step) => (
               <div key={step.number} className="text-center">
-                <div className="w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-base mx-auto mb-3">
+                <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg mx-auto mb-4 shadow-sm">
                   {step.number}
                 </div>
-                <h3 className="font-semibold text-sm mb-1.5">{step.title}</h3>
-                <p className="text-text-body text-xs leading-relaxed">{step.description}</p>
+                <h3 className="font-semibold text-base mb-2">{step.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-8 bg-gray-bg">
+      <section className="py-12 bg-gray-bg">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat) => (
-              <div key={stat.label} className="bg-white rounded-lg p-5 text-center shadow-card">
-                <div className="font-bold text-2xl mb-1">{stat.value}</div>
-                <div className="text-text-body text-xs">{stat.label}</div>
+              <div key={stat.label} className="bg-white rounded-xl p-6 text-center shadow-card">
+                <div className="font-bold text-3xl mb-2">{stat.value}</div>
+                <div className="text-muted-foreground text-sm">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-10 bg-white">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="text-center mb-8 text-xl font-bold">What travelers say</h2>
+          <h2 className="text-center mb-12 text-2xl font-bold">What travelers say</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="card-minimal bg-white p-4">
-                <div className="flex gap-0.5 mb-2.5">
+              <div key={index} className="card-minimal bg-white p-5">
+                <div className="flex gap-0.5 mb-3">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} size={12} weight="fill" className="text-primary" />
+                    <Star key={i} size={14} weight="fill" className="text-accent" />
                   ))}
                 </div>
-                <p className="text-foreground mb-3 leading-relaxed text-xs">{testimonial.text}</p>
-                <div className="flex items-center gap-2">
+                <p className="text-foreground mb-4 leading-relaxed text-sm">{testimonial.text}</p>
+                <div className="flex items-center gap-3">
                   <img 
                     src={testimonial.avatar} 
                     alt={testimonial.name}
-                    className="w-8 h-8 rounded-full"
+                    className="w-10 h-10 rounded-full"
                   />
                   <div>
-                    <div className="font-semibold text-xs">{testimonial.name}</div>
-                    <div className="text-text-body text-xs">{testimonial.flag} {testimonial.country}</div>
+                    <div className="font-semibold text-sm">{testimonial.name}</div>
+                    <div className="text-muted-foreground text-xs">{testimonial.flag} {testimonial.country}</div>
                   </div>
                 </div>
               </div>
@@ -316,65 +316,65 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-10 bg-[#FFF5F5] text-center">
+      <section className="py-16 bg-primary/5 text-center">
         <div className="container mx-auto px-4 md:px-6">
-          <h2 className="mb-2 text-xl font-bold">Start exploring Vietnam today</h2>
-          <p className="text-sm text-text-body mb-5">Join thousands of travelers discovering amazing places</p>
+          <h2 className="mb-3 text-2xl font-bold">Start exploring Vietnam today</h2>
+          <p className="text-base text-muted-foreground mb-8 max-w-xl mx-auto">Join thousands of travelers discovering amazing places</p>
           <Button 
             onClick={onGetStarted}
             size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-6 h-10 text-sm rounded-md shadow-sm hover:shadow-md transition-all"
+            className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-8 h-12 text-base rounded-lg shadow-sm hover:shadow-md transition-all"
           >
             Get Started - It's Free
-            <ArrowRight size={16} className="ml-1.5" />
+            <ArrowRight size={18} className="ml-2" />
           </Button>
-          <p className="text-text-light text-xs mt-2.5">No credit card required</p>
+          <p className="text-muted-foreground text-sm mt-4">No credit card required</p>
         </div>
       </section>
 
-      <footer className="border-t border-border bg-white py-8">
+      <footer className="border-t border-border bg-white py-12">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-5">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-bold text-sm mb-2.5">VietnamTravel</h3>
-              <p className="text-text-body text-xs">Discover authentic Vietnamese experiences</p>
+              <h3 className="font-bold text-base mb-3">VietnamTravel</h3>
+              <p className="text-muted-foreground text-sm">Discover authentic Vietnamese experiences</p>
             </div>
             <div>
-              <h4 className="font-semibold text-xs mb-2.5">Explore</h4>
-              <ul className="space-y-1.5 text-text-body text-xs">
+              <h4 className="font-semibold text-sm mb-3">Explore</h4>
+              <ul className="space-y-2 text-muted-foreground text-sm">
                 <li><button onClick={onGetStarted} className="hover:text-foreground transition-colors">Browse</button></li>
                 <li><button onClick={onGetStarted} className="hover:text-foreground transition-colors">Map</button></li>
                 <li><button onClick={onGetStarted} className="hover:text-foreground transition-colors">Favorites</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-xs mb-2.5">Company</h4>
-              <ul className="space-y-1.5 text-text-body text-xs">
+              <h4 className="font-semibold text-sm mb-3">Company</h4>
+              <ul className="space-y-2 text-muted-foreground text-sm">
                 <li><button className="hover:text-foreground transition-colors">About</button></li>
                 <li><button className="hover:text-foreground transition-colors">Contact</button></li>
                 <li><button className="hover:text-foreground transition-colors">Blog</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-xs mb-2.5">Connect</h4>
-              <div className="flex gap-2">
-                <button className="w-7 h-7 rounded-full border border-border hover:border-foreground flex items-center justify-center transition-colors">
+              <h4 className="font-semibold text-sm mb-3">Connect</h4>
+              <div className="flex gap-3">
+                <button className="w-9 h-9 rounded-full border border-border hover:border-foreground flex items-center justify-center transition-colors">
                   <span className="sr-only">Facebook</span>
-                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                 </button>
-                <button className="w-7 h-7 rounded-full border border-border hover:border-foreground flex items-center justify-center transition-colors">
+                <button className="w-9 h-9 rounded-full border border-border hover:border-foreground flex items-center justify-center transition-colors">
                   <span className="sr-only">Instagram</span>
-                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                 </button>
-                <button className="w-7 h-7 rounded-full border border-border hover:border-foreground flex items-center justify-center transition-colors">
+                <button className="w-9 h-9 rounded-full border border-border hover:border-foreground flex items-center justify-center transition-colors">
                   <span className="sr-only">Twitter</span>
-                  <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
                 </button>
               </div>
             </div>
           </div>
-          <div className="text-center pt-5 border-t border-border">
-            <p className="text-text-light text-xs">© 2024 VietnamTravel. All rights reserved.</p>
+          <div className="text-center pt-8 border-t border-border">
+            <p className="text-muted-foreground text-sm">© 2024 VietnamTravel. All rights reserved.</p>
           </div>
         </div>
       </footer>
