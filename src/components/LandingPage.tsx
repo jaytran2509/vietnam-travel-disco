@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { MagnifyingGlass, Star, ArrowRight } from '@phosphor-icons/react'
+import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { ThemeToggle } from '@/components/ThemeToggle'
 
 interface LandingPageProps {
   onGetStarted: () => void
@@ -127,121 +129,197 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
   ]
 
   return (
-    <div className="min-h-screen bg-background">
-      <nav className="sticky top-0 z-50 bg-white border-b border-border">
+    <div className="min-h-screen bg-background transition-colors duration-300">
+      <motion.nav 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="sticky top-0 z-50 glassmorphism border-b border-border/50 backdrop-blur-xl"
+      >
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <h1 className="text-xl font-bold text-primary tracking-tight">Vietnam Travel</h1>
+            <motion.h1 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="hero-title text-2xl text-primary tracking-tight"
+            >
+              Vietnam Travel
+            </motion.h1>
             <div className="flex items-center gap-3">
+              <ThemeToggle />
               <LanguageSwitcher />
-              <Button 
-                onClick={onGetStarted} 
-                className="font-semibold px-5 text-[15px] h-10 rounded-lg"
-              >
-                Sign up
-              </Button>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Button 
+                  onClick={onGetStarted} 
+                  className="font-semibold px-5 text-[15px] h-10 rounded-xl"
+                >
+                  Sign up
+                </Button>
+              </motion.div>
             </div>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
-      <section className="relative h-[65vh] min-h-[500px] flex items-center justify-center overflow-hidden bg-primary">
+      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary via-primary to-accent animate-gradient">
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-10"
+          className="absolute inset-0 bg-cover bg-center opacity-[0.08]"
           style={{ 
-            backgroundImage: 'url(https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=1920&h=1080&fit=crop)',
+            backgroundImage: 'url(https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=1920&h=1080&fit=crop&q=90)',
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-primary/20" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/30" />
         
         <div className="relative z-10 container mx-auto px-4 md:px-6 lg:px-8 text-center">
-          <h1 className="text-white font-bold mb-5 text-4xl md:text-5xl lg:text-[56px] max-w-4xl mx-auto leading-[1.1] tracking-tight">
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="hero-title text-white font-bold mb-6 text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-w-5xl mx-auto leading-[1.05] tracking-tight drop-shadow-lg"
+          >
             Discover Authentic Vietnam
-          </h1>
-          <p className="text-white/90 text-lg md:text-xl mb-8 max-w-2xl mx-auto font-medium leading-relaxed">
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="text-white/95 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow"
+          >
             Find the best restaurants, cafes, and attractions recommended by travelers
-          </p>
+          </motion.p>
           
-          <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg p-2 flex items-center gap-2">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="max-w-3xl mx-auto glassmorphism rounded-2xl shadow-2xl p-2 flex items-center gap-2 border border-white/30"
+          >
             <div className="flex-1 flex items-center gap-3 pl-4">
-              <MagnifyingGlass className="h-5 w-5 text-muted-foreground flex-shrink-0" weight="bold" />
+              <MagnifyingGlass className="h-6 w-6 text-foreground/60 flex-shrink-0" weight="bold" />
               <Input
                 type="text"
                 placeholder="Where do you want to go?"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-[15px] placeholder:text-muted-foreground h-12 font-medium text-foreground"
+                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-[15px] placeholder:text-muted-foreground h-14 font-medium text-foreground bg-transparent"
               />
             </div>
-            <Button 
-              className="font-semibold px-8 h-12 rounded-lg text-[15px]"
-              onClick={onGetStarted}
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button 
+                className="font-semibold px-8 h-14 rounded-xl text-[15px]"
+                onClick={onGetStarted}
+              >
+                Search
+              </Button>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="pt-12"
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="text-white/70 text-sm font-medium flex flex-col items-center gap-2"
             >
-              Search
-            </Button>
-          </div>
+              <span>Scroll to explore</span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="animate-bounce">
+                <path d="M10 15L5 10L6.5 8.5L10 12L13.5 8.5L15 10L10 15Z" fill="currentColor"/>
+              </svg>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12 tracking-tight">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-14 tracking-tight"
+          >
             Explore by category
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {categories.map((category) => (
-              <div 
+          </motion.h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {categories.map((category, index) => (
+              <motion.div
                 key={category.name}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
                 className="group cursor-pointer"
                 onClick={onGetStarted}
               >
-                <div className="aspect-square overflow-hidden rounded-xl mb-4">
-                  <img
+                <div className="aspect-square overflow-hidden rounded-2xl mb-5 border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10">
+                  <motion.img
                     src={category.image}
                     alt={category.name}
-                    className="w-full h-full object-cover group-hover:opacity-90 transition-opacity duration-200"
+                    className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                   />
                 </div>
-                <h3 className="font-semibold text-lg text-foreground mb-2 tracking-tight">
+                <h3 className="font-semibold text-xl text-foreground mb-2 tracking-tight group-hover:text-primary transition-colors">
                   {category.name}
                 </h3>
                 <p className="text-muted-foreground text-[15px] leading-relaxed">
                   {category.description}
                 </p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-muted">
+      <section className="py-16 md:py-24 bg-muted/50">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12 tracking-tight">
+          <motion.h2 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-14 tracking-tight"
+          >
             Popular places
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredPlaces.map((place) => (
-              <div 
+          </motion.h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+            {featuredPlaces.map((place, index) => (
+              <motion.div
                 key={place.id}
-                className="bg-white border border-border rounded-xl overflow-hidden hover:border-foreground/30 hover:shadow-md transition-all duration-200 cursor-pointer"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                whileHover={{ y: -8 }}
+                className="bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 cursor-pointer group"
                 onClick={onGetStarted}
               >
                 <div className="aspect-[4/3] overflow-hidden">
-                  <img
+                  <motion.img
                     src={place.image}
                     alt={place.name}
                     className="w-full h-full object-cover"
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                   />
                 </div>
-                <div className="p-4">
+                <div className="p-5">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-sm text-muted-foreground font-medium">{place.category}</span>
                   </div>
-                  <h3 className="font-semibold text-base text-foreground mb-2 line-clamp-1 tracking-tight">
+                  <h3 className="font-semibold text-base text-foreground mb-3 line-clamp-1 tracking-tight group-hover:text-primary transition-colors">
                     {place.name}
                   </h3>
-                  <div className="flex items-center gap-1.5 text-sm mb-2">
-                    <Star weight="fill" className="h-3.5 w-3.5 text-foreground" />
+                  <div className="flex items-center gap-1.5 text-sm mb-3">
+                    <Star weight="fill" className="h-4 w-4 text-accent" />
                     <span className="font-semibold text-foreground">{place.rating}</span>
                     <span className="text-muted-foreground">({place.reviews})</span>
                   </div>
@@ -249,18 +327,26 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                     <span className="font-semibold text-foreground">{place.price}</span> · {place.cuisine}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-          <div className="text-center mt-10">
-            <Button 
-              variant="outline"
-              className="font-semibold px-8 h-11 rounded-xl text-[15px]"
-              onClick={onGetStarted}
-            >
-              Show all places
-            </Button>
-          </div>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="text-center mt-12"
+          >
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Button 
+                variant="outline"
+                className="font-semibold px-10 h-12 rounded-xl text-[15px] hover:border-primary hover:text-primary transition-all duration-300"
+                onClick={onGetStarted}
+              >
+                Show all places
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 

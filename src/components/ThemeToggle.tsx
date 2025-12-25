@@ -1,47 +1,31 @@
 import { Moon, Sun } from '@phosphor-icons/react'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useTheme } from '@/contexts/ThemeContext'
 
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark'>('light')
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light')
-    
-    setTheme(initialTheme)
-    document.documentElement.classList.toggle('dark', initialTheme === 'dark')
-  }, [])
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-    localStorage.setItem('theme', newTheme)
-    document.documentElement.classList.toggle('dark', newTheme === 'dark')
-  }
+  const { theme, toggleTheme } = useTheme()
 
   return (
-    <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
       <Button
         variant="ghost"
         size="icon"
         onClick={toggleTheme}
-        className="h-10 w-10 rounded-full glass hover:bg-white/80 transition-all duration-300"
+        className="h-10 w-10 rounded-full hover:bg-muted transition-all duration-300"
+        aria-label="Toggle theme"
       >
         <motion.div
-          initial={false}
-          animate={{ 
-            rotate: theme === 'dark' ? 180 : 0,
-            scale: theme === 'dark' ? 1 : 1
-          }}
+          key={theme}
+          initial={{ rotate: -180, opacity: 0 }}
+          animate={{ rotate: 0, opacity: 1 }}
+          exit={{ rotate: 180, opacity: 0 }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
         >
           {theme === 'light' ? (
-            <Moon className="h-5 w-5" weight="fill" />
+            <Moon className="h-5 w-5 text-foreground" weight="fill" />
           ) : (
-            <Sun className="h-5 w-5" weight="fill" />
+            <Sun className="h-5 w-5 text-foreground" weight="fill" />
           )}
         </motion.div>
       </Button>
