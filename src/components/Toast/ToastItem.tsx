@@ -196,15 +196,16 @@ export function ToastItem({ toast, onRemove, index }: ToastItemProps) {
             "hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300"
           )}
           aria-label="Close notification"
+        >
           <X size={14} weight="bold" className="text-gray-500 hover:text-gray-700" />
-          <X size={14} weight="bold" className="text-gray-500 hover:text-gray-700" />
+        </button>
       </div>
 
       {duration !== Infinity && (
         <motion.div
           className="absolute bottom-0 left-0"
-          className="absolute bottom-0 left-0"
-            height: '2px',
+          style={{
+            backgroundColor: config.accentColor,
             height: '2px',
             width: `${progress}%`,
             transition: isPaused ? 'none' : 'width 16ms linear'
