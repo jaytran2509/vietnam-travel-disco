@@ -7,7 +7,7 @@ import { VenueCard } from '@/components/VenueCard'
 import { FilterPanel } from '@/components/FilterPanel'
 import { venues } from '@/lib/venues-data'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { toast } from 'sonner'
+import { useToast } from '@/contexts/ToastContext'
 import type { SearchFilters, SortOption, Venue } from '@/lib/types'
 
 interface BrowsePageProps {
@@ -17,6 +17,7 @@ interface BrowsePageProps {
 
 export function BrowsePage({ isAuthenticated, onLoginRequired }: BrowsePageProps) {
   const { t } = useLanguage()
+  const toast = useToast()
   const [searchQuery, setSearchQuery] = useState('')
   const [debouncedQuery, setDebouncedQuery] = useState('')
   const [showFilters, setShowFilters] = useState(false)

@@ -1,21 +1,23 @@
 import { useState } from 'react'
 import { useAuth } from '@/hooks/use-auth'
 import { useLanguage, LanguageProvider } from '@/contexts/LanguageContext'
+import { ToastProvider } from '@/contexts/ToastContext'
+import { ToastContainer } from '@/components/Toast'
 import { LandingPage } from '@/components/LandingPage'
 import { AuthDialog } from '@/components/AuthDialog'
 import { BrowsePage } from '@/components/BrowsePage'
 import { FavoritesPage } from '@/components/FavoritesPage'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
-import { Toaster } from '@/components/ui/sonner'
 import { Button } from '@/components/ui/button'
 import { Heart, User } from '@phosphor-icons/react'
-import { toast } from 'sonner'
+import { useToast } from '@/contexts/ToastContext'
 import { motion } from 'framer-motion'
 import type { User as UserType } from '@/lib/types'
 
 function AppContent() {
   const { user, isAuthenticated, login, logout } = useAuth()
   const { t } = useLanguage()
+  const toast = useToast()
   const [authDialogOpen, setAuthDialogOpen] = useState(false)
   const [currentView, setCurrentView] = useState<'browse' | 'favorites'>('browse')
 
@@ -104,11 +106,7 @@ function AppContent() {
           <FavoritesPage onVenueClick={handleVenueClick} />
         )}
 
-        <Toaster 
-          position="top-right"
-          duration={3000}
-          closeButton
-        />
+        <ToastContainer />
       </div>
     )
   }
@@ -121,11 +119,7 @@ function AppContent() {
         onOpenChange={setAuthDialogOpen} 
         onLogin={handleLogin} 
       />
-      <Toaster 
-        position="top-right"
-        duration={3000}
-        closeButton
-      />
+      <ToastContainer />
     </>
   )
 }
@@ -133,7 +127,9 @@ function AppContent() {
 export default function App() {
   return (
     <LanguageProvider>
-      <AppContent />
+      <ToastProvider>
+        <AppContent />
+      </ToastProvider>
     </LanguageProvider>
   )
 }

@@ -1,8 +1,8 @@
 import { useKV } from '@github/spark/hooks'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useToast } from '@/contexts/ToastContext'
 import { VenueCard } from '@/components/VenueCard'
 import { venues } from '@/lib/venues-data'
-import { toast } from 'sonner'
 import { Heart } from '@phosphor-icons/react'
 
 interface FavoritesPageProps {
@@ -11,6 +11,7 @@ interface FavoritesPageProps {
 
 export function FavoritesPage({ onVenueClick }: FavoritesPageProps) {
   const { t } = useLanguage()
+  const toast = useToast()
   const [favorites, setFavorites] = useKV<string[]>('user-favorites', [])
 
   const favoriteVenues = venues.filter(venue => favorites?.includes(venue.id))

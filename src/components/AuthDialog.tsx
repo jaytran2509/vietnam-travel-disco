@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { toast } from 'sonner'
+import { useToast } from '@/contexts/ToastContext'
 import { generateId } from '@/lib/helpers'
 import { Eye, EyeSlash, CheckCircle, XCircle, Spinner } from '@phosphor-icons/react'
 import type { User } from '@/lib/types'
@@ -17,6 +17,7 @@ interface AuthDialogProps {
 }
 
 export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
+  const toast = useToast()
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
@@ -108,9 +109,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     }
 
     onLogin(user, rememberMe)
-    toast.success('Welcome back!', {
-      description: 'Successfully logged in to your account'
-    })
+    toast.success('Welcome back!', 'Successfully logged in to your account')
     
     setIsLoggingIn(false)
     onOpenChange(false)
@@ -141,9 +140,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     }
 
     onLogin(user, false)
-    toast.success('Welcome aboard!', {
-      description: 'Your account has been created successfully'
-    })
+    toast.success('Welcome aboard!', 'Your account has been created successfully')
     
     setIsSigningUp(false)
     onOpenChange(false)
