@@ -109,7 +109,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     }
 
     onLogin(user, rememberMe)
-    toast.success('Welcome back!', 'Successfully logged in to your account')
+    toast.success('Successfully logged in to your account')
     
     setIsLoggingIn(false)
     onOpenChange(false)
@@ -140,7 +140,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     }
 
     onLogin(user, false)
-    toast.success('Welcome aboard!', 'Your account has been created successfully')
+    toast.success('Your account has been created successfully')
     
     setIsSigningUp(false)
     onOpenChange(false)
