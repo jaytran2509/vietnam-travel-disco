@@ -1,5 +1,5 @@
 import { Toaster } from '@/components/ui/sonner'
 
 export function ToastContainer() {
-  return <Toaster />
+  return <Toaster position="top-right" />
 }
