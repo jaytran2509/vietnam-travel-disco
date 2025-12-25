@@ -90,14 +90,14 @@ export function HeroSection({
           transition={{ duration: 0.6, delay: 0.6 }}
           className="max-w-3xl mx-auto space-y-4"
         >
-          <div className="relative group glassmorphism rounded-2xl p-2 shadow-2xl border border-white/30 backdrop-blur-xl">
+          <div className="relative group bg-white rounded-2xl p-2 shadow-2xl border border-border">
             <div className="relative">
               <MagnifyingGlass className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-foreground/60 transition-all duration-300 group-focus-within:text-primary group-focus-within:scale-110 z-10" weight="bold" />
               <Input
                 placeholder={t.hero.searchPlaceholder}
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="pl-14 pr-6 h-14 text-[15px] bg-white/95 backdrop-blur-sm border-0 shadow-none transition-all duration-300 focus-visible:ring-0 focus-visible:bg-white rounded-xl font-medium text-foreground placeholder:text-muted-foreground"
+                className="pl-14 pr-6 h-14 text-[15px] bg-white border-0 shadow-none transition-all duration-300 focus-visible:ring-0 rounded-xl font-medium text-foreground placeholder:text-muted-foreground"
               />
             </div>
           </div>
@@ -145,12 +145,12 @@ export function HeroSection({
                 opacity: { duration: 0.5, delay: 1 + index * 0.1 },
                 y: { duration: 3, delay: 1 + index * 0.1, repeat: Infinity, ease: "easeInOut" }
               }}
-              className="flex items-center gap-2.5 glassmorphism px-4 py-2.5 rounded-full shadow-lg border border-white/20 backdrop-blur-xl"
+              className="flex items-center gap-2.5 bg-white/95 px-4 py-2.5 rounded-full shadow-lg border border-border"
             >
-              <stat.icon className="h-4 w-4 text-white flex-shrink-0" weight="bold" />
+              <stat.icon className="h-4 w-4 text-primary flex-shrink-0" weight="bold" />
               <div className="text-left">
-                <div className="text-white font-bold text-sm leading-none mb-0.5">{stat.value}</div>
-                <div className="text-white/80 text-xs font-medium leading-none">{stat.label}</div>
+                <div className="text-foreground font-bold text-sm leading-none mb-0.5">{stat.value}</div>
+                <div className="text-muted-foreground text-xs font-medium leading-none">{stat.label}</div>
               </div>
             </motion.div>
           ))}

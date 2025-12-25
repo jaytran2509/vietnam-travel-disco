@@ -133,7 +133,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className="sticky top-0 z-50 glassmorphism border-b border-border/50 backdrop-blur-xl"
+        className="sticky top-0 z-50 bg-white border-b border-border"
       >
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -191,7 +191,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="max-w-3xl mx-auto glassmorphism rounded-2xl shadow-2xl p-2 flex items-center gap-2 border border-white/30"
+            className="max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl p-2 flex items-center gap-2 border border-border"
           >
             <div className="flex-1 flex items-center gap-3 pl-4">
               <MagnifyingGlass className="h-6 w-6 text-foreground/60 flex-shrink-0" weight="bold" />
@@ -200,7 +200,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                 placeholder="Where do you want to go?"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-[15px] placeholder:text-muted-foreground h-14 font-medium text-foreground bg-transparent"
+                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-[15px] placeholder:text-muted-foreground h-14 font-medium text-foreground bg-white"
               />
             </div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
