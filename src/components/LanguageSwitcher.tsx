@@ -34,7 +34,7 @@ export function LanguageSwitcher() {
       </DropdownMenuTrigger>
       <DropdownMenuContent 
         align="end" 
-        className="bg-card border border-border rounded-xl shadow-xl min-w-[180px] animate-scale-in p-1"
+        className="bg-white border border-border-light rounded-xl shadow-lg min-w-[180px] animate-scale-in p-1"
       >
         {languages.map((lang, index) => (
           <motion.div
@@ -45,10 +45,10 @@ export function LanguageSwitcher() {
           >
             <DropdownMenuItem
               onClick={() => setLanguage(lang.code)}
-              className="text-sm cursor-pointer text-foreground hover:bg-muted transition-all duration-200 rounded-lg px-3 py-2.5 focus:bg-muted"
+              className="text-sm cursor-pointer text-text-dark hover:bg-bg-gray hover:text-text-dark transition-all duration-200 rounded-lg px-3 py-2.5 focus:bg-bg-gray focus:text-text-dark"
             >
               <span className="mr-3 text-lg">{lang.flag}</span>
-              <span className="flex-1">{lang.name}</span>
+              <span className="flex-1 font-medium">{lang.name}</span>
               {language === lang.code && (
                 <motion.span 
                   initial={{ scale: 0 }}

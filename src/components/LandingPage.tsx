@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
-import { ThemeToggle } from '@/components/ThemeToggle'
 
 interface LandingPageProps {
   onGetStarted: () => void
@@ -147,7 +146,6 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               Vietnam Travel
             </motion.h1>
             <div className="flex items-center gap-3">
-              <ThemeToggle />
               <LanguageSwitcher />
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button 

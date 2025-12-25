@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import { useAuth } from '@/hooks/use-auth'
 import { useLanguage, LanguageProvider } from '@/contexts/LanguageContext'
-import { ThemeProvider } from '@/contexts/ThemeContext'
 import { LandingPage } from '@/components/LandingPage'
 import { AuthDialog } from '@/components/AuthDialog'
 import { BrowsePage } from '@/components/BrowsePage'
 import { FavoritesPage } from '@/components/FavoritesPage'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
-import { ThemeToggle } from '@/components/ThemeToggle'
 import { Toaster } from '@/components/ui/sonner'
 import { Button } from '@/components/ui/button'
 import { Heart, User } from '@phosphor-icons/react'
@@ -60,7 +58,6 @@ function AppContent() {
               </motion.button>
               
               <div className="flex items-center gap-3">
-                <ThemeToggle />
                 <LanguageSwitcher />
                 
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -135,10 +132,8 @@ function AppContent() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <LanguageProvider>
-        <AppContent />
-      </LanguageProvider>
-    </ThemeProvider>
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   )
 }
