@@ -173,22 +173,24 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
         </DialogHeader>
 
         <Tabs defaultValue="login" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 h-auto p-0 bg-muted/30 mx-8 rounded-lg">
-            <TabsTrigger 
-              value="login" 
-              className="text-[13px] font-semibold data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg py-2.5 px-4 text-muted-foreground data-[state=active]:text-foreground transition-all duration-200"
-            >
-              Sign In
-            </TabsTrigger>
-            <TabsTrigger 
-              value="signup" 
-              className="text-[13px] font-semibold data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-lg py-2.5 px-4 text-muted-foreground data-[state=active]:text-foreground transition-all duration-200"
-            >
-              Create Account
-            </TabsTrigger>
-          </TabsList>
+          <div className="px-8">
+            <TabsList className="grid w-full grid-cols-2 h-auto p-1 bg-muted/30 rounded-lg">
+              <TabsTrigger 
+                value="login" 
+                className="text-[13px] font-semibold data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-md py-2.5 px-4 text-muted-foreground data-[state=active]:text-foreground transition-all duration-200"
+              >
+                Sign In
+              </TabsTrigger>
+              <TabsTrigger 
+                value="signup" 
+                className="text-[13px] font-semibold data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-md py-2.5 px-4 text-muted-foreground data-[state=active]:text-foreground transition-all duration-200"
+              >
+                Create Account
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
-          <TabsContent value="login" className="mt-0 px-8 pt-6 pb-6">
+          <TabsContent value="login" className="mt-0 px-8 pt-6 pb-6 animate-in fade-in slide-in-from-top-2 duration-300">
             <form onSubmit={handleLogin} className="space-y-5">
               <div className="space-y-2">
                 <Label htmlFor="login-email" className="text-[13px] font-semibold text-foreground">
@@ -303,7 +305,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
             </form>
           </TabsContent>
 
-          <TabsContent value="signup" className="mt-0 px-8 pt-6 pb-6">
+          <TabsContent value="signup" className="mt-0 px-8 pt-6 pb-6 animate-in fade-in slide-in-from-top-2 duration-300">
             <form onSubmit={handleSignup} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="signup-name" className="text-[13px] font-semibold text-foreground">
