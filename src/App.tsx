@@ -49,17 +49,17 @@ function AppContent() {
           className="sticky top-0 z-50 bg-white border-b border-border"
         >
           <div className="container mx-auto px-4 md:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-16">
+            <div className="flex items-center justify-between h-14">
               <motion.button 
                 onClick={() => setCurrentView('browse')}
-                className="text-xl font-bold text-primary hover:text-primary-hover transition-colors tracking-tight"
+                className="text-lg font-semibold text-primary hover:text-primary-hover transition-colors tracking-tight"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 {t.nav.appTitle}
               </motion.button>
               
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-2">
                 <LanguageSwitcher />
                 
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -67,26 +67,26 @@ function AppContent() {
                     variant="ghost"
                     size="sm"
                     onClick={() => setCurrentView('favorites')}
-                    className="gap-2 text-foreground hover:bg-muted rounded-xl h-10 px-4 transition-all duration-300"
+                    className="gap-1.5 text-foreground hover:bg-muted rounded-lg h-9 px-3 transition-all duration-300"
                   >
-                    <Heart size={20} weight={currentView === 'favorites' ? 'fill' : 'regular'} className={currentView === 'favorites' ? 'text-accent' : ''} />
-                    <span className="hidden sm:inline text-[15px] font-medium">{t.nav.favorites}</span>
+                    <Heart size={18} weight={currentView === 'favorites' ? 'fill' : 'regular'} className={currentView === 'favorites' ? 'text-accent' : ''} />
+                    <span className="hidden sm:inline text-sm font-medium">{t.nav.favorites}</span>
                   </Button>
                 </motion.div>
 
-                <div className="flex items-center gap-3 pl-4 border-l border-border">
-                  <div className="hidden sm:flex items-center gap-2.5">
-                    <div className="w-9 h-9 rounded-full bg-muted flex items-center justify-center ring-2 ring-primary/20">
-                      <User size={18} className="text-muted-foreground" weight="bold" />
+                <div className="flex items-center gap-2 pl-3 border-l border-border">
+                  <div className="hidden sm:flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center ring-2 ring-primary/20">
+                      <User size={16} className="text-muted-foreground" weight="bold" />
                     </div>
-                    <span className="text-[15px] font-semibold text-foreground">{user?.name}</span>
+                    <span className="text-sm font-semibold text-foreground">{user?.name}</span>
                   </div>
                   <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                     <Button 
                       onClick={logout}
                       variant="outline"
                       size="sm"
-                      className="rounded-xl h-10 px-4 text-[15px] font-medium transition-all duration-300"
+                      className="rounded-lg h-9 px-3 text-sm font-medium transition-all duration-300"
                     >
                       {t.nav.logout}
                     </Button>

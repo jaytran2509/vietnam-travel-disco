@@ -136,21 +136,21 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         className="sticky top-0 z-50 bg-white border-b border-border"
       >
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-14">
             <motion.h1 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="hero-title text-2xl text-primary tracking-tight"
+              className="text-lg font-semibold text-primary tracking-tight"
             >
               Vietnam Travel
             </motion.h1>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <LanguageSwitcher />
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Button 
                   onClick={onGetStarted} 
-                  className="font-semibold px-5 text-[15px] h-10 rounded-xl"
+                  className="font-medium px-4 text-sm h-9 rounded-lg"
                 >
                   Sign up
                 </Button>
@@ -160,7 +160,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </motion.nav>
 
-      <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary via-primary to-accent animate-gradient">
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary via-primary to-accent animate-gradient">
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-[0.08]"
           style={{ 
@@ -174,7 +174,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="hero-title text-white font-bold mb-6 text-4xl md:text-5xl lg:text-6xl xl:text-7xl max-w-5xl mx-auto leading-[1.05] tracking-tight drop-shadow-lg"
+            className="hero-title text-white font-bold mb-4 text-3xl md:text-4xl lg:text-5xl max-w-4xl mx-auto leading-tight tracking-tight drop-shadow-lg"
           >
             Discover Authentic Vietnam
           </motion.h1>
@@ -182,7 +182,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-white/95 text-lg md:text-xl mb-10 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow"
+            className="text-white/95 text-base md:text-lg mb-8 max-w-2xl mx-auto font-normal leading-relaxed drop-shadow"
           >
             Find the best restaurants, cafes, and attractions recommended by travelers
           </motion.p>
@@ -191,21 +191,21 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
-            className="max-w-3xl mx-auto bg-white rounded-2xl shadow-2xl p-2 flex items-center gap-2 border border-border"
+            className="max-w-2xl mx-auto bg-white rounded-xl shadow-2xl p-1.5 flex items-center gap-2 border border-border"
           >
-            <div className="flex-1 flex items-center gap-3 pl-4">
-              <MagnifyingGlass className="h-6 w-6 text-foreground/60 flex-shrink-0" weight="bold" />
+            <div className="flex-1 flex items-center gap-2 pl-3">
+              <MagnifyingGlass className="h-5 w-5 text-foreground/60 flex-shrink-0" weight="bold" />
               <Input
                 type="text"
                 placeholder="Where do you want to go?"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-[15px] placeholder:text-muted-foreground h-14 font-medium text-foreground bg-white"
+                className="border-0 focus-visible:ring-0 focus-visible:ring-offset-0 text-sm placeholder:text-muted-foreground h-11 font-normal text-foreground bg-white"
               />
             </div>
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button 
-                className="font-semibold px-8 h-14 rounded-xl text-[15px]"
+                className="font-medium px-6 h-11 rounded-lg text-sm"
                 onClick={onGetStarted}
               >
                 Search
@@ -217,15 +217,15 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="pt-12"
+            className="pt-10"
           >
             <motion.div
-              animate={{ y: [0, 10, 0] }}
+              animate={{ y: [0, 8, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-              className="text-white/70 text-sm font-medium flex flex-col items-center gap-2"
+              className="text-white/70 text-xs font-medium flex flex-col items-center gap-1.5"
             >
               <span>Scroll to explore</span>
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="animate-bounce">
+              <svg width="16" height="16" viewBox="0 0 20 20" fill="none" className="animate-bounce">
                 <path d="M10 15L5 10L6.5 8.5L10 12L13.5 8.5L15 10L10 15Z" fill="currentColor"/>
               </svg>
             </motion.div>
@@ -233,18 +233,18 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-background">
+      <section className="py-12 md:py-16 bg-background">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-14 tracking-tight"
+            className="text-2xl md:text-3xl font-bold text-foreground text-center mb-10 tracking-tight"
           >
             Explore by category
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {categories.map((category, index) => (
               <motion.div
                 key={category.name}
@@ -252,23 +252,23 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
+                whileHover={{ y: -6 }}
                 className="group cursor-pointer"
                 onClick={onGetStarted}
               >
-                <div className="aspect-square overflow-hidden rounded-2xl mb-5 border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-2xl hover:shadow-primary/10">
+                <div className="aspect-square overflow-hidden rounded-xl mb-3 border border-border hover:border-primary/30 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10">
                   <motion.img
                     src={category.image}
                     alt={category.name}
                     className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
                   />
                 </div>
-                <h3 className="font-semibold text-xl text-foreground mb-2 tracking-tight group-hover:text-primary transition-colors">
+                <h3 className="font-semibold text-base text-foreground mb-1.5 tracking-tight group-hover:text-primary transition-colors">
                   {category.name}
                 </h3>
-                <p className="text-muted-foreground text-[15px] leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {category.description}
                 </p>
               </motion.div>
@@ -277,18 +277,18 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-muted/50">
+      <section className="py-12 md:py-16 bg-muted/50">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground text-center mb-14 tracking-tight"
+            className="text-2xl md:text-3xl font-bold text-foreground text-center mb-10 tracking-tight"
           >
             Popular places
           </motion.h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-7">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {featuredPlaces.map((place, index) => (
               <motion.div
                 key={place.id}
@@ -296,8 +296,8 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-300 cursor-pointer group"
+                whileHover={{ y: -6 }}
+                className="bg-card border border-border rounded-xl overflow-hidden hover:border-primary/30 hover:shadow-xl hover:shadow-primary/10 transition-all duration-300 cursor-pointer group"
                 onClick={onGetStarted}
               >
                 <div className="aspect-[4/3] overflow-hidden">
@@ -305,23 +305,23 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                     src={place.image}
                     alt={place.name}
                     className="w-full h-full object-cover"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
                   />
                 </div>
-                <div className="p-5">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-sm text-muted-foreground font-medium">{place.category}</span>
+                <div className="p-4">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-xs text-muted-foreground font-medium">{place.category}</span>
                   </div>
-                  <h3 className="font-semibold text-base text-foreground mb-3 line-clamp-1 tracking-tight group-hover:text-primary transition-colors">
+                  <h3 className="font-semibold text-sm text-foreground mb-2 line-clamp-1 tracking-tight group-hover:text-primary transition-colors">
                     {place.name}
                   </h3>
-                  <div className="flex items-center gap-1.5 text-sm mb-3">
-                    <Star weight="fill" className="h-4 w-4 text-accent" />
+                  <div className="flex items-center gap-1 text-xs mb-2">
+                    <Star weight="fill" className="h-3.5 w-3.5 text-accent" />
                     <span className="font-semibold text-foreground">{place.rating}</span>
                     <span className="text-muted-foreground">({place.reviews})</span>
                   </div>
-                  <div className="text-[15px] text-muted-foreground">
+                  <div className="text-sm text-muted-foreground">
                     <span className="font-semibold text-foreground">{place.price}</span> · {place.cuisine}
                   </div>
                 </div>
@@ -333,12 +333,12 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="text-center mt-12"
+            className="text-center mt-8"
           >
             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
               <Button 
                 variant="outline"
-                className="font-semibold px-10 h-12 rounded-xl text-[15px] hover:border-primary hover:text-primary transition-all duration-300"
+                className="font-medium px-8 h-10 rounded-lg text-sm hover:border-primary hover:text-primary transition-all duration-300"
                 onClick={onGetStarted}
               >
                 Show all places
@@ -348,21 +348,21 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-12 md:py-14 bg-white">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12 tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-8 tracking-tight">
             How it works
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {steps.map((step) => (
               <div key={step.number} className="text-center">
-                <div className="w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xl font-bold mx-auto mb-3">
                   {step.number}
                 </div>
-                <h3 className="text-lg font-semibold text-foreground mb-3 tracking-tight">
+                <h3 className="text-base font-semibold text-foreground mb-2 tracking-tight">
                   {step.title}
                 </h3>
-                <p className="text-muted-foreground text-[15px] leading-relaxed">
+                <p className="text-muted-foreground text-sm leading-relaxed">
                   {step.description}
                 </p>
               </div>
@@ -371,15 +371,15 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-12 md:py-16 bg-muted">
+      <section className="py-10 md:py-12 bg-muted">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {stats.map((stat) => (
-              <div key={stat.label} className="bg-white rounded-xl p-8 text-center border border-border">
-                <div className="text-4xl md:text-[44px] font-bold text-foreground mb-2 tracking-tight">
+              <div key={stat.label} className="bg-white rounded-lg p-6 text-center border border-border">
+                <div className="text-3xl md:text-4xl font-bold text-foreground mb-1.5 tracking-tight">
                   {stat.value}
                 </div>
-                <div className="text-muted-foreground text-[15px] font-medium">
+                <div className="text-muted-foreground text-sm font-medium">
                   {stat.label}
                 </div>
               </div>
@@ -388,36 +388,36 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-white">
+      <section className="py-12 md:py-14 bg-white">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center mb-12 tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-8 tracking-tight">
             What travelers say
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index}
-                className="bg-white border border-border rounded-xl p-6"
+                className="bg-white border border-border rounded-lg p-5"
               >
-                <div className="flex items-center gap-1 mb-4">
+                <div className="flex items-center gap-0.5 mb-3">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} weight="fill" className="h-4 w-4 text-primary" />
+                    <Star key={i} weight="fill" className="h-3.5 w-3.5 text-primary" />
                   ))}
                 </div>
-                <p className="text-foreground text-[15px] mb-5 leading-relaxed">
+                <p className="text-foreground text-sm mb-4 leading-relaxed">
                   "{testimonial.text}"
                 </p>
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2.5">
                   <img
                     src={testimonial.avatar}
                     alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover"
+                    className="w-10 h-10 rounded-full object-cover"
                   />
                   <div>
-                    <div className="font-semibold text-[15px] text-foreground">
+                    <div className="font-semibold text-sm text-foreground">
                       {testimonial.name}
                     </div>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-xs text-muted-foreground">
                       {testimonial.flag} {testimonial.country}
                     </div>
                   </div>
@@ -428,62 +428,62 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
         </div>
       </section>
 
-      <section className="py-16 md:py-20 bg-primary/5">
+      <section className="py-12 md:py-14 bg-primary/5">
         <div className="container mx-auto px-4 md:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-3 tracking-tight">
             Start exploring Vietnam today
           </h2>
-          <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-muted-foreground text-base mb-6 max-w-2xl mx-auto leading-relaxed">
             Join thousands of travelers discovering amazing places
           </p>
           <Button 
             onClick={onGetStarted}
-            className="font-semibold px-10 h-12 text-[15px] rounded-xl"
+            className="font-medium px-8 h-10 text-sm rounded-lg"
           >
-            Get Started - It's Free <ArrowRight className="ml-2 h-5 w-5" weight="bold" />
+            Get Started - It's Free <ArrowRight className="ml-1.5 h-4 w-4" weight="bold" />
           </Button>
-          <p className="text-muted-foreground text-sm mt-4 font-medium">
+          <p className="text-muted-foreground text-xs mt-3 font-medium">
             No credit card required
           </p>
         </div>
       </section>
 
-      <footer className="bg-white border-t border-border py-12">
+      <footer className="bg-white border-t border-border py-10">
         <div className="container mx-auto px-4 md:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
             <div>
-              <h3 className="font-bold text-foreground mb-4 text-base tracking-tight">Vietnam Travel</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
+              <h3 className="font-bold text-foreground mb-3 text-sm tracking-tight">Vietnam Travel</h3>
+              <p className="text-muted-foreground text-xs leading-relaxed">
                 Discover authentic Vietnam
               </p>
             </div>
             <div>
-              <h4 className="font-semibold text-foreground mb-3 text-sm">Explore</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <h4 className="font-semibold text-foreground mb-2.5 text-xs">Explore</h4>
+              <ul className="space-y-1.5 text-xs text-muted-foreground">
                 <li><button onClick={onGetStarted} className="hover:text-foreground transition-colors">Browse</button></li>
                 <li><button onClick={onGetStarted} className="hover:text-foreground transition-colors">Map</button></li>
                 <li><button onClick={onGetStarted} className="hover:text-foreground transition-colors">Favorites</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-foreground mb-3 text-sm">Company</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <h4 className="font-semibold text-foreground mb-2.5 text-xs">Company</h4>
+              <ul className="space-y-1.5 text-xs text-muted-foreground">
                 <li><button className="hover:text-foreground transition-colors">About</button></li>
                 <li><button className="hover:text-foreground transition-colors">Contact</button></li>
                 <li><button className="hover:text-foreground transition-colors">Blog</button></li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold text-foreground mb-3 text-sm">Connect</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
+              <h4 className="font-semibold text-foreground mb-2.5 text-xs">Connect</h4>
+              <ul className="space-y-1.5 text-xs text-muted-foreground">
                 <li><button className="hover:text-foreground transition-colors">Facebook</button></li>
                 <li><button className="hover:text-foreground transition-colors">Instagram</button></li>
                 <li><button className="hover:text-foreground transition-colors">Twitter</button></li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-border pt-8 text-center">
-            <p className="text-muted-foreground text-sm">
+          <div className="border-t border-border pt-6 text-center">
+            <p className="text-muted-foreground text-xs">
               © 2024 Vietnam Travel. All rights reserved.
             </p>
           </div>

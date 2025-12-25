@@ -36,7 +36,7 @@ export function HeroSection({
   ]
 
   return (
-    <div className="relative min-h-[70vh] md:min-h-[85vh] flex items-center justify-center overflow-hidden">
+    <div className="relative min-h-[60vh] md:min-h-[70vh] flex items-center justify-center overflow-hidden">
       <video
         autoPlay
         muted
@@ -56,10 +56,10 @@ export function HeroSection({
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 w-full max-w-5xl px-4 text-center space-y-8 py-12"
+        className="relative z-10 w-full max-w-4xl px-4 text-center space-y-6 py-10"
       >
-        <div className="space-y-6">
-          <h1 className="hero-title text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.05] tracking-tight drop-shadow-2xl">
+        <div className="space-y-4">
+          <h1 className="hero-title text-3xl sm:text-4xl md:text-5xl leading-tight tracking-tight drop-shadow-2xl">
             <span className="text-gradient-animated inline-block">
               {t.hero.title.split(' ').map((word, i) => (
                 <motion.span
@@ -67,7 +67,7 @@ export function HeroSection({
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 * i }}
-                  className="inline-block mr-3"
+                  className="inline-block mr-2"
                 >
                   {word}
                 </motion.span>
@@ -78,7 +78,7 @@ export function HeroSection({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-base md:text-lg text-white/95 max-w-2xl mx-auto font-medium leading-relaxed drop-shadow-lg"
+            className="text-sm md:text-base text-white/95 max-w-xl mx-auto font-normal leading-relaxed drop-shadow-lg"
           >
             {t.hero.subtitle}
           </motion.p>
@@ -88,21 +88,21 @@ export function HeroSection({
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="max-w-3xl mx-auto space-y-4"
+          className="max-w-2xl mx-auto space-y-3"
         >
-          <div className="relative group bg-white rounded-2xl p-2 shadow-2xl border border-border">
+          <div className="relative group bg-white rounded-xl p-1.5 shadow-2xl border border-border">
             <div className="relative">
-              <MagnifyingGlass className="absolute left-5 top-1/2 -translate-y-1/2 h-5 w-5 text-foreground/60 transition-all duration-300 group-focus-within:text-primary group-focus-within:scale-110 z-10" weight="bold" />
+              <MagnifyingGlass className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/60 transition-all duration-300 group-focus-within:text-primary group-focus-within:scale-110 z-10" weight="bold" />
               <Input
                 placeholder={t.hero.searchPlaceholder}
                 value={searchQuery}
                 onChange={(e) => onSearchChange(e.target.value)}
-                className="pl-14 pr-6 h-14 text-[15px] bg-white border-0 shadow-none transition-all duration-300 focus-visible:ring-0 rounded-xl font-medium text-foreground placeholder:text-muted-foreground"
+                className="pl-11 pr-4 h-11 text-sm bg-white border-0 shadow-none transition-all duration-300 focus-visible:ring-0 rounded-lg font-normal text-foreground placeholder:text-muted-foreground"
               />
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2">
+          <div className="flex flex-wrap items-center justify-center gap-1.5">
             {categories.map((category) => {
               const isSelected = selectedCategories.includes(category.value)
               return (
@@ -114,14 +114,14 @@ export function HeroSection({
                   <Badge
                     variant={isSelected ? 'default' : 'secondary'}
                     className={cn(
-                      'cursor-pointer px-4 py-2 text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-xl backdrop-blur-sm',
+                      'cursor-pointer px-3 py-1.5 text-xs font-semibold transition-all duration-300 shadow-md hover:shadow-lg backdrop-blur-sm',
                       isSelected 
                         ? 'bg-white text-primary border-0 hover:bg-white/95' 
                         : 'bg-white/90 text-text-body border-0 hover:bg-white hover:text-text-dark'
                     )}
                     onClick={() => onCategoryClick(category.value)}
                   >
-                    <span className="mr-2 text-base">{category.emoji}</span>
+                    <span className="mr-1.5 text-sm">{category.emoji}</span>
                     {category.label}
                   </Badge>
                 </motion.div>
@@ -134,23 +134,23 @@ export function HeroSection({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.9 }}
-          className="flex flex-wrap items-center justify-center gap-4 md:gap-6 pt-2"
+          className="flex flex-wrap items-center justify-center gap-3 pt-1"
         >
           {stats.map((stat, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: [0, -10, 0] }}
+              animate={{ opacity: 1, y: [0, -8, 0] }}
               transition={{ 
                 opacity: { duration: 0.5, delay: 1 + index * 0.1 },
                 y: { duration: 3, delay: 1 + index * 0.1, repeat: Infinity, ease: "easeInOut" }
               }}
-              className="flex items-center gap-2.5 bg-white/95 px-4 py-2.5 rounded-full shadow-lg border border-border"
+              className="flex items-center gap-2 bg-white/95 px-3 py-2 rounded-full shadow-md border border-border"
             >
-              <stat.icon className="h-4 w-4 text-primary flex-shrink-0" weight="bold" />
+              <stat.icon className="h-3.5 w-3.5 text-primary flex-shrink-0" weight="bold" />
               <div className="text-left">
-                <div className="text-foreground font-bold text-sm leading-none mb-0.5">{stat.value}</div>
-                <div className="text-muted-foreground text-xs font-medium leading-none">{stat.label}</div>
+                <div className="text-foreground font-bold text-xs leading-none mb-0.5">{stat.value}</div>
+                <div className="text-muted-foreground text-[10px] font-medium leading-none">{stat.label}</div>
               </div>
             </motion.div>
           ))}
@@ -160,15 +160,15 @@ export function HeroSection({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.3 }}
-          className="pt-6"
+          className="pt-4"
         >
           <motion.div
-            animate={{ y: [0, 8, 0] }}
+            animate={{ y: [0, 6, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="text-white/80 text-sm font-medium flex flex-col items-center gap-2"
+            className="text-white/80 text-xs font-medium flex flex-col items-center gap-1.5"
           >
             <span>Scroll to explore</span>
-            <CaretDown weight="bold" className="h-5 w-5" />
+            <CaretDown weight="bold" className="h-4 w-4" />
           </motion.div>
         </motion.div>
       </motion.div>
