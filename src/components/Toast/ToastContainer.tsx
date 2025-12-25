@@ -5,17 +5,19 @@ import { ToastItem } from './ToastItem'
 export function ToastContainer() {
   const { toasts, removeToast } = useToast()
 
+  const visibleToasts = toasts.slice(-4)
+
   return (
     <>
       <div 
-        className="fixed z-[9999] pointer-events-none top-20 right-5 hidden md:block"
-        style={{ maxWidth: '420px' }}
+        className="fixed z-[9999] pointer-events-none hidden md:block"
+        style={{ top: '24px', right: '24px' }}
         aria-live="polite"
         aria-label="Notifications"
       >
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           <AnimatePresence mode="popLayout">
-            {toasts.map((toast, index) => (
+            {visibleToasts.map((toast, index) => (
               <div key={toast.id} className="pointer-events-auto">
                 <ToastItem 
                   toast={toast} 
@@ -29,14 +31,15 @@ export function ToastContainer() {
       </div>
 
       <div 
-        className="fixed z-[9999] pointer-events-none top-20 left-4 right-4 md:hidden"
+        className="fixed z-[9999] pointer-events-none md:hidden"
+        style={{ top: '24px', left: '16px', right: '16px' }}
         aria-live="polite"
         aria-label="Notifications"
       >
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3">
           <AnimatePresence mode="popLayout">
-            {toasts.map((toast, index) => (
-              <div key={toast.id} className="pointer-events-auto">
+            {visibleToasts.map((toast, index) => (
+              <div key={toast.id} className="pointer-events-auto w-full">
                 <ToastItem 
                   toast={toast} 
                   onRemove={removeToast}
