@@ -14,26 +14,30 @@ const toastConfig = {
   success: {
     icon: CheckCircle,
     accentColor: 'rgb(34 197 94)',
-    bgColor: 'rgb(220 252 231)',
-    iconBg: 'rgb(187 247 208)',
+    accentLight: 'rgb(220 252 231)',
+    iconBg: 'rgb(220 252 231)',
+    iconColor: 'rgb(22 163 74)',
   },
   error: {
     icon: XCircle,
     accentColor: 'rgb(239 68 68)',
-    bgColor: 'rgb(254 226 226)',
-    iconBg: 'rgb(254 202 202)',
+    accentLight: 'rgb(254 226 226)',
+    iconBg: 'rgb(254 226 226)',
+    iconColor: 'rgb(220 38 38)',
   },
   warning: {
     icon: Warning,
     accentColor: 'rgb(245 158 11)',
-    bgColor: 'rgb(254 243 199)',
-    iconBg: 'rgb(253 230 138)',
+    accentLight: 'rgb(254 243 199)',
+    iconBg: 'rgb(254 243 199)',
+    iconColor: 'rgb(217 119 6)',
   },
   info: {
     icon: Info,
     accentColor: 'rgb(59 130 246)',
-    bgColor: 'rgb(219 234 254)',
-    iconBg: 'rgb(191 219 254)',
+    accentLight: 'rgb(219 234 254)',
+    iconBg: 'rgb(219 234 254)',
+    iconColor: 'rgb(37 99 235)',
   },
 }
 
@@ -107,14 +111,15 @@ export function ToastItem({ toast, onRemove, index }: ToastItemProps) {
 
   return (
     <motion.div
+      data-toast-item
       layout
-      initial={{ x: '100%', opacity: 0 }}
+      initial={{ x: 400, opacity: 0 }}
       animate={controls}
-      exit={{ x: '100%', opacity: 0, scale: 0.95 }}
+      exit={{ x: 400, opacity: 0, scale: 0.95 }}
       transition={{ 
         type: 'spring',
-        stiffness: 400,
-        damping: 30,
+        damping: 25,
+        stiffness: 300,
         opacity: { duration: 0.2 }
       }}
       drag="x"
@@ -126,12 +131,13 @@ export function ToastItem({ toast, onRemove, index }: ToastItemProps) {
       onTouchStart={handleMouseEnter}
       onTouchEnd={handleMouseLeave}
       className={cn(
-        "relative w-full bg-white rounded-xl shadow-lg overflow-hidden",
-        "border border-gray-100 backdrop-blur-sm",
-        isPaused && "shadow-xl"
+        "relative w-full rounded-2xl overflow-hidden",
+        "bg-white/90 backdrop-blur-lg",
+        "shadow-2xl transition-all duration-200",
+        isPaused && "scale-[1.02] shadow-[0_20px_60px_-10px_rgba(0,0,0,0.25)]"
       )}
       style={{
-        maxWidth: '400px',
+        maxWidth: '420px',
         borderLeftWidth: '4px',
         borderLeftColor: config.accentColor,
       }}
@@ -139,40 +145,40 @@ export function ToastItem({ toast, onRemove, index }: ToastItemProps) {
       aria-live={toast.type === 'error' || toast.type === 'warning' ? 'assertive' : 'polite'}
       aria-atomic="true"
     >
-      <div className="flex items-start gap-3 p-4">
+      <div className="flex items-start gap-3 p-3.5">
         <div 
           className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center"
           style={{ backgroundColor: config.iconBg }}
         >
-          <Icon size={24} weight="fill" style={{ color: config.accentColor }} />
+          <Icon size={20} weight="fill" style={{ color: config.iconColor }} />
         </div>
 
         <div className="flex-1 min-w-0 pt-0.5">
-          <h3 className="text-sm font-semibold text-gray-900 leading-tight">
+          <h3 className="text-sm font-bold text-gray-900 leading-tight">
             {toast.title}
           </h3>
           {toast.description && (
-            <p className="mt-1 text-xs font-normal text-gray-600 leading-snug">
+            <p className="mt-1 text-xs text-gray-600 leading-relaxed">
               {toast.description}
             </p>
           )}
 
           {toast.actions && toast.actions.length > 0 && (
-            <div className="flex items-center gap-2 mt-3">
+            <div className="flex items-center gap-2 mt-2.5">
               {toast.actions.map((action, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleActionClick(action)}
                   className={cn(
-                    "px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200",
+                    "px-2.5 py-1.5 rounded-lg text-xs font-medium transition-all duration-200",
                     "focus:outline-none focus:ring-2 focus:ring-offset-1",
                     action.variant === 'primary' 
                       ? "text-white hover:opacity-90"
-                      : "hover:opacity-80"
+                      : "hover:opacity-90"
                   )}
                   style={{
-                    backgroundColor: action.variant === 'primary' ? config.accentColor : config.bgColor,
-                    color: action.variant === 'primary' ? 'white' : config.accentColor,
+                    backgroundColor: action.variant === 'primary' ? config.accentColor : config.accentLight,
+                    color: action.variant === 'primary' ? 'white' : config.iconColor,
                   }}
                 >
                   {action.label}
@@ -185,21 +191,21 @@ export function ToastItem({ toast, onRemove, index }: ToastItemProps) {
         <button
           onClick={() => onRemove(toast.id)}
           className={cn(
-            "flex-shrink-0 rounded-full flex items-center justify-center",
+            "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center",
             "transition-colors duration-200",
             "hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300"
           )}
           aria-label="Close notification"
-          style={{ minWidth: '44px', minHeight: '44px', width: '44px', height: '44px', margin: '-9px' }}
         >
-          <X size={16} weight="bold" className="text-gray-500" />
+          <X size={14} weight="bold" className="text-gray-500 hover:text-gray-700" />
         </button>
       </div>
 
       {duration !== Infinity && (
         <motion.div
-          className="absolute bottom-0 left-0 h-0.5"
+          className="absolute bottom-0 left-0"
           style={{ 
+            height: '2px',
             backgroundColor: config.accentColor,
             width: `${progress}%`,
             transition: isPaused ? 'none' : 'width 16ms linear'
