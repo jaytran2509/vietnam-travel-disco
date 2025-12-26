@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useToast } from '@/contexts/ToastContext'
-import { generateId } from '@/lib/helpers'
+import { useAuthLogin, useAuthRegister } from '@/lib/queries'
 import { Eye, EyeSlash, CheckCircle, XCircle, Spinner } from '@phosphor-icons/react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import type { User } from '@/lib/types'
@@ -25,7 +25,6 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
   const [rememberMe, setRememberMe] = useState(false)
   const [showLoginPassword, setShowLoginPassword] = useState(false)
   const [loginErrors, setLoginErrors] = useState<{ email?: string; password?: string }>({})
-  const [isLoggingIn, setIsLoggingIn] = useState(false)
 
   const [signupName, setSignupName] = useState('')
   const [signupEmail, setSignupEmail] = useState('')
@@ -34,7 +33,10 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
   const [showSignupPassword, setShowSignupPassword] = useState(false)
   const [showSignupConfirmPassword, setShowSignupConfirmPassword] = useState(false)
   const [signupErrors, setSignupErrors] = useState<{ name?: string; email?: string; password?: string; confirmPassword?: string }>({})
-  const [isSigningUp, setIsSigningUp] = useState(false)
+  
+  // API mutations
+  const loginMutation = useAuthLogin()
+  const registerMutation = useAuthRegister()
 
   const validateEmail = (email: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -98,28 +100,27 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
       return
     }
 
-    setIsLoggingIn(true)
+    try {
+      const loginResponse = await loginMutation.mutateAsync({
+        email: loginEmail,
+        password: loginPassword,
+      })
 
-    await new Promise(resolve => setTimeout(resolve, 800))
+      onLogin(loginResponse.user, rememberMe)
+      toast.success(t.auth.loginSuccess)
 
-    const user: User = {
-      id: generateId(),
-      email: loginEmail,
-      name: loginEmail.split('@')[0],
-      preferences: {},
-      createdAt: new Date().toISOString(),
+      onOpenChange(false)
+
+      // Clear form
+      setLoginEmail('')
+      setLoginPassword('')
+      setRememberMe(false)
+      setLoginErrors({})
+    } catch (error) {
+      // Display API error message
+      const message = error instanceof Error ? error.message : 'Login failed'
+      setLoginErrors({ password: message })
     }
-
-    onLogin(user, rememberMe)
-    toast.success(t.auth.loginSuccess)
-    
-    setIsLoggingIn(false)
-    onOpenChange(false)
-
-    setLoginEmail('')
-    setLoginPassword('')
-    setRememberMe(false)
-    setLoginErrors({})
   }
 
   const handleSignup = async (e: React.FormEvent) => {
@@ -129,29 +130,29 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
       return
     }
 
-    setIsSigningUp(true)
+    try {
+      const registerResponse = await registerMutation.mutateAsync({
+        name: signupName,
+        email: signupEmail,
+        password: signupPassword,
+      })
 
-    await new Promise(resolve => setTimeout(resolve, 1000))
+      onLogin(registerResponse.user, false)
+      toast.success(t.auth.signupSuccess)
 
-    const user: User = {
-      id: generateId(),
-      email: signupEmail,
-      name: signupName,
-      preferences: {},
-      createdAt: new Date().toISOString(),
+      onOpenChange(false)
+
+      // Clear form
+      setSignupName('')
+      setSignupEmail('')
+      setSignupPassword('')
+      setSignupConfirmPassword('')
+      setSignupErrors({})
+    } catch (error) {
+      // Display API error message
+      const message = error instanceof Error ? error.message : 'Registration failed'
+      setSignupErrors({ email: message })
     }
-
-    onLogin(user, false)
-    toast.success(t.auth.signupSuccess)
-    
-    setIsSigningUp(false)
-    onOpenChange(false)
-
-    setSignupName('')
-    setSignupEmail('')
-    setSignupPassword('')
-    setSignupConfirmPassword('')
-    setSignupErrors({})
   }
 
   const getPasswordStrength = (password: string) => {
@@ -289,10 +290,10 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
 
               <Button 
                 type="submit" 
-                disabled={isLoggingIn}
+                disabled={loginMutation.isPending}
                 className="w-full h-11 text-[15px] bg-primary text-white hover:bg-primary-hover font-semibold rounded-xl transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {isLoggingIn ? (
+                {loginMutation.isPending ? (
                   <>
                     <Spinner className="w-5 h-5 mr-2 animate-spin" />
                     Signing in...
@@ -464,10 +465,10 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
 
               <Button 
                 type="submit" 
-                disabled={isSigningUp}
+                disabled={registerMutation.isPending}
                 className="w-full h-11 text-[15px] bg-primary text-white hover:bg-primary-hover font-semibold rounded-xl transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-70 disabled:cursor-not-allowed mt-6"
               >
-                {isSigningUp ? (
+                {registerMutation.isPending ? (
                   <>
                     <Spinner className="w-5 h-5 mr-2 animate-spin" />
                     Creating account...

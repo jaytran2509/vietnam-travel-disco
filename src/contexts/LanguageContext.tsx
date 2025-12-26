@@ -1,4 +1,4 @@
-import React, { createContext, useContext, ReactNode } from 'react'
+import { createContext, useContext, ReactNode } from 'react'
 import { useKV } from '@github/spark/hooks'
 import { translations, type Language, type Translations } from '@/lib/i18n'
 

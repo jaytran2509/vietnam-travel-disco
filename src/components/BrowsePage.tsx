@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { VenueCard } from '@/components/VenueCard'
 import { FilterPanel } from '@/components/FilterPanel'
-import { venues } from '@/lib/venues-data'
+import { usePlaces } from '@/lib/queries'
+import { placeToVenue } from '@/lib/types'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useToast } from '@/contexts/ToastContext'
 import type { SearchFilters, SortOption, Venue } from '@/lib/types'
@@ -34,6 +35,19 @@ export function BrowsePage({ isAuthenticated, onLoginRequired }: BrowsePageProps
     open24Hours: false,
     dietary: [],
   })
+  
+  // Fetch places from API
+  const { data: placesData, isLoading, error } = usePlaces({
+    search: debouncedQuery,
+    // We'll do filtering and sorting client-side for now for better UX
+    // Later can move to server-side if data set grows large
+  })
+  
+  // Convert places to venues for component compatibility
+  const apiVenues: Venue[] = useMemo(() => {
+    if (!placesData?.data) return []
+    return placesData.data.map(placeToVenue)
+  }, [placesData])
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -43,8 +57,10 @@ export function BrowsePage({ isAuthenticated, onLoginRequired }: BrowsePageProps
   }, [searchQuery])
 
   const filteredVenues = useMemo(() => {
-    let results = venues
+    // Use API data if available, fallback to empty array while loading
+    let results = apiVenues
 
+    // Client-side filtering for better UX
     if (debouncedQuery) {
       const query = debouncedQuery.toLowerCase()
       results = results.filter(venue =>
@@ -98,7 +114,7 @@ export function BrowsePage({ isAuthenticated, onLoginRequired }: BrowsePageProps
     }
 
     return results
-  }, [debouncedQuery, filters, sortBy])
+  }, [apiVenues, debouncedQuery, filters, sortBy])
 
   const activeFilterCount = useMemo(() => {
     let count = 0
@@ -229,7 +245,25 @@ export function BrowsePage({ isAuthenticated, onLoginRequired }: BrowsePageProps
               </select>
             </div>
 
-            {filteredVenues.length === 0 ? (
+            {error ? (
+              <div className="text-center py-16">
+                <div className="mb-4 text-5xl opacity-20">⚠️</div>
+                <h3 className="text-xl font-semibold text-text-dark mb-2">Error loading places</h3>
+                <p className="text-sm text-text-body mb-6 max-w-md mx-auto">
+                  {error instanceof Error ? error.message : 'Failed to load places'}
+                </p>
+              </div>
+            ) : isLoading ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-8">
+                {[...Array(8)].map((_, i) => (
+                  <div key={i} className="animate-pulse">
+                    <div className="bg-gray-200 rounded-xl aspect-[4/3] mb-3"></div>
+                    <div className="h-5 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-2/3"></div>
+                  </div>
+                ))}
+              </div>
+            ) : filteredVenues.length === 0 ? (
               <div className="text-center py-16">
                 <div className="mb-4 text-5xl opacity-20">🔍</div>
                 <h3 className="text-xl font-semibold text-text-dark mb-2">{t.results.noResults}</h3>

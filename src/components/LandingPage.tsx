@@ -1,8 +1,9 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { MagnifyingGlass, Star, ArrowRight } from '@phosphor-icons/react'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useFeaturedPlaces } from '@/lib/queries'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { LanguageSwitcher } from '@/components/LanguageSwitcher'
 
@@ -31,49 +32,24 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
       image: 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=600&h=600&fit=crop'
     }
   ]
-
-  const featuredPlaces = [
-    {
-      id: '1',
-      name: 'Phở Hà Nội',
-      category: 'Restaurant',
-      rating: 4.8,
-      reviews: 234,
-      price: '$$',
-      cuisine: 'Vietnamese',
-      image: 'https://images.unsplash.com/photo-1591814468924-caf88d1232e1?w=400&h=300&fit=crop'
-    },
-    {
-      id: '2',
-      name: 'Bánh Mì Huỳnh Hoa',
-      category: 'Restaurant',
-      rating: 4.9,
-      reviews: 567,
-      price: '$',
-      cuisine: 'Street Food',
-      image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=400&h=300&fit=crop'
-    },
-    {
-      id: '3',
-      name: 'Cộng Cà Phê',
-      category: 'Cafe',
-      rating: 4.7,
-      reviews: 445,
-      price: '$',
-      cuisine: 'Vietnamese Coffee',
-      image: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&h=300&fit=crop'
-    },
-    {
-      id: '4',
-      name: 'Ben Thanh Market',
-      category: 'Attraction',
-      rating: 4.5,
-      reviews: 2345,
-      price: 'Free',
-      cuisine: 'Shopping',
-      image: 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=400&h=300&fit=crop'
-    }
-  ]
+  
+  // Fetch featured places from API
+  const { data: featuredPlacesData, isLoading: loadingPlaces } = useFeaturedPlaces()
+  
+  // Convert API places to display format
+  const featuredPlaces = useMemo(() => {
+    if (!featuredPlacesData) return []
+    return featuredPlacesData.slice(0, 4).map(place => ({
+      id: place._id,
+      name: place.name,
+      category: place.category.charAt(0).toUpperCase() + place.category.slice(1),
+      rating: place.rating,
+      reviews: place.reviewCount,
+      price: place.priceLevel,
+      cuisine: place.cuisineType || place.category,
+      image: place.coverImage || place.images[0]
+    }))
+  }, [featuredPlacesData])
 
   const steps = [
     {
@@ -289,7 +265,19 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
             Popular places
           </motion.h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {featuredPlaces.map((place, index) => (
+            {loadingPlaces ? (
+              [...Array(4)].map((_, i) => (
+                <div key={i} className="animate-pulse bg-card border border-border rounded-xl overflow-hidden">
+                  <div className="aspect-[4/3] bg-gray-200"></div>
+                  <div className="p-4">
+                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-4 bg-gray-200 rounded w-2/3 mb-2"></div>
+                    <div className="h-3 bg-gray-200 rounded w-1/2"></div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              featuredPlaces.map((place, index) => (
               <motion.div
                 key={place.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -326,7 +314,8 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
                   </div>
                 </div>
               </motion.div>
-            ))}
+              ))
+            )}
           </div>
           <motion.div 
             initial={{ opacity: 0 }}
