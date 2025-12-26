@@ -82,6 +82,27 @@ export interface Translations {
     switchToLogin: string
     loginSuccess: string
     signupSuccess: string
+    subtitle: string
+    signIn: string
+    createAccount: string
+    forgotPassword: string
+    orContinueWith: string
+    passwordStrength: string
+    weak: string
+    good: string
+    strong: string
+    socialLoginComingSoon: string
+    passwordRecoveryComingSoon: string
+  }
+  validation: {
+    emailRequired: string
+    emailInvalid: string
+    passwordRequired: string
+    passwordMinLength: string
+    nameRequired: string
+    nameMinLength: string
+    confirmPasswordRequired: string
+    passwordsDoNotMatch: string
   }
   common: {
     loading: string
@@ -173,6 +194,27 @@ export const translations: Record<Language, Translations> = {
       switchToLogin: 'Have an account? Login',
       loginSuccess: 'Welcome back!',
       signupSuccess: 'Account created successfully!',
+      subtitle: 'Sign in to continue your journey',
+      signIn: 'Sign In',
+      createAccount: 'Create Account',
+      forgotPassword: 'Forgot password?',
+      orContinueWith: 'Or continue with',
+      passwordStrength: 'Password strength',
+      weak: 'Weak',
+      good: 'Good',
+      strong: 'Strong',
+      socialLoginComingSoon: 'Social login coming soon!',
+      passwordRecoveryComingSoon: 'Password recovery coming soon!',
+    },
+    validation: {
+      emailRequired: 'Email is required',
+      emailInvalid: 'Please enter a valid email',
+      passwordRequired: 'Password is required',
+      passwordMinLength: 'Password must be at least 6 characters',
+      nameRequired: 'Name is required',
+      nameMinLength: 'Name must be at least 2 characters',
+      confirmPasswordRequired: 'Please confirm your password',
+      passwordsDoNotMatch: 'Passwords do not match',
     },
     common: {
       loading: 'Loading...',
@@ -262,6 +304,27 @@ export const translations: Record<Language, Translations> = {
       switchToLogin: 'Đã có tài khoản? Đăng nhập',
       loginSuccess: 'Chào mừng bạn trở lại!',
       signupSuccess: 'Tạo tài khoản thành công!',
+      subtitle: 'Đăng nhập để tiếp tục hành trình của bạn',
+      signIn: 'Đăng Nhập',
+      createAccount: 'Tạo Tài Khoản',
+      forgotPassword: 'Quên mật khẩu?',
+      orContinueWith: 'Hoặc tiếp tục với',
+      passwordStrength: 'Độ mạnh mật khẩu',
+      weak: 'Yếu',
+      good: 'Tốt',
+      strong: 'Mạnh',
+      socialLoginComingSoon: 'Đăng nhập mạng xã hội sắp ra mắt!',
+      passwordRecoveryComingSoon: 'Khôi phục mật khẩu sắp ra mắt!',
+    },
+    validation: {
+      emailRequired: 'Vui lòng nhập email',
+      emailInvalid: 'Vui lòng nhập email hợp lệ',
+      passwordRequired: 'Vui lòng nhập mật khẩu',
+      passwordMinLength: 'Mật khẩu phải có ít nhất 6 ký tự',
+      nameRequired: 'Vui lòng nhập tên',
+      nameMinLength: 'Tên phải có ít nhất 2 ký tự',
+      confirmPasswordRequired: 'Vui lòng xác nhận mật khẩu',
+      passwordsDoNotMatch: 'Mật khẩu không khớp',
     },
     common: {
       loading: 'Đang tải...',
@@ -351,6 +414,27 @@ export const translations: Record<Language, Translations> = {
       switchToLogin: '계정이 있으신가요? 로그인',
       loginSuccess: '환영합니다!',
       signupSuccess: '계정이 성공적으로 생성되었습니다!',
+      subtitle: '계속하려면 로그인하세요',
+      signIn: '로그인',
+      createAccount: '계정 생성',
+      forgotPassword: '비밀번호를 잊으셨나요?',
+      orContinueWith: '또는 다음으로 계속',
+      passwordStrength: '비밀번호 강도',
+      weak: '약함',
+      good: '좋음',
+      strong: '강함',
+      socialLoginComingSoon: '소셜 로그인은 곧 지원됩니다!',
+      passwordRecoveryComingSoon: '비밀번호 복구는 곧 지원됩니다!',
+    },
+    validation: {
+      emailRequired: '이메일을 입력해주세요',
+      emailInvalid: '유효한 이메일을 입력해주세요',
+      passwordRequired: '비밀번호를 입력해주세요',
+      passwordMinLength: '비밀번호는 최소 6자 이상이어야 합니다',
+      nameRequired: '이름을 입력해주세요',
+      nameMinLength: '이름은 최소 2자 이상이어야 합니다',
+      confirmPasswordRequired: '비밀번호를 확인해주세요',
+      passwordsDoNotMatch: '비밀번호가 일치하지 않습니다',
     },
     common: {
       loading: '로딩 중...',
@@ -440,6 +524,27 @@ export const translations: Record<Language, Translations> = {
       switchToLogin: 'アカウントをお持ちの方はログイン',
       loginSuccess: 'お帰りなさい！',
       signupSuccess: 'アカウントが正常に作成されました！',
+      subtitle: '続けるにはログインしてください',
+      signIn: 'ログイン',
+      createAccount: 'アカウント作成',
+      forgotPassword: 'パスワードをお忘れですか？',
+      orContinueWith: 'または次で続ける',
+      passwordStrength: 'パスワードの強度',
+      weak: '弱い',
+      good: '良い',
+      strong: '強い',
+      socialLoginComingSoon: 'ソーシャルログインは間もなく公開されます！',
+      passwordRecoveryComingSoon: 'パスワードの復元は間もなく公開されます！',
+    },
+    validation: {
+      emailRequired: 'メールアドレスを入力してください',
+      emailInvalid: '有効なメールアドレスを入力してください',
+      passwordRequired: 'パスワードを入力してください',
+      passwordMinLength: 'パスワードは6文字以上である必要があります',
+      nameRequired: '名前を入力してください',
+      nameMinLength: '名前は2文字以上である必要があります',
+      confirmPasswordRequired: 'パスワードを確認してください',
+      passwordsDoNotMatch: 'パスワードが一致しません',
     },
     common: {
       loading: '読み込み中...',
@@ -529,6 +634,27 @@ export const translations: Record<Language, Translations> = {
       switchToLogin: '已有账户？登录',
       loginSuccess: '欢迎回来！',
       signupSuccess: '账户创建成功！',
+      subtitle: '登录以继续您的旅程',
+      signIn: '登录',
+      createAccount: '创建账户',
+      forgotPassword: '忘记密码？',
+      orContinueWith: '或继续使用',
+      passwordStrength: '密码强度',
+      weak: '弱',
+      good: '好',
+      strong: '强',
+      socialLoginComingSoon: '社交登录即将推出！',
+      passwordRecoveryComingSoon: '密码恢复即将推出！',
+    },
+    validation: {
+      emailRequired: '请输入电子邮件',
+      emailInvalid: '请输入有效的电子邮件',
+      passwordRequired: '请输入密码',
+      passwordMinLength: '密码长度至少为6个字符',
+      nameRequired: '请输入姓名',
+      nameMinLength: '姓名长度至少为2个字符',
+      confirmPasswordRequired: '请确认密码',
+      passwordsDoNotMatch: '密码不匹配',
     },
     common: {
       loading: '加载中...',

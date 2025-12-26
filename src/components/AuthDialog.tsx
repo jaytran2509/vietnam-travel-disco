@@ -8,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useToast } from '@/contexts/ToastContext'
 import { generateId } from '@/lib/helpers'
 import { Eye, EyeSlash, CheckCircle, XCircle, Spinner } from '@phosphor-icons/react'
+import { useLanguage } from '@/contexts/LanguageContext'
 import type { User } from '@/lib/types'
 
 interface AuthDialogProps {
@@ -17,6 +18,7 @@ interface AuthDialogProps {
 }
 
 export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
+  const { t } = useLanguage()
   const toast = useToast()
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
@@ -43,15 +45,15 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     const errors: { email?: string; password?: string } = {}
     
     if (!loginEmail) {
-      errors.email = 'Email is required'
+      errors.email = t.validation.emailRequired
     } else if (!validateEmail(loginEmail)) {
-      errors.email = 'Please enter a valid email'
+      errors.email = t.validation.emailInvalid
     }
     
     if (!loginPassword) {
-      errors.password = 'Password is required'
+      errors.password = t.validation.passwordRequired
     } else if (loginPassword.length < 6) {
-      errors.password = 'Password must be at least 6 characters'
+      errors.password = t.validation.passwordMinLength
     }
     
     setLoginErrors(errors)
@@ -62,27 +64,27 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     const errors: { name?: string; email?: string; password?: string; confirmPassword?: string } = {}
     
     if (!signupName) {
-      errors.name = 'Name is required'
+      errors.name = t.validation.nameRequired
     } else if (signupName.length < 2) {
-      errors.name = 'Name must be at least 2 characters'
+      errors.name = t.validation.nameMinLength
     }
     
     if (!signupEmail) {
-      errors.email = 'Email is required'
+      errors.email = t.validation.emailRequired
     } else if (!validateEmail(signupEmail)) {
-      errors.email = 'Please enter a valid email'
+      errors.email = t.validation.emailInvalid
     }
     
     if (!signupPassword) {
-      errors.password = 'Password is required'
+      errors.password = t.validation.passwordRequired
     } else if (signupPassword.length < 6) {
-      errors.password = 'Password must be at least 6 characters'
+      errors.password = t.validation.passwordMinLength
     }
     
     if (!signupConfirmPassword) {
-      errors.confirmPassword = 'Please confirm your password'
+      errors.confirmPassword = t.validation.confirmPasswordRequired
     } else if (signupPassword !== signupConfirmPassword) {
-      errors.confirmPassword = 'Passwords do not match'
+      errors.confirmPassword = t.validation.passwordsDoNotMatch
     }
     
     setSignupErrors(errors)
@@ -109,7 +111,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     }
 
     onLogin(user, rememberMe)
-    toast.success('Successfully logged in to your account')
+    toast.success(t.auth.loginSuccess)
     
     setIsLoggingIn(false)
     onOpenChange(false)
@@ -140,7 +142,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     }
 
     onLogin(user, false)
-    toast.success('Your account has been created successfully')
+    toast.success(t.auth.signupSuccess)
     
     setIsSigningUp(false)
     onOpenChange(false)
@@ -154,9 +156,9 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
 
   const getPasswordStrength = (password: string) => {
     if (password.length === 0) return { strength: 0, label: '', color: '' }
-    if (password.length < 6) return { strength: 33, label: 'Weak', color: 'bg-destructive' }
-    if (password.length < 10) return { strength: 66, label: 'Good', color: 'bg-accent' }
-    return { strength: 100, label: 'Strong', color: 'bg-success' }
+    if (password.length < 6) return { strength: 33, label: t.auth.weak, color: 'bg-destructive' }
+    if (password.length < 10) return { strength: 66, label: t.auth.good, color: 'bg-accent' }
+    return { strength: 100, label: t.auth.strong, color: 'bg-success' }
   }
 
   const passwordStrength = getPasswordStrength(signupPassword)
@@ -165,8 +167,8 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[460px] bg-white border-0 rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.12)] p-0 gap-0 overflow-hidden">
         <DialogHeader className="px-8 pt-8 pb-6">
-          <DialogTitle className="text-2xl font-bold text-foreground tracking-tight">Welcome back</DialogTitle>
-          <p className="text-sm text-muted-foreground mt-1.5">Sign in to continue your journey</p>
+          <DialogTitle className="text-2xl font-bold text-foreground tracking-tight">{t.auth.loginTitle}</DialogTitle>
+          <p className="text-sm text-muted-foreground mt-1.5">{t.auth.subtitle}</p>
         </DialogHeader>
 
         <Tabs defaultValue="login" className="w-full">
@@ -176,13 +178,13 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                 value="login" 
                 className="text-[13px] font-semibold data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-md py-2.5 px-4 text-muted-foreground data-[state=active]:text-foreground transition-all duration-200"
               >
-                Sign In
+                {t.auth.signIn}
               </TabsTrigger>
               <TabsTrigger 
                 value="signup" 
                 className="text-[13px] font-semibold data-[state=active]:bg-white data-[state=active]:shadow-sm rounded-md py-2.5 px-4 text-muted-foreground data-[state=active]:text-foreground transition-all duration-200"
               >
-                Create Account
+                {t.auth.createAccount}
               </TabsTrigger>
             </TabsList>
           </div>
@@ -191,7 +193,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
             <form onSubmit={handleLogin} className="space-y-5">
               <div className="space-y-2">
                 <Label htmlFor="login-email" className="text-[13px] font-semibold text-foreground">
-                  Email address
+                  {t.auth.email}
                 </Label>
                 <div className="relative">
                   <Input
@@ -226,7 +228,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
 
               <div className="space-y-2">
                 <Label htmlFor="login-password" className="text-[13px] font-semibold text-foreground">
-                  Password
+                  {t.auth.password}
                 </Label>
                 <div className="relative">
                   <Input
@@ -272,16 +274,16 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                     htmlFor="remember-me"
                     className="text-[13px] cursor-pointer text-muted-foreground font-medium select-none"
                   >
-                    Remember me
+                    {t.auth.rememberMe}
                   </Label>
                 </div>
                 <Button
                   type="button"
                   variant="ghost"
                   className="text-[13px] text-primary hover:text-primary-hover h-auto py-0 px-0 font-semibold hover:bg-transparent"
-                  onClick={() => toast.info('Password recovery coming soon!')}
+                  onClick={() => toast.info(t.auth.passwordRecoveryComingSoon)}
                 >
-                  Forgot password?
+                  {t.auth.forgotPassword}
                 </Button>
               </div>
 
@@ -296,7 +298,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                     Signing in...
                   </>
                 ) : (
-                  'Sign in'
+                  t.auth.loginButton
                 )}
               </Button>
             </form>
@@ -306,7 +308,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
             <form onSubmit={handleSignup} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="signup-name" className="text-[13px] font-semibold text-foreground">
-                  Full name
+                  {t.auth.name}
                 </Label>
                 <div className="relative">
                   <Input
@@ -338,7 +340,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
 
               <div className="space-y-2">
                 <Label htmlFor="signup-email" className="text-[13px] font-semibold text-foreground">
-                  Email address
+                  {t.auth.email}
                 </Label>
                 <div className="relative">
                   <Input
@@ -370,7 +372,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
 
               <div className="space-y-2">
                 <Label htmlFor="signup-password" className="text-[13px] font-semibold text-foreground">
-                  Password
+                  {t.auth.password}
                 </Label>
                 <div className="relative">
                   <Input
@@ -399,7 +401,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                 {signupPassword && (
                   <div className="space-y-1.5 animate-in slide-in-from-top-1 duration-200">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="text-muted-foreground font-medium">Password strength:</span>
+                      <span className="text-muted-foreground font-medium">{t.auth.passwordStrength}:</span>
                       <span className={`font-semibold ${
                         passwordStrength.strength === 100 ? 'text-success' :
                         passwordStrength.strength === 66 ? 'text-accent' : 'text-destructive'
@@ -471,7 +473,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
                     Creating account...
                   </>
                 ) : (
-                  'Create account'
+                  t.auth.signupButton
                 )}
               </Button>
             </form>
@@ -484,14 +486,14 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
               <div className="w-full border-t border-border/60"></div>
             </div>
             <div className="relative flex justify-center text-xs">
-              <span className="bg-muted/20 px-3 text-muted-foreground font-medium">Or continue with</span>
+              <span className="bg-muted/20 px-3 text-muted-foreground font-medium">{t.auth.orContinueWith}</span>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <Button
               type="button"
               variant="outline"
-              onClick={() => toast.info('Social login coming soon!')}
+              onClick={() => toast.info(t.auth.socialLoginComingSoon)}
               className="border-2 border-border hover:border-foreground hover:bg-muted/30 h-11 text-[13px] font-semibold rounded-xl transition-all duration-200"
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">
@@ -505,7 +507,7 @@ export function AuthDialog({ open, onOpenChange, onLogin }: AuthDialogProps) {
             <Button
               type="button"
               variant="outline"
-              onClick={() => toast.info('Social login coming soon!')}
+              onClick={() => toast.info(t.auth.socialLoginComingSoon)}
               className="border-2 border-border hover:border-foreground hover:bg-muted/30 h-11 text-[13px] font-semibold rounded-xl transition-all duration-200"
             >
               <svg className="w-5 h-5 mr-2" fill="#1877F2" viewBox="0 0 24 24">

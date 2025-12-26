@@ -3,14 +3,24 @@ logs
 *.log
 npm-debug.log*
 yarn-debug.log*
-yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+.pnpm-store
+
+# Build and Dist
 dist
 dist-ssr
-*-dist
+build
+*.tsbuildinfo
+
+# Local Environment
+.env
+.env.desc.json
+.env.*
+!.env.example
 *.local
 
 # Editor directories and files
@@ -24,11 +34,17 @@ dist-ssr
 *.sln
 *.sw?
 
-.env
-**/agent-eval-report*
+# Testing
+coverage/
+
+# Spark / Tooling / System specific
+runtime.config.json
+spark.meta.json
+.spark-initial-sha
+.spark-workbench-id
 packages
 pids
 .file-manifest
 .devcontainer/
-
-.spark-workbench-id
+**/agent-eval-report*
+theme.json
