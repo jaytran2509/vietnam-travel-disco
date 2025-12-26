@@ -13,15 +13,21 @@ interface PlacesQueryParams {
   featured?: boolean
 }
 
-// Get places with filters and pagination
 export function usePlaces(params: PlacesQueryParams = {}) {
   return useQuery({
     queryKey: ['places', params],
     queryFn: async (): Promise<PaginatedResponse<Place>> => {
-      // apiClient interceptor unwraps response.data.data
-      return await apiClient.get('/places', { params })
+      const queryParams = new URLSearchParams()
+      Object.entries(params).forEach(([key, value]) => {
+        if (value !== undefined) {
+          queryParams.append(key, String(value))
+        }
+      })
+      const queryString = queryParams.toString()
+      const url = queryString ? `/places?${queryString}` : '/places'
+      return await apiClient.get(url)
     },
-    staleTime: 3 * 60 * 1000, // 3 minutes
+    staleTime: 3 * 60 * 1000,
   })
 }
 
